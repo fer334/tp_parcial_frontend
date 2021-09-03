@@ -21,7 +21,23 @@ export interface ChildrenItems {
 }
 
 //Menu Items
-export const ROUTES: RouteInfo[] = [{
+export const ROUTES: RouteInfo[] = [
+    //{
+    //    path: '',
+    //    title: 'Aplicaciones',
+    //    type: 'sub',
+    //    icontype: 'apps',
+    //    collapse: 'apps',
+    //    children: [
+    //        {
+    //            path: 'categoria',
+    //            title: 'Categoria',
+    //            type: 'link',
+    //            ab: 'C'
+    //        },
+    //    ]
+    //},
+    {
         path: '/dashboard',
         title: 'Dashboard',
         type: 'link',

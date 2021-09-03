@@ -48,6 +48,8 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { ServicecategoriaService } from './service/servicecategoria.service';
 
 @NgModule({
   exports: [
@@ -81,6 +83,9 @@ import { AppRoutes } from './app.routing';
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule
+  ],
+  declarations: [
+    CategoriaComponent
   ]
 })
 export class MaterialModule {}
@@ -107,7 +112,8 @@ export class MaterialModule {}
         AuthLayoutComponent
     ],
     providers : [
-      MatNativeDateModule
+      MatNativeDateModule,
+      ServicecategoriaService
     ],
     bootstrap:    [ AppComponent ]
 })
