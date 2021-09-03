@@ -18,4 +18,9 @@ export class PacienteService {
     return this.http.get<listadatos<Paciente>>(this.api);
   }
 
+  delPaciente(id: number): Observable<Paciente> {
+    console.log('delPaciente',this.api + "/" + id);
+    
+    return this.http.delete<Paciente>(this.api + "/" + id);
+  }
 }

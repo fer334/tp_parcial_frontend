@@ -1,5 +1,5 @@
 <div class="main-content">
-  <p>{{ lindo() }}</p>
+  <!-- <p>{{ lindo() }}</p> -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -48,12 +48,12 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr *ngFor="let row of dataTable.dataRows">
-                    <td>{{ row[0] }}</td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                    <td>{{ row[3] }}</td>
-                    <td>{{ row[4] }}</td>
+                  <tr *ngFor="let paciente of pacientes">
+                    <td>{{ paciente.idPersona }}</td>
+                    <td>{{ paciente.nombre }}</td>
+                    <td>{{ paciente.apellido }}</td>
+                    <td>{{ paciente.email }}</td>
+                    <td>{{ paciente.telefono }}</td>
                     <td class="text-right">
                       <!-- Angular on click button -->
                       
@@ -68,7 +68,7 @@
                         ><i class="material-icons">dvr</i></a
                       >
                       <a
-                        (click)="close(row)"
+                        (click)="close(paciente)"
                         class="btn btn-link btn-danger btn-just-icon remove"
                         ><i class="material-icons">close</i></a
                       >
