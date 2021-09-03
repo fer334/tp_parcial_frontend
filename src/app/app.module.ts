@@ -49,7 +49,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { DataTablesModule } from "angular-datatables";
 
 import { AppRoutes } from './app.routing';
-import { ServicePacienteService } from './service/servicepaciente.service';
+import { PacienteService } from './service/servicepaciente.service';
 import { PacienteComponent } from './paciente/paciente.component';
 
 @NgModule({
@@ -113,7 +113,7 @@ export class MaterialModule {}
     ],
     providers : [
       MatNativeDateModule,
-      ServicePacienteService
+      PacienteService
     ],
     bootstrap:    [ AppComponent ]
 })

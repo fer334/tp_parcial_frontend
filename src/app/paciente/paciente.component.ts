@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Paciente } from '../model/paciente';
-import { ServicePacienteService } from '../service/servicepaciente.service';
+import { PacienteService } from '../service/servicepaciente.service';
 
 declare interface DataTable {
   headerRow: string[];
@@ -22,7 +22,7 @@ export class PacienteComponent implements OnInit, AfterViewInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>(); 
 
-  constructor(private servicioPaciente: ServicePacienteService) {}
+  constructor(private servicioPaciente: PacienteService) {}
 
   ngOnInit(): void {
 
@@ -44,7 +44,7 @@ export class PacienteComponent implements OnInit, AfterViewInit {
       dataRows: [],
     };
 
-    this.servicioPaciente.getPaises().subscribe(
+    this.servicioPaciente.getPacientes().subscribe(
       (entity) => {
         this.pacientes = entity.lista;
         const data: string[][] = [];
