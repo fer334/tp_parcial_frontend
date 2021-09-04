@@ -25,4 +25,9 @@ export class ServicecategoriaService {
       )
     );
   }
+
+  eliminarCategoria(id: number): Observable<Categoria>{
+    console.log('se está borrando la categoria ', this.api +'/'+id);
+    return this.http.delete<Categoria>(this.api + '/' + id);
+  }
 }

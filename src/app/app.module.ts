@@ -51,6 +51,7 @@ import { AppRoutes } from './app.routing';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { ServicecategoriaService } from './service/servicecategoria.service';
 import { CategoriaAgregarComponent } from './categoria/categoria-agregar/categoria-agregar.component';
+import { CategoriaEliminarComponent } from './categoria/categoria-eliminar/categoria-eliminar.component';
 
 @NgModule({
   exports: [
@@ -84,7 +85,7 @@ import { CategoriaAgregarComponent } from './categoria/categoria-agregar/categor
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule
-  ]
+  ] //abajo de esto se suele crear un declarations con los nuevos componentes, pero eso no funcioná acá. Borrar acá y poner abajo con el resto.
 })
 export class MaterialModule {}
 
@@ -109,7 +110,8 @@ export class MaterialModule {}
         AdminLayoutComponent,
         AuthLayoutComponent,
         CategoriaComponent,
-        CategoriaAgregarComponent
+        CategoriaAgregarComponent,
+        CategoriaEliminarComponent
   
     ],
     providers : [

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoriaAgregarComponent } from './categoria/categoria-agregar/categoria-agregar.component';
+import { CategoriaEliminarComponent } from './categoria/categoria-eliminar/categoria-eliminar.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 
 const routes: Routes = [
@@ -11,7 +12,11 @@ const routes: Routes = [
   {
     path:'nuevacategoria',
     component:CategoriaAgregarComponent
-  } //path para agregar categorias
+  }, //path para agregar categorias
+  {
+    path: 'borrarcategoria',
+    component: CategoriaEliminarComponent,
+  } //path para borrar categorias
 ];
 
 @NgModule({
