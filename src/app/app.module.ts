@@ -51,6 +51,7 @@ import { DataTablesModule } from "angular-datatables";
 import { AppRoutes } from './app.routing';
 import { PacienteService } from './service/servicepaciente.service';
 import { PacienteComponent } from './paciente/paciente.component';
+import { CreatePaciente } from './paciente/createpaciente.component';
 
 @NgModule({
   exports: [
@@ -110,10 +111,11 @@ export class MaterialModule {}
         AdminLayoutComponent,
         AuthLayoutComponent,
         PacienteComponent,
+        CreatePaciente,
     ],
     providers : [
       MatNativeDateModule,
-      PacienteService
+      PacienteService,
     ],
     bootstrap:    [ AppComponent ]
 })

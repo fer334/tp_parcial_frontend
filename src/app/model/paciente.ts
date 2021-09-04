@@ -1,6 +1,7 @@
 export class Paciente {
-    idPais!: number;
-    descripcion!: string;
+    setFechaNacimiento(arg0: string) {
+        this.fechaNacimiento = arg0;
+    }
     idPersona!:number;
     nombre!:string;
     apellido!:string;

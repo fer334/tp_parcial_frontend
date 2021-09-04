@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { CreatePaciente } from '../paciente/createpaciente.component';
 import { PacienteComponent } from '../paciente/paciente.component';
 
 import { DashboardComponent } from './dashboard.component';
@@ -14,6 +15,10 @@ export const DashboardRoutes: Routes = [
       {
         path: 'paciente',
         component: PacienteComponent,
+      },
+      {
+        path: 'paciente/create',
+        component: CreatePaciente,
       },
     ],
   },
