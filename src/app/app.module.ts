@@ -83,9 +83,6 @@ import { ServicecategoriaService } from './service/servicecategoria.service';
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule
-  ],
-  declarations: [
-    CategoriaComponent
   ]
 })
 export class MaterialModule {}
@@ -109,7 +106,9 @@ export class MaterialModule {}
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        AuthLayoutComponent
+        AuthLayoutComponent,
+        CategoriaComponent
+  
     ],
     providers : [
       MatNativeDateModule,
