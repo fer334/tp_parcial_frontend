@@ -1,16 +1,16 @@
 <p>categoria works!</p>
 <div *ngIf="categorias.length>0">
-<div>
-    <table border="1">
+  <table border="1">
       <tr>
         <td>Id</td>
         <td>Descripcion</td>
       </tr>
       <tr *ngFor="let c of categorias">
-          hola
         <td>{{c.idCategoria}}</td>
         <td>{{c.descripcion}}</td>
       </tr>
-    </table>
-  </div>
-  
+  </table>
+</div>
+<div>
+  <a routerLink="/nuevacategoria">Agregar categoria</a>  
+</div>

@@ -50,6 +50,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { ServicecategoriaService } from './service/servicecategoria.service';
+import { CategoriaAgregarComponent } from './categoria/categoria-agregar/categoria-agregar.component';
 
 @NgModule({
   exports: [
@@ -107,7 +108,8 @@ export class MaterialModule {}
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent,
-        CategoriaComponent
+        CategoriaComponent,
+        CategoriaAgregarComponent
   
     ],
     providers : [
