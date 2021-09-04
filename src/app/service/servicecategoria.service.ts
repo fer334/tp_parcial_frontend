@@ -30,4 +30,13 @@ export class ServicecategoriaService {
     console.log('se está borrando la categoria ', this.api +'/'+id);
     return this.http.delete<Categoria>(this.api + '/' + id);
   }
+
+  editarCategoria(c:Categoria): Observable<Categoria>{
+    return this.http.put<Categoria>(this.api, c).pipe(
+      tap(
+        data => console.log('editado '+data),
+        error => console.log('el error al editar es '+error)
+      )
+    );
+  }
 }

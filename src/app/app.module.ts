@@ -52,6 +52,7 @@ import { CategoriaComponent } from './categoria/categoria.component';
 import { ServicecategoriaService } from './service/servicecategoria.service';
 import { CategoriaAgregarComponent } from './categoria/categoria-agregar/categoria-agregar.component';
 import { CategoriaEliminarComponent } from './categoria/categoria-eliminar/categoria-eliminar.component';
+import { CategoriaEditarComponent } from './categoria/categoria-editar/categoria-editar.component';
 
 @NgModule({
   exports: [
@@ -85,7 +86,7 @@ import { CategoriaEliminarComponent } from './categoria/categoria-eliminar/categ
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule
-  ] //abajo de esto se suele crear un declarations con los nuevos componentes, pero eso no funcioná acá. Borrar acá y poner abajo con el resto.
+  ], //acá se suele crear un declarations con los nuevos componentes, pero eso no funcioná acá. Borrar acá y poner abajo con el resto.
 })
 export class MaterialModule {}
 
@@ -111,7 +112,8 @@ export class MaterialModule {}
         AuthLayoutComponent,
         CategoriaComponent,
         CategoriaAgregarComponent,
-        CategoriaEliminarComponent
+        CategoriaEliminarComponent,
+        CategoriaEditarComponent
   
     ],
     providers : [

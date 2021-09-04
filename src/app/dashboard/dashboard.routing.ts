@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { CategoriaAgregarComponent } from '../categoria/categoria-agregar/categoria-agregar.component';
+import { CategoriaEditarComponent } from '../categoria/categoria-editar/categoria-editar.component';
 import { CategoriaEliminarComponent } from '../categoria/categoria-eliminar/categoria-eliminar.component';
 import { CategoriaComponent } from '../categoria/categoria.component';
 
@@ -24,6 +25,10 @@ export const DashboardRoutes: Routes = [
         {
           path: 'borrarcategoria',
           component: CategoriaEliminarComponent,
+        },
+        {
+          path: 'editarcategoria/:id',
+          component: CategoriaEditarComponent,
         }
     ]
 }
