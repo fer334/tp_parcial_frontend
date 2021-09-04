@@ -4,6 +4,7 @@ import { Paciente } from '../model/paciente';
 import { PacienteService } from '../service/servicepaciente.service';
 import swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
+import { Router } from '@angular/router';
 
 declare interface DataTable {
   headerRow: string[];
@@ -27,7 +28,7 @@ export class PacienteComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective;
 
-  constructor(private servicioPaciente: PacienteService) {}
+  constructor(private servicioPaciente: PacienteService, private router: Router) {}
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -76,14 +77,8 @@ export class PacienteComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  lindo() {
-    return JSON.stringify(this.pacientes);
-  }
-  fav() {
-    console.log('clicked');
-  }
-  drv() {
-    console.log('clicked');
+  edit(p: Paciente) {
+    this.router.navigate(['/paciente/edit/', p.idPersona]);
   }
 
   close(e: Paciente) {

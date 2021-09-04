@@ -52,6 +52,7 @@ import { AppRoutes } from './app.routing';
 import { PacienteService } from './service/servicepaciente.service';
 import { PacienteComponent } from './paciente/paciente.component';
 import { CreatePaciente } from './paciente/createpaciente.component';
+import { EditPaciente } from './paciente/editpaciente.component';
 
 @NgModule({
   exports: [
@@ -112,6 +113,7 @@ export class MaterialModule {}
         AuthLayoutComponent,
         PacienteComponent,
         CreatePaciente,
+        EditPaciente,
     ],
     providers : [
       MatNativeDateModule,
