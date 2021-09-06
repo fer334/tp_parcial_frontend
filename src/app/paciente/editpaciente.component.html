@@ -13,50 +13,50 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Nombre" type="text" [(ngModel)]="paciente.nombre">
+                      <input matInput name="nombre" placeholder="Nombre" type="text" [(ngModel)]="paciente.nombre">
                     </mat-form-field>
                   </div>
                   <div class="col-sm-6">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Apellido" type="text" [(ngModel)]="paciente.apellido">
-                    </mat-form-field>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Teléfono" type="text" [(ngModel)]="paciente.telefono">
-                    </mat-form-field>
-                  </div>
-                  <div class="col-sm-6">
-                    <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Email" type="email" [(ngModel)]="paciente.email">
+                      <input matInput name="apellido" placeholder="Apellido" type="text" [(ngModel)]="paciente.apellido">
                     </mat-form-field>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="RUC" type="text" [(ngModel)]="paciente.ruc">
+                      <input matInput name="telefono" placeholder="Teléfono" type="text" [(ngModel)]="paciente.telefono">
                     </mat-form-field>
                   </div>
                   <div class="col-sm-6">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Cédula" type="number" [(ngModel)]="paciente.cedula">
+                      <input matInput name="email" placeholder="Email" type="email" [(ngModel)]="paciente.email">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="ruc" placeholder="RUC" type="text" [(ngModel)]="paciente.ruc">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="cedula" placeholder="Cédula" type="number" [(ngModel)]="paciente.cedula">
                     </mat-form-field>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
                     <mat-form-field >
-                      <input matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" (click)="picker.open()" [(ngModel)]="paciente.fechaNacimiento">
+                      <input matInput name="fechaNacimiento" [matDatepicker]="picker" placeholder="Fecha de nacimiento" (click)="picker.open()" [(ngModel)]="paciente.fechaNacimiento">
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                   </div>
                   <div class="col-sm-6">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Tipo Persona" type="text" [(ngModel)]="paciente.tipoPersona">
+                      <input matInput name="tipoPersona" placeholder="Tipo Persona" type="text" [(ngModel)]="paciente.tipoPersona">
                     </mat-form-field>
                   </div>
                 </div>

@@ -11,7 +11,7 @@ import { PacienteService } from '../service/servicepaciente.service';
   templateUrl: 'editpaciente.component.html',
 })
 export class EditPaciente implements OnInit {
-  paciente: Paciente;
+  paciente: Paciente = new Paciente();
   constructor(
     private pacienteService: PacienteService,
     private route: ActivatedRoute,
@@ -33,7 +33,7 @@ export class EditPaciente implements OnInit {
   createPaciente() {
     console.log(this.paciente);
     if (this.checkFields()) {
-      this.pacienteService.createPaciente(this.paciente).subscribe(
+      this.pacienteService.updatePaciente(this.paciente).subscribe(
         () => {
           swal
             .fire({
