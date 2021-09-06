@@ -21,8 +21,8 @@ export class CreatePaciente {
             this.pacienteService.createPaciente(this.paciente).subscribe(
                 () => {
                     swal.fire({
-                        title: 'Creado!',
-                        text: 'El nuevo paciente fue creado exitosamente.',
+                        title: 'Actualizado!',
+                        text: 'El nuevo paciente fue actualizado exitosamente.',
                         icon: 'success',
                         customClass: {
                         confirmButton: 'btn btn-success',
@@ -34,7 +34,7 @@ export class CreatePaciente {
                 }, 
                 error => {
                     console.log(error);
-                    let message = 'El paciente no pudo ser creado. \n'
+                    let message = 'El paciente no pudo ser editado. \n'
                     message += error.error ? error.error : error.message;
                     swal.fire({
                         title: 'Error!',
