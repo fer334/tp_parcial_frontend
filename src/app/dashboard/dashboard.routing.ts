@@ -3,6 +3,7 @@ import { CategoriaAgregarComponent } from '../categoria/categoria-agregar/catego
 import { CategoriaEditarComponent } from '../categoria/categoria-editar/categoria-editar.component';
 import { CategoriaEliminarComponent } from '../categoria/categoria-eliminar/categoria-eliminar.component';
 import { CategoriaComponent } from '../categoria/categoria.component';
+import { SubcategoriaComponent } from '../subcategoria/subcategoria.component';
 
 import { DashboardComponent } from './dashboard.component';
 
@@ -29,6 +30,10 @@ export const DashboardRoutes: Routes = [
         {
           path: 'editarcategoria/:id',
           component: CategoriaEditarComponent,
+        },
+        {
+          path: 'subcategoria',
+          component: SubcategoriaComponent,
         }
     ]
 }

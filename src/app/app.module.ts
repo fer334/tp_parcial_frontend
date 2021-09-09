@@ -53,6 +53,7 @@ import { ServicecategoriaService } from './service/servicecategoria.service';
 import { CategoriaAgregarComponent } from './categoria/categoria-agregar/categoria-agregar.component';
 import { CategoriaEliminarComponent } from './categoria/categoria-eliminar/categoria-eliminar.component';
 import { CategoriaEditarComponent } from './categoria/categoria-editar/categoria-editar.component';
+import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 
 @NgModule({
   exports: [
@@ -113,7 +114,8 @@ export class MaterialModule {}
         CategoriaComponent,
         CategoriaAgregarComponent,
         CategoriaEliminarComponent,
-        CategoriaEditarComponent
+        CategoriaEditarComponent,
+        SubcategoriaComponent
   
     ],
     providers : [

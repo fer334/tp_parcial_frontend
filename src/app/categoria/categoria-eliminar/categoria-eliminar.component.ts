@@ -20,7 +20,9 @@ export class CategoriaEliminarComponent implements OnInit {
       () => {
         this.mensaje='Eliminado exitosamente'
       },
-      error => console.log("el error es: "+ error)
+      error =>{ console.log("el error es: "+ error);
+        this.mensaje= error.error;
+      }
     );
     console.log(this.id);
   }

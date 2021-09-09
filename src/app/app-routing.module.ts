@@ -4,6 +4,7 @@ import { CategoriaAgregarComponent } from './categoria/categoria-agregar/categor
 import { CategoriaEditarComponent } from './categoria/categoria-editar/categoria-editar.component';
 import { CategoriaEliminarComponent } from './categoria/categoria-eliminar/categoria-eliminar.component';
 import { CategoriaComponent } from './categoria/categoria.component';
+import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,11 @@ const routes: Routes = [
   {
     path: 'editarcategoria/:id',
     component: CategoriaEditarComponent,
-  } //editar categorias
+  }, //editar categorias
+  {
+    path: 'subcategoria',
+    component: SubcategoriaComponent,
+  } //path para listar categorias
 ];
 
 @NgModule({
