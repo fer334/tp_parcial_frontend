@@ -32,6 +32,11 @@ export const ROUTES: RouteInfo[] = [{
             title: 'Paciente',
             type: 'link',
             ab:'P'
+        },{
+            path: 'horario',
+            title: 'Horario',
+            type: 'link',
+            ab:'H'
         },
         ]
     },{
