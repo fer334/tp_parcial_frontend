@@ -48,6 +48,10 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
+import { PresentacionProductoComponent } from './presentacion-producto/presentacion-producto.component';
+import { PresentacionProductoService } from './service/presentacion-producto.service';
+import { PresentacionAgregarComponent } from './presentacion-producto/presentacion-agregar/presentacion-agregar.component';
+import { PresentacionEditarComponent } from './presentacion-producto/presentacion-editar/presentacion-editar.component';
 
 @NgModule({
   exports: [
@@ -81,6 +85,8 @@ import { AppRoutes } from './app.routing';
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule
+  ],
+  declarations: [
   ]
 })
 export class MaterialModule {}
@@ -104,10 +110,14 @@ export class MaterialModule {}
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        AuthLayoutComponent
+        AuthLayoutComponent,
+        PresentacionProductoComponent,
+        PresentacionAgregarComponent,
+        PresentacionEditarComponent
     ],
     providers : [
-      MatNativeDateModule
+      MatNativeDateModule,
+      PresentacionProductoService
     ],
     bootstrap:    [ AppComponent ]
 })

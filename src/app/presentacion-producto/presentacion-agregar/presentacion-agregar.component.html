@@ -1,0 +1,20 @@
+<p>Presentacion Productos Crear</p>
+<div>
+    Codigo: <input name="1" type="text" [(ngModel)]="presentacionProducto.codigo" >
+    <br>
+    flagServicio: <input name="2" type="text" [(ngModel)]="presentacionProducto.flagServicio">
+    <br>
+    nombre: <input name="3" type="text"[(ngModel)]="presentacionProducto.nombre">
+    <br>
+    PrecioVenta: <input name="4" type="number" [(ngModel)]="presentacionProducto.existenciaProducto.precioVenta">
+    <br>
+    IdProducto:  
+    <select  [(ngModel)]="presentacionProducto.idProducto.idProducto">
+        <option *ngFor="let p of products" [value]="p.idProducto" >{{p.descripcionGeneral}}</option>
+    </select>   
+    <br>   
+</div>
+<div>
+    <p>{{mensaje}}</p>
+</div>
+<button (click)="guardar()"> Crear</button>
