@@ -5,6 +5,7 @@ import { CategoriaEditarComponent } from './categoria/categoria-editar/categoria
 import { CategoriaEliminarComponent } from './categoria/categoria-eliminar/categoria-eliminar.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { SubcategoriaAgregarComponent } from './subcategoria/subcategoria-agregar/subcategoria-agregar.component';
+import { SubcategoriaEditarComponent } from './subcategoria/subcategoria-editar/subcategoria-editar.component';
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 
 const routes: Routes = [
@@ -38,8 +39,8 @@ const routes: Routes = [
   }, //path para borrar categorias XXXX
   {
     path: 'editarsubcategoria/:id',
-    component: CategoriaEditarComponent,
-  } //editar categorias XXXX
+    component: SubcategoriaEditarComponent,
+  } //editar subcategorias 
 ];
 
 @NgModule({

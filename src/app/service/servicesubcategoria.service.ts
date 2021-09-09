@@ -28,5 +28,14 @@ export class ServicesubcategoriaService {
     );
   }
 
+  editarSubcategoria(sc:Subcategoria): Observable<Subcategoria>{
+    return this.http.put<Subcategoria>(this.api, sc).pipe(
+      tap(
+        data => console.log('editada sc '+data),
+        error => console.log('el error al editar la sc es '+error.error)
+      )
+    );
+  }
+
   
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subcategoria } from '../model/subcategoria';
 import { ServicesubcategoriaService } from '../service/servicesubcategoria.service';
 
@@ -9,7 +10,9 @@ import { ServicesubcategoriaService } from '../service/servicesubcategoria.servi
 })
 export class SubcategoriaComponent implements OnInit {
   subcategorias: Subcategoria[] = []; 
-  constructor( private servicioSubcategoria: ServicesubcategoriaService ) { }
+  constructor( private servicioSubcategoria: ServicesubcategoriaService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.servicioSubcategoria.getSubcategorias().subscribe(
@@ -17,5 +20,8 @@ export class SubcategoriaComponent implements OnInit {
       error => console.log('no se pudieron conseguir las subcategorias')
     );
   }
-
+  
+  edit(sc: Subcategoria){
+    this.router.navigate(['editarsubcategoria/',sc.idTipoProducto]);
+  }
 }

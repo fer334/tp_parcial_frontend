@@ -1,0 +1,21 @@
+<p>subcategoria-editar works!</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Ingrese los nuevos datos de la subcategoria</p>
+<div>
+    Nombre de la subcategoria <input [(ngModel)]="subcategoriaedit.descripcion">
+    <br>
+    Categoria de la subcategoria
+    <select [(ngModel)]="subcategoriaedit.idCategoria.idCategoria">
+        <option *ngFor="let c of categorias" [value]="c.idCategoria">{{c.descripcion}}</option>
+    </select>
+    <br>
+     <button  (click)="editar()">Modificar</button>
+    <br/>
+     {{mensaje}}
+</div>
