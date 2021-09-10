@@ -56,6 +56,8 @@ import { CategoriaEditarComponent } from './categoria/categoria-editar/categoria
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 import { SubcategoriaAgregarComponent } from './subcategoria/subcategoria-agregar/subcategoria-agregar.component';
 import { SubcategoriaEditarComponent } from './subcategoria/subcategoria-editar/subcategoria-editar.component';
+import { SubcategoriaEliminarComponent } from './subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
+import { ServicesubcategoriaService } from './service/servicesubcategoria.service';
 
 @NgModule({
   exports: [
@@ -119,11 +121,13 @@ export class MaterialModule {}
         CategoriaEditarComponent,
         SubcategoriaComponent,
         SubcategoriaAgregarComponent,
-        SubcategoriaEditarComponent
+        SubcategoriaEditarComponent,
+        SubcategoriaEliminarComponent
     ],
     providers : [
       MatNativeDateModule,
-      ServicecategoriaService
+      ServicecategoriaService,
+      ServicesubcategoriaService
     ],
     bootstrap:    [ AppComponent ]
 })

@@ -37,5 +37,9 @@ export class ServicesubcategoriaService {
     );
   }
 
+  eliminarSubcategoria(id: number): Observable<Subcategoria>{
+    console.log('se está borrando la subcategoria ', this.api +'/'+id);
+    return this.http.delete<Subcategoria>(this.api + '/' + id);
+  }
   
 }

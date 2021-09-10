@@ -6,6 +6,7 @@ import { CategoriaEliminarComponent } from './categoria/categoria-eliminar/categ
 import { CategoriaComponent } from './categoria/categoria.component';
 import { SubcategoriaAgregarComponent } from './subcategoria/subcategoria-agregar/subcategoria-agregar.component';
 import { SubcategoriaEditarComponent } from './subcategoria/subcategoria-editar/subcategoria-editar.component';
+import { SubcategoriaEliminarComponent } from './subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 
 const routes: Routes = [
@@ -35,8 +36,8 @@ const routes: Routes = [
   }, //path para agregar subcategorias
   {
     path: 'borrarsubcategoria',
-    component: CategoriaEliminarComponent,
-  }, //path para borrar categorias XXXX
+    component: SubcategoriaEliminarComponent,
+  }, //path para borrar subcategorias
   {
     path: 'editarsubcategoria/:id',
     component: SubcategoriaEditarComponent,
