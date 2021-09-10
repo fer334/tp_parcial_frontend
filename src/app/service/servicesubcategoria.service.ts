@@ -19,8 +19,8 @@ export class ServicesubcategoriaService {
   }
 
   getSubcategoriaPorId(id: number): Observable<Subcategoria> {
-    let payload = JSON.stringify({idTipoProducto:id});
-    return this.http.get<Subcategoria>(this.api,{params:{ejemplo:payload}});
+    const apiconid = this.api+'/'+String(id);
+    return this.http.get<Subcategoria>(apiconid);
   }
 
   getSubcategoriasPorDescripcion(descripcion: string): Observable<listadatos<Subcategoria>> {
