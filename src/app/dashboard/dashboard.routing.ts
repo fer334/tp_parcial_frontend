@@ -3,6 +3,7 @@ import { CategoriaAgregarComponent } from '../categoria/categoria-agregar/catego
 import { CategoriaEditarComponent } from '../categoria/categoria-editar/categoria-editar.component';
 import { CategoriaEliminarComponent } from '../categoria/categoria-eliminar/categoria-eliminar.component';
 import { CategoriaComponent } from '../categoria/categoria.component';
+import { FichaClinicaComponent } from '../ficha-clinica/ficha-clinica.component';
 import { SubcategoriaAgregarComponent } from '../subcategoria/subcategoria-agregar/subcategoria-agregar.component';
 import { SubcategoriaEditarComponent } from '../subcategoria/subcategoria-editar/subcategoria-editar.component';
 import { SubcategoriaEliminarComponent } from '../subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
@@ -49,6 +50,10 @@ export const DashboardRoutes: Routes = [
         {
           path: 'borrarsubcategoria',
           component: SubcategoriaEliminarComponent,
+        },
+        {
+          path: 'ficha_clinica',
+          component: FichaClinicaComponent,
         }
     ]
 }

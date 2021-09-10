@@ -4,6 +4,7 @@ import { CategoriaAgregarComponent } from './categoria/categoria-agregar/categor
 import { CategoriaEditarComponent } from './categoria/categoria-editar/categoria-editar.component';
 import { CategoriaEliminarComponent } from './categoria/categoria-eliminar/categoria-eliminar.component';
 import { CategoriaComponent } from './categoria/categoria.component';
+import { FichaClinicaComponent } from './ficha-clinica/ficha-clinica.component';
 import { SubcategoriaAgregarComponent } from './subcategoria/subcategoria-agregar/subcategoria-agregar.component';
 import { SubcategoriaEditarComponent } from './subcategoria/subcategoria-editar/subcategoria-editar.component';
 import { SubcategoriaEliminarComponent } from './subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
@@ -41,7 +42,13 @@ const routes: Routes = [
   {
     path: 'editarsubcategoria/:id',
     component: SubcategoriaEditarComponent,
-  } //editar subcategorias 
+  }, //editar subcategorias 
+
+  //desde acá componentes de ficha clinica
+  {
+    path: 'ficha_clinica',
+    component: FichaClinicaComponent,
+  }
 ];
 
 @NgModule({

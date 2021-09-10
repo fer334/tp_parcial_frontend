@@ -58,6 +58,7 @@ import { SubcategoriaAgregarComponent } from './subcategoria/subcategoria-agrega
 import { SubcategoriaEditarComponent } from './subcategoria/subcategoria-editar/subcategoria-editar.component';
 import { SubcategoriaEliminarComponent } from './subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
 import { ServicesubcategoriaService } from './service/servicesubcategoria.service';
+import { FichaClinicaComponent } from './ficha-clinica/ficha-clinica.component';
 
 @NgModule({
   exports: [
@@ -122,7 +123,8 @@ export class MaterialModule {}
         SubcategoriaComponent,
         SubcategoriaAgregarComponent,
         SubcategoriaEditarComponent,
-        SubcategoriaEliminarComponent
+        SubcategoriaEliminarComponent,
+        FichaClinicaComponent
     ],
     providers : [
       MatNativeDateModule,
