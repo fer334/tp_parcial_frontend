@@ -52,6 +52,9 @@ import { PresentacionProductoComponent } from './presentacion-producto/presentac
 import { PresentacionProductoService } from './service/presentacion-producto.service';
 import { PresentacionAgregarComponent } from './presentacion-producto/presentacion-agregar/presentacion-agregar.component';
 import { PresentacionEditarComponent } from './presentacion-producto/presentacion-editar/presentacion-editar.component';
+import { ReservaComponent } from './reserva/reserva.component';
+import { ReservaService } from './service/reserva/reserva.service';
+import { ReservaEditarComponent } from './reserva/reserva-editar/reserva-editar.component';
 
 @NgModule({
   exports: [
@@ -87,6 +90,8 @@ import { PresentacionEditarComponent } from './presentacion-producto/presentacio
     MatNativeDateModule
   ],
   declarations: [
+  
+    ReservaEditarComponent
   ]
 })
 export class MaterialModule {}
@@ -111,13 +116,17 @@ export class MaterialModule {}
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent,
+        //Componentes Presentacion Producto
         PresentacionProductoComponent,
         PresentacionAgregarComponent,
-        PresentacionEditarComponent
+        PresentacionEditarComponent,
+        //Componente de Reservas
+        ReservaComponent
     ],
     providers : [
       MatNativeDateModule,
-      PresentacionProductoService
+      PresentacionProductoService,
+      ReservaService
     ],
     bootstrap:    [ AppComponent ]
 })

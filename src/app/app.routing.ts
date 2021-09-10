@@ -5,19 +5,25 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { PresentacionProductoComponent } from './presentacion-producto/presentacion-producto.component';
 import { PresentacionAgregarComponent } from './presentacion-producto/presentacion-agregar/presentacion-agregar.component';
 import { PresentacionEditarComponent } from './presentacion-producto/presentacion-editar/presentacion-editar.component';
+import { ReservaComponent } from './reserva/reserva.component';
+
 export const AppRoutes: Routes = [
     {
         path:'presentacionProducto',
-        component:PresentacionProductoComponent
+        component:PresentacionProductoComponent,
     },
     {
         path:'agregarpresentacionProducto',
         component:PresentacionAgregarComponent
     },
     {
-        path:'editarpresentacionProducto',
+        path:'editarpresentacionProducto/:id',
         component:PresentacionEditarComponent
     },
+    {
+        path:'reserva',
+        component:ReservaComponent
+    }
     /*
     {
       path: '',
@@ -65,7 +71,7 @@ export const AppRoutes: Routes = [
         path: 'pages',
         loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
       }]
-    },*/
-    
+    }
+    */
     
 ];

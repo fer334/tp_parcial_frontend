@@ -15,19 +15,39 @@
       <p>Obtener el Precio de un Presentacion</p>
     </button>
 
-    <button>
-      <a routerLink="/agregarpresentacionProducto">Crear</a>
+    <button routerLink="/agregarpresentacionProducto">
+      <p>Crear</p>
     </button>
-    
-    <button (click)="deletePresentacionProducto()">
-      <p>Eliminar</p>
-    </button>
-    <button>
-      <a routerLink="/editarpresentacionProducto"> Actualizar</a>
-    </button>
-    
-    
-
+  
+  </div>
+  <br>
+  <div *ngIf="presentacionProductos.length>0">
+      <table border="1">
+        <tr>
+          <td>IdPresentacionProducto</td>
+          <td>Codigo</td>
+          <td>Nombre</td>
+          <td>IdProducto</td>
+          <td>IdTipoProducto</td>
+          <td>PrecioVenta</td>
+          <td>Flag Servicio</td>
+          <td>Eliminar</td>
+          <td>Actualizar</td>
+        </tr>
+        <tr *ngFor="let p of presentacionProductos">
+            <td>
+              {{p.idPresentacionProducto}}
+            </td>
+            <td>{{p.codigo}}</td>
+            <td>{{p.nombre}}</td>
+            <td>{{p.idProducto.idProducto}}</td>
+            <td>{{p.idProducto.idTipoProducto.idTipoProducto}}</td>
+            <td>{{p.existenciaProducto.precioVenta}}</td>
+            <td>{{p.flagServicio}}</td>
+            <td><button (click)="deletePresentacionProducto(p.idPresentacionProducto)">Eliminar</button></td>
+            <td><button [routerLink]="['/editarpresentacionProducto',p.idPresentacionProducto]" > Actualizar</button></td>
+        </tr>
+      </table>
   </div>
 </div>
   

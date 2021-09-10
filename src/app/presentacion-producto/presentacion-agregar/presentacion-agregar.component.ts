@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PresentacionProducto,ExistenciaProducto,Producto } from 'src/app/model/presentacionProducto';
 import { PresentacionProductoService } from 'src/app/service/presentacion-producto.service';
 import { listadatos } from 'src/app/model/datos';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-presentacion-agregar',
   templateUrl: './presentacion-agregar.component.html',
@@ -14,7 +15,10 @@ export class PresentacionAgregarComponent implements OnInit {
 
   mensaje: String=""
 
-  constructor( private presentacionService: PresentacionProductoService) { }
+  constructor( 
+    private presentacionService: PresentacionProductoService,
+    private route:Router
+    ) { }
 
   ngOnInit(): void {
     this.fetchProducts()
@@ -26,6 +30,7 @@ export class PresentacionAgregarComponent implements OnInit {
       entity=>{
         console.log("Se creeo",entity)
         this.mensaje="Se creo exitosamente"
+        this.route.navigate(['/presentacionProducto'])
       },
       error=> {
         console.log("Hubo un Error",error)

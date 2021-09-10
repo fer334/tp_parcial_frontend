@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExistenciaProducto, PresentacionProducto } from 'src/app/model/presentacionProducto';
 import { Producto } from 'src/app/model/presentacionProducto';
 import { PresentacionProductoService } from 'src/app/service/presentacion-producto.service';
-
+import { ActivatedRoute,Router } from '@angular/router';
 @Component({
   selector: 'app-presentacion-editar',
   templateUrl: './presentacion-editar.component.html',
@@ -14,11 +14,17 @@ export class PresentacionEditarComponent implements OnInit {
   mensaje : String = ""
   loaded : Boolean = false
 
-  constructor(private presentacionService: PresentacionProductoService) { }
+  constructor(
+    private presentacionService: PresentacionProductoService,
+    private route :ActivatedRoute,
+    private routeNavigate:Router
+    ) { }
 
   ngOnInit(): void {
+    const routeParams=this.route.snapshot.paramMap
+    let idPresentacionProducto=Number(routeParams.get('id'))
     this.fetchProducts()
-    this.fetchPresentacionProducto()
+    this.fetchPresentacionProducto(idPresentacionProducto)
     this.loaded=true
   }
   guardar():void{
@@ -26,7 +32,8 @@ export class PresentacionEditarComponent implements OnInit {
     this.presentacionService.actualizarPresentacionProducto(this.presentacionProducto).subscribe(
       entity=>{
         console.log("Se actualizoo",entity)
-        this.mensaje="Se creo exitosamente"
+        this.mensaje="Se Edito exitosamente"  
+        this.routeNavigate.navigate(['/presentacionProducto'])
       },
       error=> {
         console.log("Hubo un Error",error)
@@ -48,8 +55,8 @@ export class PresentacionEditarComponent implements OnInit {
     )
   }
 
-  fetchPresentacionProducto():void{
-    this.presentacionService.getPresentacionProducto(180).subscribe(
+  fetchPresentacionProducto(idPresentacionProducto:number):void{
+    this.presentacionService.getPresentacionProducto(idPresentacionProducto).subscribe(
       entity=>{
         this.presentacionProducto=entity
         if (!this.presentacionProducto.existenciaProducto) this.presentacionProducto.existenciaProducto= new ExistenciaProducto()
