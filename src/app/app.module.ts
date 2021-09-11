@@ -46,6 +46,7 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 import { FixedpluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { DataTablesModule } from "angular-datatables";
 
 import { AppRoutes } from './app.routing';
 import { CategoriaComponent } from './categoria/categoria.component';
@@ -59,6 +60,10 @@ import { SubcategoriaEditarComponent } from './subcategoria/subcategoria-editar/
 import { SubcategoriaEliminarComponent } from './subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
 import { ServicesubcategoriaService } from './service/servicesubcategoria.service';
 import { FichaClinicaComponent } from './ficha-clinica/ficha-clinica.component';
+import { PacienteService } from './service/servicepaciente.service';
+import { PacienteComponent } from './paciente/paciente.component';
+import { CreatePaciente } from './paciente/createpaciente.component';
+import { EditPaciente } from './paciente/editpaciente.component';
 
 @NgModule({
   exports: [
@@ -110,7 +115,8 @@ export class MaterialModule {}
         SidebarModule,
         NavbarModule,
         FooterModule,
-        FixedpluginModule
+        FixedpluginModule,
+        DataTablesModule,
     ],
     declarations: [
         AppComponent,
@@ -129,7 +135,12 @@ export class MaterialModule {}
     providers : [
       MatNativeDateModule,
       ServicecategoriaService,
-      ServicesubcategoriaService
+      ServicesubcategoriaService,
+      PacienteComponent,
+      CreatePaciente,
+      EditPaciente,
+      MatNativeDateModule,
+      PacienteService
     ],
     bootstrap:    [ AppComponent ]
 })

@@ -38,6 +38,19 @@ export const ROUTES: RouteInfo[] = [
     //    ]
     //},
     {
+        path: '',
+        title: 'Aplicaciones',
+        type: 'sub',
+        icontype: 'apps',
+        collapse: 'apps',
+        children: [{
+            path: 'paciente',
+            title: 'Paciente',
+            type: 'link',
+            ab:'P'
+        },
+        ]
+    },{
         path: '/dashboard',
         title: 'Dashboard',
         type: 'link',

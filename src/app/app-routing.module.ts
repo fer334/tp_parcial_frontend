@@ -9,6 +9,7 @@ import { SubcategoriaAgregarComponent } from './subcategoria/subcategoria-agrega
 import { SubcategoriaEditarComponent } from './subcategoria/subcategoria-editar/subcategoria-editar.component';
 import { SubcategoriaEliminarComponent } from './subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
+import { PacienteComponent } from './paciente/paciente.component';
 
 const routes: Routes = [
   {
@@ -48,7 +49,11 @@ const routes: Routes = [
   {
     path: 'ficha_clinica',
     component: FichaClinicaComponent,
-  }
+  },
+  {
+    path: 'paciente',
+    component: PacienteComponent
+  },
 ];
 
 @NgModule({
