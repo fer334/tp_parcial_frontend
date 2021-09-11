@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FichaClinica } from '../model/ficha-clinica';
+import { ServicefichaclinicaService } from '../service/servicefichaclinica.service';
 
 @Component({
   selector: 'app-ficha-clinica',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ficha-clinica.component.css']
 })
 export class FichaClinicaComponent implements OnInit {
-
-  constructor() { }
+  fichasclinicas: FichaClinica[] = [];
+  constructor(private servicioFichaClinica: ServicefichaclinicaService) { }
 
   ngOnInit(): void {
+    this.getFichasClinicas();
+  }
+
+  getFichasClinicas(): void {
+    this.servicioFichaClinica.getFichasClinicas().subscribe(
+      entity => this.fichasclinicas = entity.lista,
+      error => console.log('no se pueden conseguir las fichas clinicas')
+    );
   }
 
 }

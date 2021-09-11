@@ -13,6 +13,7 @@ import { EditPaciente } from '../paciente/editpaciente.component';
 import { PacienteComponent } from '../paciente/paciente.component';
 
 import { DashboardComponent } from './dashboard.component';
+import { FichaClinica } from '../model/ficha-clinica';
 
 export const DashboardRoutes: Routes = [
     {

@@ -64,6 +64,7 @@ import { PacienteService } from './service/servicepaciente.service';
 import { PacienteComponent } from './paciente/paciente.component';
 import { CreatePaciente } from './paciente/createpaciente.component';
 import { EditPaciente } from './paciente/editpaciente.component';
+import { ServicefichaclinicaService } from './service/servicefichaclinica.service';
 
 @NgModule({
   exports: [
@@ -130,17 +131,17 @@ export class MaterialModule {}
         SubcategoriaAgregarComponent,
         SubcategoriaEditarComponent,
         SubcategoriaEliminarComponent,
-        FichaClinicaComponent
+        FichaClinicaComponent,
+        PacienteComponent,
+        CreatePaciente,
+        EditPaciente,
     ],
     providers : [
       MatNativeDateModule,
       ServicecategoriaService,
       ServicesubcategoriaService,
-      PacienteComponent,
-      CreatePaciente,
-      EditPaciente,
-      MatNativeDateModule,
-      PacienteService
+      PacienteService,
+      ServicefichaclinicaService
     ],
     bootstrap:    [ AppComponent ]
 })
