@@ -1,21 +1,44 @@
 <h1>Lista de Reservas</h1>
-<div *ngIf="reservas.length > 0" style="margin: auto;" >
+
+<div>
+    <h1>Filtrar</h1>
+    <div>
+        Empleado: <input [(ngModel)]="empleado" type="text" name="" id="">
+        Cliente : <input [(ngModel)]="cliente" type="text" name="" id="">
+        Desde: <input [(ngModel)]="fromDate" type="date" name="" id="">
+        Hasta: <input [(ngModel)]="toDate" type="date" name="" id="">
+    </div>
+</div>
+<div>
+    <p>{{fromDate}} ---- {{toDate}}</p>
+    <button (click)="filtrarReservas()">Filtrar   </button>
+    <button (click)="getAll()">Ver todas las Reservas</button>
+</div>
+<div *ngIf="reservasFiltradas.length > 0" style="margin: auto;" >
     <table border="1">
-        <tr>
+        <tr>    
+            <td>Id Reserva</td>
             <td>Fecha</td>
             <td>Hora Inicio</td>
             <td>Hora Fin</td>
             <td>Empleado</td>
             <td>Cliente</td>
+            <td>Asistio</td>
+            <td>Obeservacion</td>
+            <td>Estado</td>
             <td>Modificar</td>
         </tr>
-        <tr *ngFor="let r of reservas">
-            <td>{{r.fechaCadena}}</td>
+        <tr *ngFor="let r of reservasFiltradas">
+            <td>{{r.idReserva}}</td>
+            <td>{{r.fecha}}</td>
             <td>{{r.horaInicio}}</td>
             <td>{{r.horaFin}}</td>
             <td>{{r.idEmpleado.nombre}}</td>
             <td>{{r.idCliente.nombre}}</td>
-            <td><a>Ir a Modificar </a></td>
+            <td>{{r.flagAsistio}}</td>
+            <td>{{r.observacion}}</td>
+            <td>{{r.flagEstado}}</td>
+            <td><button [routerLink]="['/editarReserva',r.idReserva]">Ir a Modificar</button></td>
         </tr>
     </table>
 </div>

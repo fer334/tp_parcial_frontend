@@ -11,4 +11,6 @@ export class Reserva{
     idEmpleado!:Persona;
     idCliente!: Persona;
     observacion!:string;
+    flagAsistio!: string;
+    flagEstado!:string;
 }

@@ -17,16 +17,22 @@ export class ReservaService {
     return this.http.get<listadatos<Reserva>>(endPoint)
   } 
 
-  cancelarReserva(): Observable<number>{
-    let resource="stock-pwfe/reserva"
+  getReserva(idReserva:number):Observable<Reserva>{
+    let resource=`stock-pwfe/reserva/${idReserva}`
+    let endPoint=this.api+resource
+    return this.http.get<Reserva>(endPoint)
+  }
+  cancelarReserva(idReserva:number): Observable<number>{
+    let resource=`stock-pwfe/reserva/${idReserva}`
     let endPoint=this.api+resource 
     return this.http.delete<number>(endPoint)
   }
 
-  updateReserva(reserva:Reserva): Observable<Reserva>{
+  updateReserva(reserva): Observable<Reserva>{
     let resource="stock-pwfe/reserva"
     let endPoint=this.api+resource
-    return this.http.put<Reserva>(endPoint,reserva)
+    console.log("Reserva a actualizar",reserva)
+    return this.http.put<Reserva>(endPoint,JSON.stringify(reserva),{headers:{'Content-Type': 'application/json'}})
   }
 
   crearReserva(reserva:Reserva): Observable<Reserva>{

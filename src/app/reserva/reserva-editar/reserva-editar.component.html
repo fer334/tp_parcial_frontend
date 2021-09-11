@@ -1,1 +1,17 @@
-<p>reserva-editar works!</p>
+<div>
+    <h1>Editar Reserva</h1>
+    <p>Observacion <input [(ngModel)]="observacion"  type="text" name="" id=""></p>
+    <p>Asistio 
+        <select [(ngModel)]="flagAsistio"  name="" id="">
+            <option value="" disabled selected hidden></option>
+            <option value="S">Si</option>
+            <option value="N">No</option>
+        </select>
+    </p>
+    <button (click)="guardar()">  Guardar</button>
+    <button (click)="cancelarReserva()">  Cancelar Reserva </button>
+</div>
+
+<div>
+    <p>{{mensaje}}</p>
+</div>

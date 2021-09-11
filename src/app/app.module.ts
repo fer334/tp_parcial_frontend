@@ -90,8 +90,7 @@ import { ReservaEditarComponent } from './reserva/reserva-editar/reserva-editar.
     MatNativeDateModule
   ],
   declarations: [
-  
-    ReservaEditarComponent
+
   ]
 })
 export class MaterialModule {}
@@ -121,7 +120,8 @@ export class MaterialModule {}
         PresentacionAgregarComponent,
         PresentacionEditarComponent,
         //Componente de Reservas
-        ReservaComponent
+        ReservaComponent,
+        ReservaEditarComponent
     ],
     providers : [
       MatNativeDateModule,
