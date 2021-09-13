@@ -55,6 +55,8 @@ import { CreatePaciente } from './paciente/createpaciente.component';
 import { EditPaciente } from './paciente/editpaciente.component';
 import { HorarioComponent } from './horario/horario.component';
 import { CreateHorarioComponent } from './horario/createhorario.component';
+import { HorarioExComponent } from './horario_ex/horario.component';
+import { CreateHorarioExComponent } from './horario_ex/createhorario.component';
 
 @NgModule({
   exports: [
@@ -118,6 +120,8 @@ export class MaterialModule {}
         EditPaciente,
         HorarioComponent,
         CreateHorarioComponent,
+        HorarioExComponent,
+        CreateHorarioExComponent,
     ],
     providers : [
       MatNativeDateModule,
