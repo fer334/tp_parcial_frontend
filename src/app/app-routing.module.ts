@@ -10,7 +10,7 @@ import { SubcategoriaEditarComponent } from './subcategoria/subcategoria-editar/
 import { SubcategoriaEliminarComponent } from './subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 import { PacienteComponent } from './paciente/paciente.component';
-import { FichaClinicaAgregarComponent } from './ficha-clinica-agregar/ficha-clinica-agregar.component';
+import { FichaClinicaAgregarComponent } from './ficha-clinica/ficha-clinica-agregar/ficha-clinica-agregar.component';
 import { CreatePaciente } from './paciente/createpaciente.component';
 import { EditPaciente } from './paciente/editpaciente.component';
 

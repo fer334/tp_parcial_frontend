@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FichaClinica } from '../model/ficha-clinica';
-import { Paciente } from '../model/paciente';
-import { Subcategoria } from '../model/subcategoria';
-import { ServicefichaclinicaService } from '../service/servicefichaclinica.service';
-import { PacienteService } from '../service/servicepaciente.service';
-import { ServicesubcategoriaService } from '../service/servicesubcategoria.service';
+import { FichaClinica } from '../../model/ficha-clinica';
+import { Paciente } from '../../model/paciente';
+import { Subcategoria } from '../../model/subcategoria';
+import { ServicefichaclinicaService } from '../../service/servicefichaclinica.service';
+import { PacienteService } from '../../service/servicepaciente.service';
+import { ServicesubcategoriaService } from '../../service/servicesubcategoria.service';
 
 @Component({
   selector: 'app-ficha-clinica-agregar',

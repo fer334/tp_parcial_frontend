@@ -14,7 +14,7 @@ import { PacienteComponent } from '../paciente/paciente.component';
 
 import { DashboardComponent } from './dashboard.component';
 import { FichaClinica } from '../model/ficha-clinica';
-import { FichaClinicaAgregarComponent } from '../ficha-clinica-agregar/ficha-clinica-agregar.component';
+import { FichaClinicaAgregarComponent } from '../ficha-clinica/ficha-clinica-agregar/ficha-clinica-agregar.component';
 
 export const DashboardRoutes: Routes = [
     {
