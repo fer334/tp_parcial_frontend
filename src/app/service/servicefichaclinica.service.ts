@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { listadatos } from '../model/datos';
-import { FichaClinica } from '../model/ficha-clinica';
+import { FichaClinica, Local } from '../model/ficha-clinica';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +43,7 @@ export class ServicefichaclinicaService {
   }
   
   getFichasClinicasPorSubcategoria(idSubcategoria: number): Observable<listadatos<FichaClinica>> {
-    let payload = JSON.stringify({idTipoProducto:{idTipoProducto:"${idSubcategoria}"}});
+    let payload = JSON.stringify({idTipoProducto:{idTipoProducto:idSubcategoria}});
     return this.http.get<listadatos<FichaClinica>>(this.api,{params:{ejemplo:payload}});
   }
 
@@ -51,7 +51,11 @@ export class ServicefichaclinicaService {
   // preseleccionarse si existe una reserva de turno, el campo de observación es opcional, la fecha
   // se carga en el backend automáticamente) PREGUNTAR A JESÚS LO DE RESERVA
   agregarFichaClinica(fc:FichaClinica): Observable<FichaClinica> {
-    return this.http.post<FichaClinica>(this.api, fc)
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'usuario': 'usuario2'
+    });
+    return this.http.post<FichaClinica>(this.api, fc, {headers:headers})
     .pipe(
       tap(
         data => console.log("ficha clinica añadida "+data),
@@ -59,4 +63,21 @@ export class ServicefichaclinicaService {
       )
     );
   }
+
+  editarFichaClinica(fc:FichaClinica): Observable<FichaClinica>{
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'usuario': 'usuario2'
+    });
+    return this.http.put<FichaClinica>(this.api, fc, {headers:headers}).pipe(
+      tap(
+        data => console.log('editada fc '+data.motivoConsulta),
+        error => console.log('el error al editar la fc es '+error.error)
+      )
+    );
+  }
+
+  getLocales(): Observable<listadatos<Local>>{
+    return this.http.get<listadatos<Local>>("http://181.123.243.5:8080/stock-pwfe/local");
+  } 
 }

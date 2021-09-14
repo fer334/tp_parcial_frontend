@@ -34,7 +34,8 @@ export class SubcategoriaEditarComponent implements OnInit {
   editar(): void{
     this.servicioSubcategoria.editarSubcategoria(this.subcategoriaedit).subscribe(
       ()=> {
-        this.mensaje='subcategoria editada exitosamente'
+        this.mensaje='subcategoria editada exitosamente';
+        console.log(this.subcategoriaedit);
       },
       error =>{ console.log("el error al editar es: "+error);
         console.log("llega el valor? "+this.subcategoriaedit.descripcion);

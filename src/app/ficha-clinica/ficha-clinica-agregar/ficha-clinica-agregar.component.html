@@ -29,6 +29,11 @@
         <option *ngFor="let sc of subcategorias" [value]="sc.idTipoProducto">{{sc.descripcion}}</option>
     </select>
     <br>
+    Locales:
+    <select [(ngModel)]="fichaclinica.idLocal.idLocal">
+        <option *ngFor="let l of locales" [value]="l.idLocal">{{l.nombre}}</option>
+    </select>
+    <br>
      <button  (click)="guardar()">Guardar</button>
      {{mensaje}}
 </div>

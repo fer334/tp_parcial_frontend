@@ -1,0 +1,40 @@
+<p>ficha-clinica-editar works!</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Ingrese los nuevos datos de la ficha</p>
+<div>  
+    Motivo de la consulta <input [(ngModel)]="fichaclinicaedit.motivoConsulta">
+    <br>
+    Diagnostico <input [(ngModel)]="fichaclinicaedit.diagnostico">
+    <br>
+    Observacion [SOLO ESTE SE PUEDE EDITAR] <input [(ngModel)]="fichaclinicaedit.observacion">
+    <br>
+    Fisioterapeuta encargado:
+    <select [(ngModel)]="fichaclinicaedit.idEmpleado.idPersona">
+        <option *ngFor="let e of empleados" [value]="e.idPersona">{{e.nombre}}</option>
+    </select>
+    <br>
+    Cliente:
+    <select [(ngModel)]="fichaclinicaedit.idCliente.idPersona">
+        <option *ngFor="let cl of clientes" [value]="cl.idPersona">{{cl.nombre}}</option>
+    </select>
+    <br>
+    Producto(subcategoria):
+    <select [(ngModel)]="fichaclinicaedit.idTipoProducto.idTipoProducto">
+        <option *ngFor="let sc of subcategorias" [value]="sc.idTipoProducto">{{sc.descripcion}}</option>
+    </select>
+    <br>
+    Locales:
+    <select [(ngModel)]="fichaclinicaedit.idLocal.idLocal">
+        <option *ngFor="let l of locales" [value]="l.idLocal">{{l.nombre}}</option>
+    </select>
+    <br>
+     <button  (click)="editar()">Modificar</button>
+    <br/>
+     {{mensaje}}
+</div>

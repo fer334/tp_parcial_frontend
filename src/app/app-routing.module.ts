@@ -13,6 +13,7 @@ import { PacienteComponent } from './paciente/paciente.component';
 import { FichaClinicaAgregarComponent } from './ficha-clinica/ficha-clinica-agregar/ficha-clinica-agregar.component';
 import { CreatePaciente } from './paciente/createpaciente.component';
 import { EditPaciente } from './paciente/editpaciente.component';
+import { FichaClinicaEditarComponent } from './ficha-clinica/ficha-clinica-editar/ficha-clinica-editar.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'ficha_clinica',
     component: FichaClinicaComponent,
+  },
+  {
+    path: 'editarficha_clinica/:id',
+    component: FichaClinicaEditarComponent,
   },
   {
     path: 'paciente',

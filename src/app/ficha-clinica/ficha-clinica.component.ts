@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FichaClinica } from '../model/ficha-clinica';
 import { ServicefichaclinicaService } from '../service/servicefichaclinica.service';
 
@@ -9,7 +10,9 @@ import { ServicefichaclinicaService } from '../service/servicefichaclinica.servi
 })
 export class FichaClinicaComponent implements OnInit {
   fichasclinicas: FichaClinica[] = [];
-  constructor(private servicioFichaClinica: ServicefichaclinicaService) { }
+  constructor(private servicioFichaClinica: ServicefichaclinicaService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getFichasClinicas();
@@ -22,7 +25,10 @@ export class FichaClinicaComponent implements OnInit {
     this.getFichasClinicasPorFechaDesdeHasta();
     this.getFichasClinicasPorIdTipoProducto();
   }
-
+  
+  edit(fc: FichaClinica){
+    this.router.navigate(['editarficha_clinica/',fc.idFichaClinica]);
+  }
   getFichasClinicas(): void {
     this.servicioFichaClinica.getFichasClinicas().subscribe(
       entity => this.fichasclinicas = entity.lista,

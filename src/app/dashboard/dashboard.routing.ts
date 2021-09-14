@@ -15,6 +15,7 @@ import { PacienteComponent } from '../paciente/paciente.component';
 import { DashboardComponent } from './dashboard.component';
 import { FichaClinica } from '../model/ficha-clinica';
 import { FichaClinicaAgregarComponent } from '../ficha-clinica/ficha-clinica-agregar/ficha-clinica-agregar.component';
+import { FichaClinicaEditarComponent } from '../ficha-clinica/ficha-clinica-editar/ficha-clinica-editar.component';
 
 export const DashboardRoutes: Routes = [
     {
@@ -63,6 +64,10 @@ export const DashboardRoutes: Routes = [
         {
           path: 'nuevaficha_clinica',
           component: FichaClinicaAgregarComponent,
+        },
+        {
+          path: 'editarficha_clinica/:id',
+          component: FichaClinicaEditarComponent,
         },
         {
           path: 'dashboard',

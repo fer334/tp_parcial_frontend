@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FichaClinica, Local } from '../../model/ficha-clinica';
-import { Paciente } from '../../model/paciente';
-import { Subcategoria } from '../../model/subcategoria';
-import { ServicefichaclinicaService } from '../../service/servicefichaclinica.service';
-import { PacienteService } from '../../service/servicepaciente.service';
-import { ServicesubcategoriaService } from '../../service/servicesubcategoria.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FichaClinica, Local } from 'src/app/model/ficha-clinica';
+import { Paciente } from 'src/app/model/paciente';
+import { Subcategoria } from 'src/app/model/subcategoria';
+import { ServicefichaclinicaService } from 'src/app/service/servicefichaclinica.service';
+import { PacienteService } from 'src/app/service/servicepaciente.service';
+import { ServicesubcategoriaService } from 'src/app/service/servicesubcategoria.service';
 
 @Component({
-  selector: 'app-ficha-clinica-agregar',
-  templateUrl: './ficha-clinica-agregar.component.html',
-  styleUrls: ['./ficha-clinica-agregar.component.css']
+  selector: 'app-ficha-clinica-editar',
+  templateUrl: './ficha-clinica-editar.component.html',
+  styleUrls: ['./ficha-clinica-editar.component.css']
 })
-export class FichaClinicaAgregarComponent implements OnInit {
+export class FichaClinicaEditarComponent implements OnInit {
   fichaclinica: FichaClinica = new FichaClinica();
-  mensaje: string = ""
+  fichaclinicaedit: FichaClinica = new FichaClinica();
+  mensaje: string = "";
   subcategorias: Subcategoria[] = [];
   clientes: Paciente[] = [];
   empleados: Paciente[] = [];
@@ -21,23 +23,33 @@ export class FichaClinicaAgregarComponent implements OnInit {
 
   constructor(private servicioFichaClinica: ServicefichaclinicaService,
     private servicioSubcategoria: ServicesubcategoriaService,
-    private servicioPersona: PacienteService) { }
+    private servicioPersona: PacienteService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params) =>{
+      const id = +params['id']; // el + convierte el string id a number
+      this.fichaclinicaedit.idFichaClinica = id;
+    });
     this.traerSubCategorias();
     this.traerPersonas();
     this.traerLocales();
   }
 
-  guardar(): void{
-    this.servicioFichaClinica.agregarFichaClinica(this.fichaclinica).subscribe(
-      () => {
-        this.mensaje = "Agregado exitosamente"
+  editar(): void{
+    this.servicioFichaClinica.editarFichaClinica(this.fichaclinicaedit).subscribe(
+      ()=> {
+        console.log(this.fichaclinicaedit);
+        this.mensaje='ficha clinica editada exitosamente';
       },
-      error => this.mensaje = "Error al agregar ficha: "+ error.error
+      error =>{ console.log("el error al editar es: "+error); 
+        console.log("llega el valor? "+this.fichaclinicaedit.motivoConsulta);
+        this.mensaje=error.error;
+      }
     );
   }
- 
+  
   traerSubCategorias(): void { //función para traer la lista de subcategorías a la hora de crear una ficha clinica
     this.servicioSubcategoria.getSubcategorias().subscribe(
        entity=>{
