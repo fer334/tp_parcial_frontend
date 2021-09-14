@@ -78,7 +78,7 @@ export const DashboardRoutes: Routes = [
         },
         {
           path: 'paciente/edit/:id',
-          component: EditPaciente
+          component: EditPaciente,
         }
       ],
   },

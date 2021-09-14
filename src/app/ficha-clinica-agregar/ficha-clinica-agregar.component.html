@@ -12,24 +12,23 @@
     <br>
     Diagnostico <input [(ngModel)]="fichaclinica.diagnostico">
     <br>
-    Observacion <input [(ngModel)]="fichaclinica.observación">
+    Observacion <input [(ngModel)]="fichaclinica.observacion">
     <br>
     Fisioterapeuta encargado:
     <select [(ngModel)]="fichaclinica.idEmpleado.idPersona">
         <option *ngFor="let e of empleados" [value]="e.idPersona">{{e.nombre}}</option>
     </select>
     <br>
-    Fisioterapeuta encargado:
+    Cliente:
     <select [(ngModel)]="fichaclinica.idCliente.idPersona">
         <option *ngFor="let cl of clientes" [value]="cl.idPersona">{{cl.nombre}}</option>
     </select>
     <br>
-    Fisioterapeuta encargado:
+    Producto(subcategoria):
     <select [(ngModel)]="fichaclinica.idTipoProducto.idTipoProducto">
         <option *ngFor="let sc of subcategorias" [value]="sc.idTipoProducto">{{sc.descripcion}}</option>
     </select>
     <br>
      <button  (click)="guardar()">Guardar</button>
-    <br/>
      {{mensaje}}
 </div>

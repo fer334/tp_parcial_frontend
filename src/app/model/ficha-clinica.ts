@@ -16,7 +16,7 @@ export class FichaClinica {
     fechaHora: Date;
     motivoConsulta: string;
     diagnostico: string;
-    observación: string;
+    observacion: string;
     idLocal!: Local;
     idEmpleado!: Paciente;
     idCliente!: Paciente;

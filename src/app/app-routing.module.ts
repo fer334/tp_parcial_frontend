@@ -11,6 +11,8 @@ import { SubcategoriaEliminarComponent } from './subcategoria/subcategoria-elimi
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { FichaClinicaAgregarComponent } from './ficha-clinica-agregar/ficha-clinica-agregar.component';
+import { CreatePaciente } from './paciente/createpaciente.component';
+import { EditPaciente } from './paciente/editpaciente.component';
 
 const routes: Routes = [
   {
@@ -53,11 +55,19 @@ const routes: Routes = [
   },
   {
     path: 'ficha_clinica',
-    component: PacienteComponent
+    component: FichaClinicaComponent,
   },
   {
     path: 'paciente',
-    component: PacienteComponent
+    component: PacienteComponent,
+  },
+  {
+    path: 'paciente/create',
+    component: CreatePaciente,
+  },
+  {
+    path: 'paciente/edit/:id',
+    component: EditPaciente,
   },
   
 ];
