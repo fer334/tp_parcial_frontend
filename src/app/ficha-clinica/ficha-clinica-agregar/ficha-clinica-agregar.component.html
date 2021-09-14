@@ -15,15 +15,32 @@
     Observacion <input [(ngModel)]="fichaclinica.observacion">
     <br>
     Fisioterapeuta encargado:
+<!--
     <select [(ngModel)]="fichaclinica.idEmpleado.idPersona">
         <option *ngFor="let e of empleados" [value]="e.idPersona">{{e.nombre}}</option>
     </select>
     <br>
+-->
+    <select [(ngModel)]="fichaclinica.idEmpleado.idPersona" >
+        <ng-container *ngFor="let e of empleados">
+            <option *ngIf="e.usuarioLogin"  value="{{e.idPersona}}">{{e.nombre}}</option>
+        </ng-container> 
+    </select>
+    <br>
+
     Cliente:
+<!--
     <select [(ngModel)]="fichaclinica.idCliente.idPersona">
         <option *ngFor="let cl of clientes" [value]="cl.idPersona">{{cl.nombre}}</option>
     </select>
+-->
+    <select [(ngModel)]="fichaclinica.idCliente.idPersona" >
+        <ng-container *ngFor="let cl of clientes">
+            <option *ngIf="!cl.usuarioLogin"  value="{{cl.idPersona}}">{{cl.nombre}}</option>
+        </ng-container> 
+    </select>
     <br>
+
     Producto(subcategoria):
     <select [(ngModel)]="fichaclinica.idTipoProducto.idTipoProducto">
         <option *ngFor="let sc of subcategorias" [value]="sc.idTipoProducto">{{sc.descripcion}}</option>
