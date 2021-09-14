@@ -11,10 +11,10 @@
 </div>
 <div>
     <p>{{fromDate}} ---- {{toDate}}</p>
-    <button (click)="filtrarReservas()">Filtrar   </button>
+    <button (click)="filtrarReservas()">Filtrar</button> <br><br>
     <button (click)="getAll()">Ver todas las Reservas</button>
 </div>
-<div *ngIf="reservasFiltradas.length > 0" style="margin: auto;" >
+<div *ngIf="reservasFiltradas.length > 0 && filtreFinished" style="margin: auto;" >
     <table border="1">
         <tr>    
             <td>Id Reserva</td>
@@ -41,4 +41,7 @@
             <td><button [routerLink]="['/editarReserva',r.idReserva]">Ir a Modificar</button></td>
         </tr>
     </table>
+</div>
+<div>
+    <button routerLink="/agregarReserva">Agregar Reserva</button>
 </div>

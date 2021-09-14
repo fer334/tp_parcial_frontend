@@ -55,6 +55,7 @@ import { PresentacionEditarComponent } from './presentacion-producto/presentacio
 import { ReservaComponent } from './reserva/reserva.component';
 import { ReservaService } from './service/reserva/reserva.service';
 import { ReservaEditarComponent } from './reserva/reserva-editar/reserva-editar.component';
+import { ReservaAgregarComponent } from './reserva/reserva-agregar/reserva-agregar.component';
 
 @NgModule({
   exports: [
@@ -91,6 +92,8 @@ import { ReservaEditarComponent } from './reserva/reserva-editar/reserva-editar.
   ],
   declarations: [
 
+  
+    
   ]
 })
 export class MaterialModule {}
@@ -121,7 +124,8 @@ export class MaterialModule {}
         PresentacionEditarComponent,
         //Componente de Reservas
         ReservaComponent,
-        ReservaEditarComponent
+        ReservaEditarComponent,
+        ReservaAgregarComponent
     ],
     providers : [
       MatNativeDateModule,

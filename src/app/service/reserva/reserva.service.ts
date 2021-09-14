@@ -35,9 +35,40 @@ export class ReservaService {
     return this.http.put<Reserva>(endPoint,JSON.stringify(reserva),{headers:{'Content-Type': 'application/json'}})
   }
 
-  crearReserva(reserva:Reserva): Observable<Reserva>{
+  crearReserva(reserva:any): Observable<Reserva>{
     let resource="stock-pwfe/reserva"
     let endPoint=this.api+resource
-    return this.http.post<Reserva>(endPoint,reserva)
+    console.log("newReserva",JSON.stringify(reserva))
+    return this.http.post<Reserva>(endPoint,JSON.stringify(reserva),{headers:{'Content-Type': 'application/json','usuario':'usuario2'}})
+  }
+
+  getAgendaLibre(idEmpleado:number,fecha:string):Observable<Reserva[]>{
+    let resource=`stock-pwfe/persona/${idEmpleado}/agenda`
+    let endPoint=this.api+resource
+    return this.http.get<Reserva[]>(endPoint,{params:{
+      fecha:fecha,
+      disponible:"S"
+    }})
+  }
+
+  getAgendaLibreOcupado(idEmpleado:number,fecha:string):Observable<Reserva[]>{
+    let resource=`stock-pwfe/persona/${idEmpleado}/agenda`
+    let endPoint=this.api+resource
+    return this.http.get<Reserva[]>(endPoint,{params:{
+      fecha:fecha
+    }})
+  }
+
+  getEmpleados(){
+    let resource="stock-pwfe/persona"
+    let endPoint=this.api+resource
+    return this.http.get(endPoint,{params:{
+      ejemplo:JSON.stringify({soloUsuariosDelSistema:true})
+    }})
+  }
+  getClientes(){
+    let resource="stock-pwfe/persona"
+    let endPoint=this.api+resource
+    return this.http.get(endPoint)
   }
 }

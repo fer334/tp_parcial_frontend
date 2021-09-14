@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReservaService } from '../service/reserva/reserva.service';
 import { Reserva } from '../model/reserva';
 import { formatDate } from '@angular/common';
+import { throws } from 'assert';
 @Component({
   selector: 'app-reserva',
   templateUrl: './reserva.component.html',
@@ -14,7 +15,7 @@ export class ReservaComponent implements OnInit {
   empleado:String
   cliente:String
   reservasFiltradas:Reserva[]=[]
-
+  filtreFinished:boolean=true
   constructor(private reservaService: ReservaService
     ) { }
 
@@ -40,39 +41,41 @@ export class ReservaComponent implements OnInit {
   }
   filtrarReservas():void{
       this.reservasFiltradas=[]
+      this.filtreFinished=false
       this.filtrarReservasByRange();
       this.filtrarReservaByEmpleado();
       this.filtrarReservaByCliente();
       this.removeDuplicate();
+      this.filtreFinished=true
+      console.log(this.filtreFinished)
   }
   removeDuplicate():void{
     let unique={}
-    let aux=this.reservasFiltradas
-    this.reservasFiltradas=aux.filter(obj=> !unique[obj.idReserva] && (unique[obj.idReserva]=true) )
+    this.reservasFiltradas=this.reservasFiltradas.filter(obj=> !unique[obj.idReserva] && (unique[obj.idReserva]=true) )
   }
   filtrarReservasByRange():void{
-    console.log(this.fromDate,this.toDate)
+
     if(this.fromDate && this.toDate){
         let from =formatDate(this.fromDate,'yyyyMMdd','en-US');
         let to=formatDate(this.toDate,'yyyyMMdd','en-US');
-        this.reservasFiltradas=this.reservasFiltradas.concat(this.reservas.filter( item=> item.fechaCadena>=from && item.fechaCadena<=to ))
+        console.log(from,to)
+        this.reservasFiltradas=this.reservasFiltradas.concat(this.reservas.filter(item=> item.fechaCadena>=from && item.fechaCadena<=to ))
     }
-    this.fromDate=this.toDate=null
   }
   filtrarReservaByEmpleado():void{
+    console.log('lenE',this.reservasFiltradas.length)
     if(this.empleado){
-      this.reservasFiltradas=this.reservasFiltradas.concat(this.reservas.filter(item=>item.idEmpleado.nombre.toLowerCase().startsWith(this.empleado+"".toLocaleLowerCase())))
+      this.reservasFiltradas= this.reservasFiltradas.length>0 ? this.reservasFiltradas.filter(item=>item.idEmpleado.nombre.toLowerCase().startsWith((this.empleado+"").toLocaleLowerCase())) : this.reservasFiltradas.concat(this.reservas.filter(item=>item.idEmpleado.nombre.toLowerCase().startsWith((this.empleado+"").toLocaleLowerCase())))
     }
-    this.empleado=""
   }
   getAll():void{
     this.reservasFiltradas=[...this.reservas]
   }
   filtrarReservaByCliente():void{
+    console.log('lenC',this.reservasFiltradas.length)
     if(this.cliente){
-      this.reservasFiltradas=this.reservasFiltradas.concat(this.reservas.filter(item=>item.idCliente.nombre.toLowerCase().startsWith(this.cliente+"".toLowerCase())))
+      this.reservasFiltradas= this.reservasFiltradas.length>0 ? this.reservasFiltradas.filter(item=>item.idCliente.nombre.toLowerCase().startsWith((this.cliente+"").toLowerCase())) : this.reservas.concat(this.reservasFiltradas.filter(item=>item.idCliente.nombre.toLowerCase().startsWith((this.cliente+"").toLowerCase())))
     }
-    this.cliente=""
   }
   
 }

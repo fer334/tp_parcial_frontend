@@ -2,6 +2,7 @@
 <div>
 
   <div>
+<!--
     <button  (click)="getByProdutType()">
       <p>Obtener Por id Tipo de Producto</p>
     </button>
@@ -14,14 +15,23 @@
     <button (click)="getPriceByIdPresentacionProducto()">
       <p>Obtener el Precio de un Presentacion</p>
     </button>
-
+-->
     <button routerLink="/agregarpresentacionProducto">
       <p>Crear</p>
     </button>
   
   </div>
+  <div>
+      <label>Tipo de Producto</label><input [(ngModel)]="idTipoProductoFilter" type="text"/>
+      <label>Nombre</label><input [(ngModel)]="nombreFilter" type="text"/>
+      <br>
+      <button (click)="filtrar()">Filtrar</button>
+  </div>
+  <div>
+    <p>{{mensaje}}</p>
+  </div>
   <br>
-  <div *ngIf="presentacionProductos.length>0">
+  <div *ngIf="presentacionProductosFiltrado.length>0">
       <table border="1">
         <tr>
           <td>IdPresentacionProducto</td>
@@ -34,7 +44,7 @@
           <td>Eliminar</td>
           <td>Actualizar</td>
         </tr>
-        <tr *ngFor="let p of presentacionProductos">
+        <tr *ngFor="let p of presentacionProductosFiltrado">
             <td>
               {{p.idPresentacionProducto}}
             </td>

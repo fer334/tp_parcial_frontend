@@ -23,14 +23,18 @@ export class PresentacionAgregarComponent implements OnInit {
   ngOnInit(): void {
     this.fetchProducts()
   }
-
+  goBack(): void{
+    setTimeout(()=>{
+      this.route.navigate(['/presentacionProducto'])
+    },1000)
+  }
   guardar():void{
     console.log("Estoy Agregandoo....",this.presentacionProducto)
     this.presentacionService.createPresentacionProducto(this.presentacionProducto).subscribe(
       entity=>{
         console.log("Se creeo",entity)
         this.mensaje="Se creo exitosamente"
-        this.route.navigate(['/presentacionProducto'])
+        this.goBack()
       },
       error=> {
         console.log("Hubo un Error",error)

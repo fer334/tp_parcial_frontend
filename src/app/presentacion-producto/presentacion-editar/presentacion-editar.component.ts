@@ -27,13 +27,16 @@ export class PresentacionEditarComponent implements OnInit {
     this.fetchPresentacionProducto(idPresentacionProducto)
     this.loaded=true
   }
+  
   guardar():void{
     console.log("Estoy Agregandoo....",this.presentacionProducto)
     this.presentacionService.actualizarPresentacionProducto(this.presentacionProducto).subscribe(
       entity=>{
         console.log("Se actualizoo",entity)
         this.mensaje="Se Edito exitosamente"  
-        this.routeNavigate.navigate(['/presentacionProducto'])
+        setTimeout(()=>{
+          this.routeNavigate.navigate(['/presentacionProducto'])
+        },1000)
       },
       error=> {
         console.log("Hubo un Error",error)
