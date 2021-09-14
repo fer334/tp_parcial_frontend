@@ -10,6 +10,7 @@ import { SubcategoriaEditarComponent } from './subcategoria/subcategoria-editar/
 import { SubcategoriaEliminarComponent } from './subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 import { PacienteComponent } from './paciente/paciente.component';
+import { FichaClinicaAgregarComponent } from './ficha-clinica-agregar/ficha-clinica-agregar.component';
 
 const routes: Routes = [
   {
@@ -47,13 +48,18 @@ const routes: Routes = [
 
   //desde acá componentes de ficha clinica
   {
+    path: 'nuevaficha_clinica',
+    component: FichaClinicaAgregarComponent,
+  },
+  {
     path: 'ficha_clinica',
-    component: FichaClinicaComponent,
+    component: PacienteComponent
   },
   {
     path: 'paciente',
     component: PacienteComponent
   },
+  
 ];
 
 @NgModule({

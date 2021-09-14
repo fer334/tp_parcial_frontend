@@ -65,6 +65,7 @@ import { PacienteComponent } from './paciente/paciente.component';
 import { CreatePaciente } from './paciente/createpaciente.component';
 import { EditPaciente } from './paciente/editpaciente.component';
 import { ServicefichaclinicaService } from './service/servicefichaclinica.service';
+import { FichaClinicaAgregarComponent } from './ficha-clinica-agregar/ficha-clinica-agregar.component';
 
 @NgModule({
   exports: [
@@ -135,6 +136,7 @@ export class MaterialModule {}
         PacienteComponent,
         CreatePaciente,
         EditPaciente,
+        FichaClinicaAgregarComponent,
     ],
     providers : [
       MatNativeDateModule,
