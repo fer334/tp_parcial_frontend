@@ -22,9 +22,9 @@
                   </div>
                   <div class="col-sm-6">
                     <mat-form-field class="example-full-width">
-                      <mat-select placeholder="Ficha Clinica" name="idFichaClinica"  [(ngModel)]="data.idFichaClinica" >
-                        <mat-option *ngFor="let f of fichas" [value]="f.idFichaClinica">
-                          {{ f.idFichaClinica +' - ' + f.motivoConsulta }}
+                      <mat-select placeholder="Categoria" name="idDetalle"  [(ngModel)]="detail.idDetalle" >
+                        <mat-option *ngFor="let c of categorias" [value]="c.idDetalle">
+                          {{ c.idCategoria +' - ' + c.descripcion }}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>

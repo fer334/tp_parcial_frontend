@@ -2,10 +2,12 @@ import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
+import { Categoria } from '../model/categoria';
 import { Detalle } from '../model/detalle';
 import { FichaClinica } from '../model/ficha-clinica';
 import { Paciente } from '../model/paciente';
 import { Servicio } from '../model/servicio';
+import { ServicecategoriaService } from '../service/servicecategoria.service';
 import { ServicefichaclinicaService } from '../service/servicefichaclinica.service';
 import { PacienteService } from '../service/servicepaciente.service';
 
@@ -18,11 +20,13 @@ import { PacienteService } from '../service/servicepaciente.service';
 })
 export class CreateServicioComponent {
 	data: Servicio = new Servicio();
-	details: Detalle = new Detalle();
+	detail: Detalle = new Detalle();
     fichas: FichaClinica[] = [];
+	categorias: Categoria[] = [];
 
 	constructor(
-        private fichasService: ServicefichaclinicaService ,
+        private fichasService: ServicefichaclinicaService,
+		private categoriaService: ServicecategoriaService,
 		private router: Router
 	) {
         this.fichasService.getFichasClinicas().subscribe(
@@ -30,6 +34,11 @@ export class CreateServicioComponent {
                 this.fichas = data.lista;
             }
         );
+		this.categoriaService.getCategorias().subscribe(
+			(data) => {
+				this.categorias = data.lista;
+			}
+		);
     }
 
 	createButton() {
