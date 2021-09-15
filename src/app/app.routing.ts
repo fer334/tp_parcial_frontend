@@ -8,6 +8,7 @@ import { PresentacionEditarComponent } from './presentacion-producto/presentacio
 import { ReservaComponent } from './reserva/reserva.component';
 import { ReservaEditarComponent } from './reserva/reserva-editar/reserva-editar.component';
 import { ReservaAgregarComponent } from './reserva/reserva-agregar/reserva-agregar.component';
+import { LoginComponent } from './login/login.component';
 
 export const AppRoutes: Routes = [
     {
@@ -33,6 +34,10 @@ export const AppRoutes: Routes = [
     {
         path:'agregarReserva',
         component:ReservaAgregarComponent
+    },
+    {
+        path:'login',
+        component:LoginComponent
     }
     /*
     {

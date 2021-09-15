@@ -3,6 +3,7 @@ import { ReservaService } from '../service/reserva/reserva.service';
 import { Reserva } from '../model/reserva';
 import { formatDate } from '@angular/common';
 import { throws } from 'assert';
+import { LoginService } from '../service/login/login.service';
 @Component({
   selector: 'app-reserva',
   templateUrl: './reserva.component.html',
@@ -16,10 +17,12 @@ export class ReservaComponent implements OnInit {
   cliente:String
   reservasFiltradas:Reserva[]=[]
   filtreFinished:boolean=true
-  constructor(private reservaService: ReservaService
+  constructor(private reservaService: ReservaService,
+              private loginService : LoginService
     ) { }
 
   ngOnInit(): void {
+    this.loginService.isLogged()
     this.fetchReservas()
 
   } 

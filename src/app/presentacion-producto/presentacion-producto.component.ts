@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PresentacionProducto } from '../model/presentacionProducto';
 import { PresentacionProductoService } from '../service/presentacion-producto.service';
 import { ActivatedRoute } from '@angular/router';
+import { LoginService } from '../service/login/login.service';
 @Component({
   selector: 'app-presentacion-producto',
   templateUrl: './presentacion-producto.component.html',
@@ -10,7 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PresentacionProductoComponent implements OnInit {
   
-  constructor(private servicioPresentacionProducto: PresentacionProductoService,private route : ActivatedRoute) { }
+  constructor(
+    private servicioPresentacionProducto: PresentacionProductoService,
+    private route : ActivatedRoute,
+    private loginService:LoginService
+    ) { }
   //states
   mensaje: String=""
   presentacionProductos: PresentacionProducto[]= []
@@ -20,6 +25,7 @@ export class PresentacionProductoComponent implements OnInit {
   nombreFilter:String=""
 
   ngOnInit(): void {
+      this.loginService.isLogged()
       this.getListPresentacionProducto()
   }
   getListPresentacionProducto():void{

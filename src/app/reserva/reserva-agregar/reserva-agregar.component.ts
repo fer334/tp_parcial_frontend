@@ -4,6 +4,7 @@ import { Reserva } from 'src/app/model/reserva';
 import { ReservaService } from 'src/app/service/reserva/reserva.service';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
+import { LoginService } from 'src/app/service/login/login.service';
 
 @Component({
   selector: 'app-reserva-agregar',
@@ -14,11 +15,13 @@ export class ReservaAgregarComponent implements OnInit {
 
   constructor(
     private reservaService:ReservaService,
-    private routeNavigation:Router
+    private routeNavigation:Router,
+    private loginService:LoginService
     ) { }
 
   ngOnInit(): void {
     //this.fetchAgendaLibreOcupada()
+    this.loginService.isLogged()
     this.fetchFisioterapeutas()
     this.fetchPersona()
   }

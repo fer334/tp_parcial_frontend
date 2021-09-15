@@ -3,6 +3,7 @@ import { PresentacionProducto,ExistenciaProducto,Producto } from 'src/app/model/
 import { PresentacionProductoService } from 'src/app/service/presentacion-producto.service';
 import { listadatos } from 'src/app/model/datos';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/service/login/login.service';
 @Component({
   selector: 'app-presentacion-agregar',
   templateUrl: './presentacion-agregar.component.html',
@@ -17,10 +18,12 @@ export class PresentacionAgregarComponent implements OnInit {
 
   constructor( 
     private presentacionService: PresentacionProductoService,
-    private route:Router
+    private route:Router,
+    private loginService:LoginService
     ) { }
 
   ngOnInit(): void {
+    this.loginService.isLogged()
     this.fetchProducts()
   }
   goBack(): void{

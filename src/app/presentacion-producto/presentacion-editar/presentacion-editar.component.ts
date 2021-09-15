@@ -3,6 +3,7 @@ import { ExistenciaProducto, PresentacionProducto } from 'src/app/model/presenta
 import { Producto } from 'src/app/model/presentacionProducto';
 import { PresentacionProductoService } from 'src/app/service/presentacion-producto.service';
 import { ActivatedRoute,Router } from '@angular/router';
+import { LoginService } from 'src/app/service/login/login.service';
 @Component({
   selector: 'app-presentacion-editar',
   templateUrl: './presentacion-editar.component.html',
@@ -17,10 +18,12 @@ export class PresentacionEditarComponent implements OnInit {
   constructor(
     private presentacionService: PresentacionProductoService,
     private route :ActivatedRoute,
-    private routeNavigate:Router
+    private routeNavigate:Router,
+    private loginService:LoginService
     ) { }
 
   ngOnInit(): void {
+    this.loginService.isLogged()
     const routeParams=this.route.snapshot.paramMap
     let idPresentacionProducto=Number(routeParams.get('id'))
     this.fetchProducts()

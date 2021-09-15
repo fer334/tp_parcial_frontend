@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReservaService } from 'src/app/service/reserva/reserva.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Reserva } from 'src/app/model/reserva';
+import { LoginService } from 'src/app/service/login/login.service';
 @Component({
   selector: 'app-reserva-editar',
   templateUrl: './reserva-editar.component.html',
@@ -13,9 +14,11 @@ export class ReservaEditarComponent implements OnInit {
   constructor(
     private reservaService: ReservaService,
     private routeNavigation: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loginService:LoginService
     ) { }
   ngOnInit(): void {
+    this.loginService.isLogged()
     let routeParams=this.route.snapshot.paramMap
     let idReserva= Number(routeParams.get('id'))
     this.getReserva(idReserva);

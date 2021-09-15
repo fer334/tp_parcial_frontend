@@ -56,6 +56,8 @@ import { ReservaComponent } from './reserva/reserva.component';
 import { ReservaService } from './service/reserva/reserva.service';
 import { ReservaEditarComponent } from './reserva/reserva-editar/reserva-editar.component';
 import { ReservaAgregarComponent } from './reserva/reserva-agregar/reserva-agregar.component';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './service/login/login.service';
 
 @NgModule({
   exports: [
@@ -94,6 +96,7 @@ import { ReservaAgregarComponent } from './reserva/reserva-agregar/reserva-agreg
 
   
     
+  
   ]
 })
 export class MaterialModule {}
@@ -125,12 +128,14 @@ export class MaterialModule {}
         //Componente de Reservas
         ReservaComponent,
         ReservaEditarComponent,
-        ReservaAgregarComponent
+        ReservaAgregarComponent,      
+        LoginComponent
     ],
     providers : [
       MatNativeDateModule,
       PresentacionProductoService,
-      ReservaService
+      ReservaService,
+      LoginService
     ],
     bootstrap:    [ AppComponent ]
 })
