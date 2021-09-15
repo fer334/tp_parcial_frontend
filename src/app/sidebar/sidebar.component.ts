@@ -49,6 +49,12 @@ export const ROUTES: RouteInfo[] = [
             type: 'link',
             ab:'P'
         },
+        {
+            path: 'servicio',
+            title: 'Servicio',
+            type: 'link',
+            ab:'S'
+        }
         ]
     },{
         path: '/dashboard',

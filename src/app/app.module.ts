@@ -64,6 +64,8 @@ import { PacienteService } from './service/servicepaciente.service';
 import { PacienteComponent } from './paciente/paciente.component';
 import { CreatePaciente } from './paciente/createpaciente.component';
 import { EditPaciente } from './paciente/editpaciente.component';
+import { ServicioComponent } from './servicio/servicio.component';
+import { CreateServicioComponent } from './servicio/createservicio.component';
 import { ServicefichaclinicaService } from './service/servicefichaclinica.service';
 import { FichaClinicaAgregarComponent } from './ficha-clinica/ficha-clinica-agregar/ficha-clinica-agregar.component';
 import { FichaClinicaEditarComponent } from './ficha-clinica/ficha-clinica-editar/ficha-clinica-editar.component';
@@ -139,6 +141,8 @@ export class MaterialModule {}
         EditPaciente,
         FichaClinicaAgregarComponent,
         FichaClinicaEditarComponent,
+        ServicioComponent,
+        CreateServicioComponent,
     ],
     providers : [
       MatNativeDateModule,
