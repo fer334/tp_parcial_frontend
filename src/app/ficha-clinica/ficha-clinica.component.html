@@ -1,0 +1,30 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ficha-clinica works!</p>
+<div *ngIf="fichasclinicas.length>0">
+    <table border="1">
+        <tr>
+          <td>Id</td>
+          <td>Descripcion</td>
+        </tr>
+        <tr *ngFor="let fc of fichasclinicas">
+          <td>{{fc.idFichaClinica}}</td>
+          <td>{{fc.fechaHora}}</td>
+          <td>{{fc.motivoConsulta}}</td>
+          <td>{{fc.observacion}}</td>
+          <td>{{fc.diagnostico}}</td>
+          <td><a (click)="edit(fc)">editar</a></td>
+        </tr>
+    </table>
+  </div>
+  <div>
+    <a routerLink="/nuevaficha_clinica">Agregar ficha clinica</a>  
+  </div>
+  <!--
+  <div>
+    <a routerLink="/borrarcategoria">Eliminar categoria</a>  
+  </div>
+  -->

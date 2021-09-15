@@ -1,0 +1,21 @@
+<p>categoria works!</p>
+<div *ngIf="categorias.length>0">
+  <table border="1">
+      <tr>
+        <td>Id</td>
+        <td>Descripcion</td>
+      </tr>
+      <tr *ngFor="let c of categorias">
+        <td>{{c.idCategoria}}</td>
+        <td>{{c.descripcion}}</td>
+        <td><a (click)="edit(c)">editar</a></td>
+      </tr>
+  </table>
+</div>
+<div>
+  <a routerLink="/nuevacategoria">Agregar categoria</a>  
+</div>
+
+<div>
+  <a routerLink="/borrarcategoria">Eliminar categoria</a>  
+</div>
