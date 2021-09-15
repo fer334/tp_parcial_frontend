@@ -54,7 +54,6 @@ export class ReservaComponent implements OnInit {
     this.reservasFiltradas=this.reservasFiltradas.filter(obj=> !unique[obj.idReserva] && (unique[obj.idReserva]=true) )
   }
   filtrarReservasByRange():void{
-
     if(this.fromDate && this.toDate){
         let from =formatDate(this.fromDate,'yyyyMMdd','en-US');
         let to=formatDate(this.toDate,'yyyyMMdd','en-US');
@@ -65,7 +64,7 @@ export class ReservaComponent implements OnInit {
   filtrarReservaByEmpleado():void{
     console.log('lenE',this.reservasFiltradas.length)
     if(this.empleado){
-      this.reservasFiltradas= this.reservasFiltradas.length>0 ? this.reservasFiltradas.filter(item=>item.idEmpleado.nombre.toLowerCase().startsWith((this.empleado+"").toLocaleLowerCase())) : this.reservasFiltradas.concat(this.reservas.filter(item=>item.idEmpleado.nombre.toLowerCase().startsWith((this.empleado+"").toLocaleLowerCase())))
+      this.reservasFiltradas= this.reservasFiltradas.length!=0 ? this.reservasFiltradas.filter(item=>item.idEmpleado.nombre.toLowerCase().startsWith((this.empleado+"").toLocaleLowerCase())) :this.reservas.filter(item=>item.idEmpleado.nombre.toLowerCase().startsWith((this.empleado+"").toLocaleLowerCase()))
     }
   }
   getAll():void{
@@ -74,7 +73,7 @@ export class ReservaComponent implements OnInit {
   filtrarReservaByCliente():void{
     console.log('lenC',this.reservasFiltradas.length)
     if(this.cliente){
-      this.reservasFiltradas= this.reservasFiltradas.length>0 ? this.reservasFiltradas.filter(item=>item.idCliente.nombre.toLowerCase().startsWith((this.cliente+"").toLowerCase())) : this.reservas.concat(this.reservasFiltradas.filter(item=>item.idCliente.nombre.toLowerCase().startsWith((this.cliente+"").toLowerCase())))
+      this.reservasFiltradas= this.reservasFiltradas.length>0 ? this.reservasFiltradas.filter(item=>item.idCliente.nombre.toLowerCase().startsWith((this.cliente+"").toLowerCase())) : this.reservas.filter(item=>item.idCliente.nombre.toLowerCase().startsWith((this.cliente+"").toLowerCase()))
     }
   }
   

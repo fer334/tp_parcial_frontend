@@ -14,7 +14,7 @@ export class PresentacionProductoComponent implements OnInit {
   //states
   mensaje: String=""
   presentacionProductos: PresentacionProducto[]= []
-  presentacionProductosFiltrado: PresentacionProducto[]= []
+    presentacionProductosFiltrado: PresentacionProducto[]= []
   newPresentacionProducto: PresentacionProducto= new PresentacionProducto()
   idTipoProductoFilter:String=""
   nombreFilter:String=""
@@ -26,68 +26,81 @@ export class PresentacionProductoComponent implements OnInit {
     this.servicioPresentacionProducto.getPresentacionProductos().subscribe(
       entity =>{
         console.log("result",entity.lista)
-        this.presentacionProductosFiltrado= entity.lista
+        this.presentacionProductos=this.presentacionProductosFiltrado= entity.lista
       },
       error=> console.log("No se pudieron obtener la lista Presentacion Productos")
     );
   }
 
   filtrar():void{
-    let result=this.getProductByProductType(this.idTipoProductoFilter)
-    if(this.nombreFilter && this.idTipoProductoFilter){
-      console.log("here")
-      this.presentacionProductosFiltrado=result.filter((item)=>item.nombre==this.nombreFilter)
-    }else if(this.nombreFilter){
-        this.presentacionProductosFiltrado=this.getByName(this.nombreFilter)
-        console.log("here2",this.presentacionProductosFiltrado)
-    }else if(this.idTipoProductoFilter) {
-      console.log("here 3")
-      this.presentacionProductosFiltrado=[...result]
-    }
+    
+    if (!this.nombreFilter && !this.idTipoProductoFilter) this.presentacionProductosFiltrado=this.presentacionProductos
+    this.getByProdutType(this.idTipoProductoFilter)
+    .then((data)=> data)
+    .then((result)=>{
+      if(this.nombreFilter && this.idTipoProductoFilter){
+        this.presentacionProductosFiltrado=result.filter((item)=>item.nombre.toLocaleLowerCase()==this.nombreFilter.toLocaleLowerCase())
+      }else if(this.nombreFilter){
+          this.getByName(this.nombreFilter).
+          then((data)=>this.presentacionProductosFiltrado=data)
+          .catch((error)=>console.log(error))
+      }else if(this.idTipoProductoFilter) {
+        this.presentacionProductosFiltrado=[...result]
+      }
+    })
+    .catch((error)=>console.log(error))
   }
   /* Funcion que retorna la lista de presentacion producto por Id tipo de Producto */
-  getByProdutType(): void {
-     this.servicioPresentacionProducto.getPrentacionProductoPorIdTipoProducto(2).subscribe(
-          entity=>{
-              console.log("Lista",entity.lista)
-          },
-          error=> console.log("Error:",error)
-      );
+  getByProdutType(id:any): Promise<PresentacionProducto[]> {
+     return new Promise((resolve,reject)=>{
+            this.servicioPresentacionProducto.getPrentacionProductoPorIdTipoProducto(id).subscribe(
+              entity=>{
+                  console.log("Lista",entity.lista)
+                  resolve(entity.lista)
+              },
+              error=> {console.log("Error:",error);reject("error")}
+          );
+     })
   }
 
   /* Funcion que retorna la lista de presentacion producto por nombre */
-  getByName(nombre:any):PresentacionProducto[]{
+   async getByName  (nombre:any):Promise<PresentacionProducto[]>{
       let result=[]
-      this.servicioPresentacionProducto.getPresentacionProductoPorNombre(nombre).subscribe(
+      return new Promise((resolve,reject)=>{
+        this.servicioPresentacionProducto.getPresentacionProductoPorNombre(nombre).subscribe(
           entity=>{
             console.log("Lista",entity.lista)
-            result=entity.lista
+            resolve(entity.lista)
           },
-          error=> console.log("Error",error)
+          error=> {console.log("Error",error);reject("Error")}
       )
-      return result
+      })
+      
   }
 
     /* Funcion que retorna la lista de productos por tipo de Producto */
-    getProductByProductType(id:any):PresentacionProducto[]{
-      let result=[]
-      this.servicioPresentacionProducto.getProductosPorIdTipoProducto(id).subscribe(
+    async getProductByProductType(id:any):Promise<PresentacionProducto[]>{
+      return new Promise((resolve,reject)=>{
+        this.servicioPresentacionProducto.getProductosPorIdTipoProducto(id).subscribe(
           entity=>{
             console.log("Lista",entity.lista)
-            result= entity.lista
+            resolve(entity.lista)
           },
-          error=> console.log("Error",error)
-      )
-      return result
+          error=> {console.log("Error",error); reject(error)}
+        )
+      }) 
   }
   /* Funcion que retorna la lista de productos por tipo de Producto */
-  getPriceByIdPresentacionProducto():void{
-    this.servicioPresentacionProducto.getPrecioByPresentacionProducto(6).subscribe(
+  getPriceByIdPresentacionProducto(id:any):Promise<PresentacionProducto[]>{
+    return new Promise((resolve,reject)=>{
+      this.servicioPresentacionProducto.getPrecioByPresentacionProducto(id).subscribe(
         entity=>{
           console.log("Lista",entity.lista)
+          resolve(entity.lista)
         },
-        error=> console.log("Error",error)
+        error=> {console.log("Error",error);reject("error")}
     )
+    })
   }
 
   /* Eliminar una Presentacion Producto */

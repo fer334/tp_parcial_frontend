@@ -36,7 +36,7 @@ export class ReservaAgregarComponent implements OnInit {
   mensaje:string=""
   idEmpleado:number=2
   idCliente:number=1
-  observacion:string=""
+  observacion:string=null
   showAll:boolean
   dateFilter:Date
   fisioterapeutas:any
