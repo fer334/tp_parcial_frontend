@@ -86,7 +86,10 @@ export class ReservaAgregarComponent implements OnInit {
       }
     )
   }
-
+  getFisioSelected(){
+    let f= this.fisioterapeutas.lista.find((item)=>item.idPersona==this.idEmpleado)
+    return `${f.nombre} ${f.apellido}`
+  }
   goBack(): void{
     setTimeout(()=>{
       this.routeNavigation.navigate(['/reserva'])

@@ -1,5 +1,5 @@
 import { ElementSchemaRegistry, ThrowStmt } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit } from '@angular/core';
 import { PresentacionProducto } from '../model/presentacionProducto';
 import { PresentacionProductoService } from '../service/presentacion-producto.service';
 import { ActivatedRoute } from '@angular/router';
@@ -9,14 +9,17 @@ import swal from 'sweetalert2';
 declare interface DataTable {
   headerRow: string[];
   footerRow: string[];
+
 }
+
+declare const $: any;
 
 @Component({
   selector: 'app-presentacion-producto',
   templateUrl: './presentacion-producto.component.html',
   styleUrls: ['./presentacion-producto.component.css']
 })
-export class PresentacionProductoComponent implements OnInit {
+export class PresentacionProductoComponent implements OnInit,AfterViewInit {
   
   constructor(
     private servicioPresentacionProducto: PresentacionProductoService,
@@ -40,6 +43,24 @@ export class PresentacionProductoComponent implements OnInit {
         footerRow:[ 'Id', 'Codigo', 'Nombre', 'IdProducto', 'IdTipoProducto', 'PrecioVenta','FlagServicio','Accion' ]
       }
   }
+  ngAfterViewInit() {
+    $('#datatables').DataTable({
+      "pagingType": "full_numbers",
+      "lengthMenu": [
+        [10, 25, 50, -1],
+        [10, 25, 50, "All"]
+      ],
+      responsive: true,
+      language: {
+        search: "_INPUT_",
+        searchPlaceholder: "Search records",
+      }
+    });
+    const table = $('#datatables').DataTable();
+    console.log('Tablee',table);
+    
+    $('.card .material-datatables label').addClass('form-group');
+  }
   getListPresentacionProducto():void{
     this.servicioPresentacionProducto.getPresentacionProductos().subscribe(
       entity =>{
@@ -52,23 +73,36 @@ export class PresentacionProductoComponent implements OnInit {
   getAll(){
     this.getListPresentacionProducto()
   }
+  resetFields(){
+    this.idTipoProductoFilter=this.nombreFilter=""
+  }
   filtrar():void{
     console.log(this.nombreFilter,this.idTipoProductoFilter)
-    if (!this.nombreFilter && !this.idTipoProductoFilter) this.presentacionProductosFiltrado=this.presentacionProductos
-    this.getByProdutType(this.idTipoProductoFilter)
-    .then((data)=> data)
-    .then((result)=>{
-      if(this.nombreFilter && this.idTipoProductoFilter){
-        this.presentacionProductosFiltrado=result.filter((item)=>item.nombre.toLocaleLowerCase()==this.nombreFilter.toLocaleLowerCase())
-      }else if(this.nombreFilter){
-          this.getByName(this.nombreFilter).
-          then((data)=>this.presentacionProductosFiltrado=data)
-          .catch((error)=>console.log(error))
-      }else if(this.idTipoProductoFilter) {
-        this.presentacionProductosFiltrado=[...result]
-      }
-    })
-    .catch((error)=>console.log(error))
+    if (!this.nombreFilter && !this.idTipoProductoFilter) {
+      this.presentacionProductosFiltrado=this.presentacionProductos
+      console.log("here2");
+      
+    }
+    else{
+      console.log("Here");
+      this.getByProdutType(this.idTipoProductoFilter)
+      .then((data)=> data)
+      .then((result)=>{
+        if(this.nombreFilter && this.idTipoProductoFilter){
+          this.presentacionProductosFiltrado=result.filter((item)=>item.nombre.toLocaleLowerCase().includes(this.nombreFilter.toLocaleLowerCase()))
+        }else if(this.nombreFilter){
+            this.getByName(this.nombreFilter).
+            then((data)=>this.presentacionProductosFiltrado=data)
+            .catch((error)=>console.log(error))
+        }else if(this.idTipoProductoFilter) {
+          this.presentacionProductosFiltrado=[...result]
+        }
+      })
+      .catch((error)=>{
+        console.log(error)
+        this.presentacionProductosFiltrado=[]
+      })
+    }
   }
   /* Funcion que retorna la lista de presentacion producto por Id tipo de Producto */
   getByProdutType(id:any): Promise<PresentacionProducto[]> {

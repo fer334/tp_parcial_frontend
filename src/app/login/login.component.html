@@ -12,9 +12,19 @@
               <div class="card card-login card-hidden">
                 <div class="card-header card-header-rose text-center">
                   <h4 class="card-title">Log in</h4>
+                  <div class="social-line">
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                      <i class="fa fa-facebook-square"></i>
+                    </a>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                      <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                      <i class="fa fa-google-plus"></i>
+                    </a>
+                  </div>
                 </div>
                 <div class="card-body ">
-                  
                   <span class="bmd-form-group">
                     <div class="input-group">
                       <div class="input-group-prepend">
@@ -22,7 +32,7 @@
                           <i class="material-icons">face</i>
                         </span>
                       </div>
-                      <input [(ngModel)]="user" type="text" class="form-control" placeholder="Usuario..">
+                      <input required [(ngModel)]="user" type="text" class="form-control" placeholder="Usuario..">
                     </div>
                   </span>
                   <span class="bmd-form-group">
@@ -32,7 +42,7 @@
                           <i class="material-icons">lock_outline</i>
                         </span>
                       </div>
-                      <input  [(ngModel)]="password" type="password" class="form-control" placeholder="Contraseña...">
+                      <input required [(ngModel)]="password" type="password" class="form-control" placeholder="Contraseña...">
                     </div>
                   </span>
                 </div>

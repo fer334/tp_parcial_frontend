@@ -80,6 +80,9 @@ export class ReservaComponent implements OnInit {
       this.reservasFiltradas= this.reservasFiltradas.length!=0 ? this.reservasFiltradas.filter(item=>item.idEmpleado.nombre.toLowerCase().startsWith((this.empleado+"").toLocaleLowerCase())) :this.reservas.filter(item=>item.idEmpleado.nombre.toLowerCase().startsWith((this.empleado+"").toLocaleLowerCase()))
     }
   }
+  resetField(){
+    this.fromDate=this.toDate=this.empleado=this.cliente=null
+  }
   getAll():void{
     this.reservasFiltradas=[...this.reservas]
   }

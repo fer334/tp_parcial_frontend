@@ -3,6 +3,7 @@ import { User } from '../model/user';
 import { LoginService } from '../service/login/login.service';
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 declare var $: any;
 
@@ -66,8 +67,18 @@ export class LoginComponent implements OnInit {
         this.route.navigate([''])
         
       }else{
-        this.mensaje="Incorrecto"
+        this.showSwal("Error","Usuario Incorrecto")
       }
-    }else this.mensaje="Por favor completa sus datos"
+    }else this.showSwal("Error","Completa todos los campos")
+  }
+  showSwal(title:string,text:string){
+      swal.fire({
+        title: title,
+        text: text,
+        buttonsStyling: false,
+        customClass:{
+          confirmButton: "btn btn-info"
+        }
+      });
   }
 }

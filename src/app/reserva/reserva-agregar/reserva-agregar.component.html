@@ -80,7 +80,7 @@
               <div class="card ">
               <div class="card-header card-header-rose card-header-text">
                   <div class="card-text">
-                  <h4 class="card-title">Crear Presentacion Producto</h4>
+                  <h4 class="card-title">Crear Reserva</h4>
                   </div>
               </div>
               <div class="card-body ">
@@ -117,10 +117,29 @@
                                Seleccione un horario
                             </ng-template>
                           </p>
-
                       </div>
-
                   </div>
+                  <div class="row">
+                    <label class="col-sm-2 col-form-label">Fecha:</label>
+                    <div class="col-sm-10 mt-3">
+                        <p class="col-sm-10 text-left" >
+                          <ng-container *ngIf="dateFilter; else other2" >
+                            {{ dateFilter | date: 'dd/MM/yyyy' }}
+                          </ng-container>
+                          <ng-template #other2>
+                             Seleccione una Fecha
+                          </ng-template>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">Fisioterapeuta:</label>
+                  <div class="col-sm-10 mt-3">
+                      <p class="col-sm-10 text-left" >
+                          {{ getFisioSelected() }}
+                      </p>
+                  </div>
+              </div>
                   <button class=" center btn btn-success" (click)="agregarReserva()"> Guardar</button>
               </div>
       </div>

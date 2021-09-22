@@ -34,7 +34,7 @@ export class PresentacionProductoService {
       let resource=`stock-pwfe/presentacionProducto`
       let endpoint=this.api+resource
       let payload=JSON.stringify({nombre:nombre})
-      return this.http.get<listadatos<PresentacionProducto>>(endpoint,{params:{ejemplo:payload}})
+      return this.http.get<listadatos<PresentacionProducto>>(endpoint,{params:{ejemplo:payload,like:"S"}})
   } 
 
 
