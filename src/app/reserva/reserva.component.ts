@@ -4,6 +4,10 @@ import { Reserva } from '../model/reserva';
 import { formatDate } from '@angular/common';
 import { throws } from 'assert';
 import { LoginService } from '../service/login/login.service';
+declare interface DataTable {
+  headerRow: string[];
+  footerRow: string[];
+}
 @Component({
   selector: 'app-reserva',
   templateUrl: './reserva.component.html',
@@ -17,6 +21,8 @@ export class ReservaComponent implements OnInit {
   cliente:String
   reservasFiltradas:Reserva[]=[]
   filtreFinished:boolean=true
+  public dataTable: DataTable;
+
   constructor(private reservaService: ReservaService,
               private loginService : LoginService
     ) { }
@@ -24,6 +30,10 @@ export class ReservaComponent implements OnInit {
   ngOnInit(): void {
     this.loginService.isLogged()
     this.fetchReservas()
+    this.dataTable = {
+      headerRow: [ 'Id', 'Fecha', 'HoraInicio', 'HoraFin', 'Empleado', 'Cliente','Asistio','Observacion','Estado','Accion' ],
+      footerRow: [ 'Id', 'Fecha', 'HoraInicio', 'HoraFin', 'Empleado', 'Cliente','Asistio','Observacion','Estado','Accion' ]
+    }
 
   } 
 

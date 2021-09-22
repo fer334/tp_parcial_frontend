@@ -22,6 +22,7 @@ export class LoginService {
   }
 
   isLogged():void{
+    console.log(`${localStorage.getItem("idUser")}`)
     if (!localStorage.getItem("isLogged")) this.router.navigate(['/login'])
   }
 }

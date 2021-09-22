@@ -1,3 +1,4 @@
 export class User{
-    usuarioLogin!:string
+    usuarioLogin!:string;
+    idPersona!:number;
 }

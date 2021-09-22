@@ -3,6 +3,8 @@ import { ReservaService } from 'src/app/service/reserva/reserva.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Reserva } from 'src/app/model/reserva';
 import { LoginService } from 'src/app/service/login/login.service';
+import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-reserva-editar',
   templateUrl: './reserva-editar.component.html',
@@ -24,7 +26,7 @@ export class ReservaEditarComponent implements OnInit {
     this.getReserva(idReserva);
   }
   reserva:Reserva=new Reserva
-  observacion:String=""
+  observacion:String=null
   flagAsistio:String=""
   mensaje:String=""
 
@@ -44,42 +46,82 @@ export class ReservaEditarComponent implements OnInit {
   goBack(): void{
     setTimeout(()=>{
       this.routeNavigation.navigate(['/reserva'])
-    },1000)
+    },1)
   }
 
   cancelarReserva():void{
        this.reservaService.cancelarReserva(this.reserva.idReserva).subscribe(
         response=>{
-          console.log("Se canceloo")
-          this.mensaje="La reserva se cancelo Exitosamente"
-          this.goBack()
+          console.log("Se cancelo")
+          this.showSwall(true,"Eliminado","Se ha cancelado Exitosamente la Reserva")
         },
         error=> {
           console.log("Error",error)
-          this.mensaje="No se pudo cancelar la Reserva"
-          this.goBack()
+          this.showSwall(false,"Error!","No se a podido Eliminar la reserva")
         }
       )
   }
   guardar():void{
-
       this.reserva.flagAsistio=this.flagAsistio+""
-      this.reserva.observacion=this.observacion+""
+      this.reserva.observacion=this.observacion?this.observacion+"":null
       let {idReserva,observacion,flagAsistio}=this.reserva
 
       this.reservaService.updateReserva({idReserva,observacion,flagAsistio}).subscribe(
           entity=>{
             console.log("Se actualizo Correctamente",entity)
             this.mensaje="La reserva se Actualizo Correctamente"
-            this.goBack()
+            this.showSwall(true,"Actualizado","Se ha actualizado Correctamente")
           },
           error=>{
             console.log("Error",error)
             this.mensaje="No se pudo actualizar la Reserva"
-            this.goBack()
+            this.showSwall(false,"Error!","No se a podido actualizar la reserva")
           }
       )
       
   }
-
+  cancellConfirmation(){
+    swal.fire({
+      title: 'Estas Seguro',
+      text: "Una vez cancelado la Reseva, no podras Revertirlo",
+      icon: 'warning',
+      showCancelButton: true,
+      customClass:{
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      confirmButtonText: 'Si, Eliminar',
+      cancelButtonText:"Cancelar",
+       buttonsStyling: false
+    }).then((result) => {
+      if (result.value) {
+        this.cancelarReserva()
+      }
+    })   
+  }
+  showSwall(type:boolean,title:string,text:string){
+    if(type){
+        swal.fire({
+          title: title,
+          text: text,
+          buttonsStyling: false,
+          customClass:{
+            confirmButton: "btn btn-success",
+          },
+          icon: "success"
+      }).then((result)=>{
+        if(result.isConfirmed) this.goBack()
+        else this.goBack()
+      });
+  }else{
+      swal.fire({
+        title: title,
+        text: text,
+        buttonsStyling: false,
+        customClass:{
+          confirmButton: "btn btn-info"
+        }
+      });
+    }
+  }
 }

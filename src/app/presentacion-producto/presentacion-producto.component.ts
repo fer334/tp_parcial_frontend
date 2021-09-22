@@ -4,6 +4,13 @@ import { PresentacionProducto } from '../model/presentacionProducto';
 import { PresentacionProductoService } from '../service/presentacion-producto.service';
 import { ActivatedRoute } from '@angular/router';
 import { LoginService } from '../service/login/login.service';
+import swal from 'sweetalert2';
+
+declare interface DataTable {
+  headerRow: string[];
+  footerRow: string[];
+}
+
 @Component({
   selector: 'app-presentacion-producto',
   templateUrl: './presentacion-producto.component.html',
@@ -19,14 +26,19 @@ export class PresentacionProductoComponent implements OnInit {
   //states
   mensaje: String=""
   presentacionProductos: PresentacionProducto[]= []
-    presentacionProductosFiltrado: PresentacionProducto[]= []
+  presentacionProductosFiltrado: PresentacionProducto[]= []
   newPresentacionProducto: PresentacionProducto= new PresentacionProducto()
   idTipoProductoFilter:String=""
   nombreFilter:String=""
+  public dataTable: DataTable;
 
   ngOnInit(): void {
       this.loginService.isLogged()
       this.getListPresentacionProducto()
+      this.dataTable = {
+        headerRow: [ 'Id', 'Codigo', 'Nombre', 'IdProducto', 'IdTipoProducto', 'PrecioVenta','FlagServicio','Accion' ],
+        footerRow:[ 'Id', 'Codigo', 'Nombre', 'IdProducto', 'IdTipoProducto', 'PrecioVenta','FlagServicio','Accion' ]
+      }
   }
   getListPresentacionProducto():void{
     this.servicioPresentacionProducto.getPresentacionProductos().subscribe(
@@ -37,9 +49,11 @@ export class PresentacionProductoComponent implements OnInit {
       error=> console.log("No se pudieron obtener la lista Presentacion Productos")
     );
   }
-
+  getAll(){
+    this.getListPresentacionProducto()
+  }
   filtrar():void{
-    
+    console.log(this.nombreFilter,this.idTipoProductoFilter)
     if (!this.nombreFilter && !this.idTipoProductoFilter) this.presentacionProductosFiltrado=this.presentacionProductos
     this.getByProdutType(this.idTipoProductoFilter)
     .then((data)=> data)
@@ -116,14 +130,57 @@ export class PresentacionProductoComponent implements OnInit {
         console.log("Se elimino",entity)
 
         this.mensaje="Se elimino Exitosamente el registro"
-        setTimeout(()=>{
-          this.ngOnInit()
-          this.mensaje=""
-        },1000)
+        this.showSwallMessage(true)
       }, 
-      error => console.log("Error",error)
+      error => {
+        console.log("Error",error)
+        this.showSwallMessage(false)
+      }
     )
   }
   
+  showSwall(idPresentacionProducto:number){
+    swal.fire({
+      title: 'Estas Seguro',
+      text: "Una vez eliminado, ya no podras revertirlo",
+      icon: 'warning',
+      showCancelButton: true,
+      customClass:{
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      confirmButtonText: 'Si, Eliminar',
+      cancelButtonText:"Cancelar",
+       buttonsStyling: false
+    }).then((result) => {
+      if (result.value) {
+        this.deletePresentacionProducto(idPresentacionProducto)
+      }
+    })    
+  }
+  showSwallMessage(type:boolean){
+    if(type){
+      swal.fire(
+        {
+          title: 'Eliminado',
+          text: 'El registro ha sido Eliminado',
+          icon: 'success',
+          customClass:{
+            confirmButton: "btn btn-success",
+          },
+          buttonsStyling: false
+        }
+      ).then(()=>this.ngOnInit())
+    } else{
+    swal.fire({
+      title: "Error!",
+      text: "No se pudo Eliminar el  registro",
+      buttonsStyling: false,
+      customClass:{
+        confirmButton: "btn btn-info"
+      }
+    });
+  }
+  }
 
 }

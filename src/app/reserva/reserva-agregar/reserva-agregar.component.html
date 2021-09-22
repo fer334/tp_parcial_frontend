@@ -1,47 +1,131 @@
-<div>
-    <p>Fecha <input [(ngModel)]="dateFilter" type="date" name="" id=""></p>
-    <p *ngIf="fisioterapeutas">Empleado 
-        <select  [(ngModel)]="idEmpleado" name="" id="">
-            <option *ngFor="let f of fisioterapeutas.lista" value="{{f.idPersona}}">{{f.usuarioLogin}}</option>
-        </select>
-    </p>
-    <p>
-        <input type="checkbox" [(ngModel)]="showAll" selected name="" id="">Mostrar ya Reservados
-    </p>
-    <button (click)="buscar()">
-        Buscar
-    </button>
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card ">
+            <div class="card-body ">
+                <div class="row">
+                    <div *ngIf="fisioterapeutas" class="col-lg-5 col-md-8 col-sm-4">
+                        <mat-form-field>
+                            <mat-select [(ngModel)]="idEmpleado" placeholder="Fisioterapeutas" name="city">
+                              <mat-option *ngFor="let f of fisioterapeutas.lista" [value]="f.idPersona" >
+                                {{f.nombre}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2 ">
+                        <mat-form-field >
+                          <input [(ngModel)]="dateFilter"  matInput [matDatepicker]="picker2" placeholder="Elegir Fecha" >
+                          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                          <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+
+                    </div>
+                    <div class="col-sm-1 ">
+                        <br>
+                        <mat-checkbox [(ngModel)]="showAll" > Todas Las Rerservas</mat-checkbox>
+                    </div>
+                  </div>
+                  <button (click)="buscar()"  mat-raised-button class="btn btn-primary">Obtener Reservas</button>
+              </div>
+          </div>
+        </div>      
+      </div>
+    </div>
 </div>
-<hr>
-<div>
-    <p>
-        Cliente 
-        <select [(ngModel)]="idCliente" >
-            <ng-container *ngFor="let c of clientes.lista">
-                <option *ngIf="!c.usuarioLogin"  value="{{c.idPersona}}">{{c.nombre}}</option>
-            </ng-container>
-            
-        </select>
-    </p>
-    <p>
-        Observacion <input [(ngModel)]  ="observacion" type="text" name="" id="">
-    </p>
-    <p>{{mensaje}}</p>
-    <button (click)="agregarReserva()"> Agregar Reserva</button>
-    <table border="1" *ngIf="reservas">
-        <tr>
-            <td>HoraInicio</td>
-            <td>HoraFin</td>
-            <td>Cliente</td>
-            <td>Seleccionar</td>
-        </tr>
-        <tr *ngFor="let r of reservas">
-            <td>{{ r.horaInicio.split(" ")[1] ? r.horaInicio.split(" ")[1] : r.horaInicio }}</td>
-            <td>{{ r.horaFin.split(" ")[1] ? r.horaFin.split(" ")[1] : r.horaFin }}</td>
-            <td>{{r.idCliente ? r.idCliente.nombre :""}}</td>
-            <td *ngIf="!r.idCliente"> <input  type="radio" name="horario" [value]="r.horaInicioCadena" (change)="choose(r.horaInicioCadena)" ></td>
-            <td></td>
-        </tr>
-    </table>
-    
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-icon card-header-rose">
+                  <div class="card-icon">
+                    <i class="material-icons">assignment</i>
+                  </div>
+                  <h4 class="card-title ">Lista de Reservas</h4>
+                </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table">
+                                <thead class="text-primary">
+                                    <tr>
+                                      <th>HoraInicio</th>
+                                      <th>HoraFin</th>
+                                      <th>Cliente</th>
+                                      <th>Seleccionar</th>
+                                  </tr>
+                                </thead>
+                              <tbody>
+                                <tr *ngFor="let r of reservas">
+                                  <td>{{ r.horaInicio.split(" ")[1] ? r.horaInicio.split(" ")[1] : r.horaInicio }}</td>
+                                  <td>{{ r.horaFin.split(" ")[1] ? r.horaFin.split(" ")[1] : r.horaFin }}</td>
+                                  <td>{{r.idCliente ? r.idCliente.nombre :""}}</td>
+                                  <td *ngIf="!r.idCliente"> <input  type="radio" name="horario" [value]="r.horaInicioCadena" (change)="choose(r.horaInicioCadena)" ></td>
+                                  <td></td>
+                              </tr>
+                              </tbody>
+                        </table>
+                      </div>
+                  </div>
+            </div>
+         </div>
+  </div>
 </div>
+
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card ">
+              <div class="card-header card-header-rose card-header-text">
+                  <div class="card-text">
+                  <h4 class="card-title">Crear Presentacion Producto</h4>
+                  </div>
+              </div>
+              <div class="card-body ">
+                  <div class="row">
+                    <label class="col-sm-2 col-form-label">Observacion:</label>
+                    <div class="col-sm-10">
+                        <mat-form-field class="example-full-width">
+                            <input  [(ngModel)]  ="observacion" matInput type="text">
+                        </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-sm-2 col-form-label">Buscar Cliente:</label>
+                    <div class="col-sm-10">
+                      <mat-form-field>
+                        <mat-select [(ngModel)]="idCliente" placeholder="Clientes" name="city">
+                        <ng-container *ngFor="let c of clientes.lista">
+                            <mat-option *ngIf="!c.usuarioLogin"  value="{{c.idPersona}}">
+                              {{c.nombre}}
+                            </mat-option>
+                        </ng-container>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <label class="col-sm-2 col-form-label">Horario Seleccionado:</label>
+                      <div class="col-sm-10 mt-3">
+                          <p class="col-sm-10 text-left" >
+                            <ng-container *ngIf="selectedSchedule.length>0; else other" >
+                              Desde las {{selectedSchedule[0]}} hasta las {{selectedSchedule[1]}}
+                            </ng-container>
+                            <ng-template #other>
+                               Seleccione un horario
+                            </ng-template>
+                          </p>
+
+                      </div>
+
+                  </div>
+                  <button class=" center btn btn-success" (click)="agregarReserva()"> Guardar</button>
+              </div>
+      </div>
+  </div>
+</div>
+
+
+

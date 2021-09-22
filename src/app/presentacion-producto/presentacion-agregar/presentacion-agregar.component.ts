@@ -4,6 +4,8 @@ import { PresentacionProductoService } from 'src/app/service/presentacion-produc
 import { listadatos } from 'src/app/model/datos';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/service/login/login.service';
+import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-presentacion-agregar',
   templateUrl: './presentacion-agregar.component.html',
@@ -29,7 +31,7 @@ export class PresentacionAgregarComponent implements OnInit {
   goBack(): void{
     setTimeout(()=>{
       this.route.navigate(['/presentacionProducto'])
-    },1000)
+    },1)  
   }
   guardar():void{
     console.log("Estoy Agregandoo....",this.presentacionProducto)
@@ -37,11 +39,12 @@ export class PresentacionAgregarComponent implements OnInit {
       entity=>{
         console.log("Se creeo",entity)
         this.mensaje="Se creo exitosamente"
-        this.goBack()
+        //this.goBack()
+        this.showSwall(true)
       },
       error=> {
         console.log("Hubo un Error",error)
-        this.mensaje="Registro en Uso, Intente igresando otro Codigo"
+        this.showSwall(false)
       }
     )
   }
@@ -62,5 +65,30 @@ export class PresentacionAgregarComponent implements OnInit {
   fetchPresentacionProducto():void{
     
   }
+  showSwall(type:boolean){
+    if(type){
+        swal.fire({
+          title: "Creado",
+          text: "Se ha Creado Exitosamente un nuevo Presentacion Producto",
+          buttonsStyling: false,
+          customClass:{
+            confirmButton: "btn btn-success",
+          },
+          icon: "success"
+      }).then((result)=>{
+        if(result.isConfirmed) this.goBack()
+        else this.goBack()
 
+      });
+  }else{
+      swal.fire({
+        title: "Error!",
+        text: "No se pudo crear el nuevo registro",
+        buttonsStyling: false,
+        customClass:{
+          confirmButton: "btn btn-info"
+        }
+      });
+    }
+  }
 }

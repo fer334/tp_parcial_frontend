@@ -38,8 +38,8 @@ export const AppRoutes: Routes = [
     {
         path:'login',
         component:LoginComponent
-    }
-    /*
+    },
+    
     {
       path: '',
       redirectTo: 'dashboard',
@@ -87,6 +87,6 @@ export const AppRoutes: Routes = [
         loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
       }]
     }
-    */
-    
+
+
 ];

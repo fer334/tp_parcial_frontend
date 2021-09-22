@@ -4,6 +4,8 @@ import { Producto } from 'src/app/model/presentacionProducto';
 import { PresentacionProductoService } from 'src/app/service/presentacion-producto.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { LoginService } from 'src/app/service/login/login.service';
+import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-presentacion-editar',
   templateUrl: './presentacion-editar.component.html',
@@ -30,20 +32,23 @@ export class PresentacionEditarComponent implements OnInit {
     this.fetchPresentacionProducto(idPresentacionProducto)
     this.loaded=true
   }
-  
+  goBack(){
+    setTimeout(()=>{
+      this.routeNavigate.navigate(['/presentacionProducto'])
+    },1)
+  }
   guardar():void{
     console.log("Estoy Agregandoo....",this.presentacionProducto)
     this.presentacionService.actualizarPresentacionProducto(this.presentacionProducto).subscribe(
       entity=>{
         console.log("Se actualizoo",entity)
-        this.mensaje="Se Edito exitosamente"  
-        setTimeout(()=>{
-          this.routeNavigate.navigate(['/presentacionProducto'])
-        },1000)
+        this.showSwall(true)
+
       },
       error=> {
         console.log("Hubo un Error",error)
-        this.mensaje="Registro en Uso, Intente igresando otro Codigo"
+        this.showSwall(false)
+        this.ngOnInit()
       }
     )
   }
@@ -72,6 +77,32 @@ export class PresentacionEditarComponent implements OnInit {
         console.log("Error",error)
       }
     )
+  }
+  showSwall(type:boolean){
+    if(type){
+        swal.fire({
+          title: "Actualizado",
+          text: "Se ha Actualizado correctamente el registro",
+          buttonsStyling: false,
+          customClass:{
+            confirmButton: "btn btn-success",
+          },
+          icon: "success"
+      }).then((result)=>{
+        if(result.isConfirmed) this.goBack()
+        else this.goBack()
+
+      });
+  }else{
+      swal.fire({
+        title: "Error!",
+        text: "No se pudo Actualizar el  registro",
+        buttonsStyling: false,
+        customClass:{
+          confirmButton: "btn btn-info"
+        }
+      });
+    }
   }
 
 }
