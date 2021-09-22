@@ -34,7 +34,7 @@ export const DashboardRoutes: Routes = [
           component: CategoriaAgregarComponent,
         },
         {
-          path: 'borrarcategoria',
+          path: 'borrarcategoria/:id',
           component: CategoriaEliminarComponent,
         },
         {

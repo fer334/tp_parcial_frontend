@@ -43,12 +43,11 @@ export const ROUTES: RouteInfo[] = [
         type: 'sub',
         icontype: 'apps',
         collapse: 'apps',
-        children: [{
-            path: 'paciente',
-            title: 'Paciente',
-            type: 'link',
-            ab:'P'
-        },
+        children: [
+            { path: 'paciente', title: 'Paciente', type: 'link', ab:'P'},
+            { path: 'categoria', title: 'Categorias', type: 'link', ab:'C'},
+            { path: 'subcategoria', title: 'Sub-Categorias', type: 'link', ab:'SC'},
+            { path: 'ficha_clinica', title: 'Ficha Clínica', type: 'link', ab:'FC'},
         ]
     },{
         path: '/dashboard',

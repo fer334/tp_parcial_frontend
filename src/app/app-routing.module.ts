@@ -25,7 +25,7 @@ const routes: Routes = [
     component:CategoriaAgregarComponent
   }, //path para agregar categorias
   {
-    path: 'borrarcategoria',
+    path: 'borrarcategoria/:id',
     component: CategoriaEliminarComponent,
   }, //path para borrar categorias
   {

@@ -16,6 +16,10 @@ export class ServicecategoriaService {
   getCategorias(): Observable<listadatos<Categoria>> { //get para leer categorias
     return this.http.get<listadatos<Categoria>>(this.api);
   }
+
+  getCategoriaPorId(id: number): Observable<Categoria>{
+    return this.http.get<Categoria>(this.api+'/'+id);
+  }
   
   agregarCategorias(c:Categoria): Observable<Categoria>{
     return this.http.post<Categoria>(this.api, c).pipe(
