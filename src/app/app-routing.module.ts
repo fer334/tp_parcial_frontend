@@ -41,7 +41,7 @@ const routes: Routes = [
     component: SubcategoriaAgregarComponent,
   }, //path para agregar subcategorias
   {
-    path: 'borrarsubcategoria',
+    path: 'borrarsubcategoria/:id',
     component: SubcategoriaEliminarComponent,
   }, //path para borrar subcategorias
   {

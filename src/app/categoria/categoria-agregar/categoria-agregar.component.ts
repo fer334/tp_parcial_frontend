@@ -35,7 +35,7 @@ export class CategoriaAgregarComponent implements OnInit {
         });
       },
       error =>{ console.log("error: "+ error)
-      let message = 'La categoría no pudo ser editada. \n'
+      let message = 'La categoría no pudo ser agregada. \n'
       message += error.error ? error.error : error.message;
       Swal.fire({
           title: 'Error!',

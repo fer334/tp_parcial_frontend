@@ -5,6 +5,7 @@ import { Categoria } from 'src/app/model/categoria';
 import { Subcategoria } from 'src/app/model/subcategoria';
 import { ServicecategoriaService } from 'src/app/service/servicecategoria.service';
 import { ServicesubcategoriaService } from 'src/app/service/servicesubcategoria.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-subcategoria-editar',
@@ -27,8 +28,12 @@ export class SubcategoriaEditarComponent implements OnInit {
       const id = +params['id']; // el + convierte el string id a number
       this.subcategoriaedit.idTipoProducto = id;
       this.traerCategorias();
+      this.servicioSubcategoria.getSubcategoriaPorId(id).subscribe(
+        (subcategoriaOld) => {
+          this.subcategoriaedit = subcategoriaOld;
+        }
+      );
     });
-    //this.cargarSubcategoria();
   }
 
   editar(): void{
@@ -36,10 +41,32 @@ export class SubcategoriaEditarComponent implements OnInit {
       ()=> {
         this.mensaje='subcategoria editada exitosamente';
         console.log(this.subcategoriaedit);
+        Swal.fire({
+          title: 'Editado!',
+          text: 'La sub-categoria fue editada exitosamente.',
+          icon: 'success',
+          customClass: {
+            confirmButton: 'btn btn-success',
+          },
+          buttonsStyling: false,
+        })
+        .then(() => {
+          this.router.navigate(['/subcategoria']);
+        });
       },
       error =>{ console.log("el error al editar es: "+error);
         console.log("llega el valor? "+this.subcategoriaedit.descripcion);
-        this.mensaje=error.error;
+        let message = 'la subcategoria no pudo ser creada. \n';
+        message += error.error ? error.error : error.message;
+        Swal.fire({
+          title: 'Error!',
+          text: message,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-danger',
+          },
+          buttonsStyling: false,
+        });
       }
     );
   }
@@ -56,9 +83,5 @@ export class SubcategoriaEditarComponent implements OnInit {
        }
    )
  }
-  
-  //sfunction cargarSubcategoria(): void{
-
-  //}
 }
 

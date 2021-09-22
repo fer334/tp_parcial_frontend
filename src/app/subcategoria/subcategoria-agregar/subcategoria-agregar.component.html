@@ -1,12 +1,50 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>subcategoria-agregar works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card ">
+            <div class="card-header card-header-primary card-header-text">
+              <div class="card-text">
+                <h4 class="card-title">Sub-Categoria Nueva</h4>
+              </div>
+            </div>
+            <div class="card-body ">
+              <form method="#" action="#" >
+                <div class="row">
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="Descripcion" placeholder="descripcion" type="text" [(ngModel)]="subcategoria.descripcion">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <mat-form-field>
+                        <mat-select placeholder="Categoria de la subcategoria" name="idCategoria" [(ngModel)]="subcategoria.idCategoria.idCategoria">
+                          <mat-option *ngFor="let c of categorias" [value]="c.idCategoria">
+                            {{c.descripcion}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- div card footer with items aligned to right -->
+            <div class="card-footer ">
+              <div class="row">
+                <div class="col-md-12">
+
+                  <button mat-raised-button class="btn btn-fill btn-primary mx-2" (click)='guardar()' >Guardar</button>
+                  <button mat-raised-button class="btn btn-fill btn-secondary mx-2" [routerLink]="['/subcategoria']">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- <p>subcategoria-agregar works!</p>
 <div>
     Nombre de la subcategoria <input [(ngModel)]="subcategoria.descripcion">
     <br>
@@ -18,4 +56,4 @@
      <button  (click)="guardar()">Guardar</button>
     <br/>
      {{mensaje}}
-</div>
+</div> -->

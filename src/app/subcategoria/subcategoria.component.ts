@@ -1,7 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
 import { Subcategoria } from '../model/subcategoria';
 import { ServicesubcategoriaService } from '../service/servicesubcategoria.service';
+
+declare interface DataTable {
+  headerRow: string[];
+  footerRow: string[];
+  dataRows: string[][];
+}
+
+declare const $: any;
 
 @Component({
   selector: 'app-subcategoria',
@@ -10,6 +20,12 @@ import { ServicesubcategoriaService } from '../service/servicesubcategoria.servi
 })
 export class SubcategoriaComponent implements OnInit {
   subcategorias: Subcategoria[] = []; 
+
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement: DataTableDirective;
   
   constructor( private servicioSubcategoria: ServicesubcategoriaService,
     private route: ActivatedRoute,
@@ -18,7 +34,10 @@ export class SubcategoriaComponent implements OnInit {
   ngOnInit(): void {
     //cargar lista de subcategorias
     this.servicioSubcategoria.getSubcategorias().subscribe(
-      entity => this.subcategorias = entity.lista,
+      entity =>{ 
+        this.subcategorias = entity.lista;
+        this.dtTrigger.next();
+      },
       error => console.log('no se pudieron conseguir las subcategorias')
     );
 
@@ -26,10 +45,34 @@ export class SubcategoriaComponent implements OnInit {
     this.getSubcategoriaPorId();
     this.getSubcategoriaPorDescripcion();
     this.getSubcategoriaPorIdCategoria();
+
+    //configuraciones de la tabla
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      lengthMenu: [
+        [10, 25, 50, -1],
+        [10, 25, 50, 'All'],
+      ],
+      responsive: true,
+      language: {
+        search: '_INPUT_',
+        searchPlaceholder: 'Buscar Subcategorias',
+      },
+    };
+    this.dataTable = {
+      headerRow: ['Id', 'Descripción', 'Categoría', 'Acciones'],
+      footerRow: ['Id', 'Descripción', 'Categoría', 'Acciones'],
+      dataRows: [],
+    };
   }
-  
+
+  public dataTable: DataTable;
+
   edit(sc: Subcategoria){
     this.router.navigate(['editarsubcategoria/',sc.idTipoProducto]);
+  }
+  delete(sc: Subcategoria){
+    this.router.navigate(['borrarsubcategoria/',sc.idTipoProducto]);
   }
 
   getSubcategoriaPorId(): void { //para el ejemplo se consulta por la subcategoria con id 46
@@ -51,5 +94,21 @@ export class SubcategoriaComponent implements OnInit {
       entity => console.log("lista de subcategorias con categoria de id 3: "+entity.lista+ " ["+ entity.totalDatos +"] elementos"),
       error => console.log('no se pudieron conseguir las subcategorias')
     );
+  }
+
+  ngAfterViewInit() {}
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      // Call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 }

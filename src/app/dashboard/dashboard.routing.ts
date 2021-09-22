@@ -54,7 +54,7 @@ export const DashboardRoutes: Routes = [
           component: SubcategoriaEditarComponent,
         },
         {
-          path: 'borrarsubcategoria',
+          path: 'borrarsubcategoria/:id',
           component: SubcategoriaEliminarComponent,
         },
         {

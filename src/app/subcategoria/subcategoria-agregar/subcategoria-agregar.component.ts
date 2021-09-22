@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Categoria } from 'src/app/model/categoria';
 import { Subcategoria } from 'src/app/model/subcategoria';
 import { ServicecategoriaService } from 'src/app/service/servicecategoria.service';
 import { ServicesubcategoriaService } from 'src/app/service/servicesubcategoria.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-subcategoria-agregar',
@@ -14,7 +16,9 @@ export class SubcategoriaAgregarComponent implements OnInit {
   categorias: Categoria[]= [];
   mensaje: string = "";
 
-  constructor( private servicioSubcategoria: ServicesubcategoriaService, private servicioCategoria: ServicecategoriaService) { }
+  constructor( private servicioSubcategoria: ServicesubcategoriaService,
+     private servicioCategoria: ServicecategoriaService,
+     private router: Router) { }
 
   ngOnInit(): void {
     this.traerCategorias();
@@ -23,10 +27,31 @@ export class SubcategoriaAgregarComponent implements OnInit {
   guardar(): void{
     this.servicioSubcategoria.agregarSubcategorias(this.subcategoria).subscribe(
       () => {
-        this.mensaje='Subcategoria Agregada correctamente'
+        this.mensaje='Subcategoria Agregada correctamente';
+        Swal.fire({
+          title: 'Creada!',
+          text: 'La nueva sub-categoría fue creada exitosamente.',
+          icon: 'success',
+          customClass: {
+          confirmButton: 'btn btn-success',
+          },
+          buttonsStyling: false,
+        }).then(() => {
+            this.router.navigate(['/subcategoria'])
+        });
       },
       error =>{ console.log("error add sc: "+error);
-        this.mensaje=error.error;
+        let message = 'La sub-categoría no pudo ser agregada. \n'
+        message += error.error ? error.error : error.message;
+        Swal.fire({
+            title: 'Error!',
+            text: message,
+            icon: 'error',
+            customClass: {
+            confirmButton: 'btn btn-danger',
+            },
+            buttonsStyling: false,
+        });
       }
     );
   }
