@@ -12,34 +12,9 @@ import { LoginComponent } from './login/login.component';
 
 export const AppRoutes: Routes = [
     {
-        path:'presentacionProducto',
-        component:PresentacionProductoComponent,
-    },
-    {
-        path:'agregarpresentacionProducto',
-        component:PresentacionAgregarComponent
-    },
-    {
-        path:'editarpresentacionProducto/:id',
-        component:PresentacionEditarComponent
-    },
-    {
-        path:'reserva',
-        component:ReservaComponent
-    },
-    {
-        path:'editarReserva/:id',
-        component:ReservaEditarComponent
-    },
-    {
-        path:'agregarReserva',
-        component:ReservaAgregarComponent
-    },
-    {
         path:'login',
         component:LoginComponent
     },
-    
     {
       path: '',
       redirectTo: 'dashboard',
@@ -78,8 +53,32 @@ export const AppRoutes: Routes = [
     }, {
         path: '',
         loadChildren: () => import('./timeline/timeline.module').then(m => m.TimelineModule)
-    }
-  ]}, {
+    },
+    {
+        path:'presentacionProducto',
+        component:PresentacionProductoComponent,
+    },
+    {
+        path:'agregarpresentacionProducto',
+        component:PresentacionAgregarComponent
+    },
+    {
+        path:'editarpresentacionProducto/:id',
+        component:PresentacionEditarComponent
+    },
+    {
+        path:'reserva',
+        component:ReservaComponent
+    },
+    {
+        path:'editarReserva/:id',
+        component:ReservaEditarComponent
+    },
+    {
+        path:'agregarReserva',
+        component:ReservaAgregarComponent
+    },
+    ]}, {
       path: '',
       component: AuthLayoutComponent,
       children: [{

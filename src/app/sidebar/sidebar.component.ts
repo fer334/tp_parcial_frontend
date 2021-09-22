@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
-
+import {LoginService}  from '../service/login/login.service'
 declare const $: any;
 
 //Metadata
@@ -87,6 +87,24 @@ export const ROUTES: RouteInfo[] = [{
         type: 'link',
         icontype: 'timeline'
 
+    },
+    {
+        path: '/presentacionProducto',
+        title: 'Presentacion Producto',
+        type: 'link',
+        icontype: 'timeline'
+    },
+    {
+        path: '/reserva',
+        title: 'Reserva',
+        type: 'link',
+        icontype: 'timeline'
+    },
+    {
+        path: '',
+        title: 'Cerrar Sesion',
+        type: 'logOut',
+        icontype: 'timeline'
     },{
         path: '/calendar',
         title: 'Calendar',
@@ -122,8 +140,9 @@ export class SidebarComponent implements OnInit {
         }
         return true;
     };
-
+    constructor(private loginService:LoginService){}
     ngOnInit() {
+        this.loginService.isLogged()
         this.menuItems = ROUTES.filter(menuItem => menuItem);
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
@@ -141,5 +160,10 @@ export class SidebarComponent implements OnInit {
             bool = true;
         }
         return bool;
+    }
+    logOut():void{
+        console.log("Hago logOut")
+        localStorage.clear()
+        this.ngOnInit()
     }
 }
