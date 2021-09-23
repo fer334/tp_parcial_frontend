@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
@@ -18,7 +18,7 @@ declare const $: any;
   templateUrl: './subcategoria.component.html',
   styleUrls: ['./subcategoria.component.css']
 })
-export class SubcategoriaComponent implements OnInit {
+export class SubcategoriaComponent implements OnInit, AfterViewInit, OnDestroy {
   subcategorias: Subcategoria[] = []; 
 
   dtOptions: DataTables.Settings = {};

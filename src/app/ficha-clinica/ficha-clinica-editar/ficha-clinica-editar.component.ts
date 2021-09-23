@@ -6,6 +6,7 @@ import { Subcategoria } from 'src/app/model/subcategoria';
 import { ServicefichaclinicaService } from 'src/app/service/servicefichaclinica.service';
 import { PacienteService } from 'src/app/service/servicepaciente.service';
 import { ServicesubcategoriaService } from 'src/app/service/servicesubcategoria.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ficha-clinica-editar',
@@ -31,6 +32,11 @@ export class FichaClinicaEditarComponent implements OnInit {
     this.route.params.subscribe((params) =>{
       const id = +params['id']; // el + convierte el string id a number
       this.fichaclinicaedit.idFichaClinica = id;
+      this.servicioFichaClinica.getFichaClinicaPorId(id).subscribe(
+        (fichaClinicaOld) => {
+          this.fichaclinicaedit = fichaClinicaOld;
+        }
+      );
     });
     this.traerSubCategorias();
     this.traerPersonas();
@@ -42,10 +48,32 @@ export class FichaClinicaEditarComponent implements OnInit {
       ()=> {
         console.log(this.fichaclinicaedit);
         this.mensaje='ficha clinica editada exitosamente';
+        Swal.fire({
+          title: 'Editado!',
+          text: 'La ficha clinica fue editada exitosamente.',
+          icon: 'success',
+          customClass: {
+            confirmButton: 'btn btn-success',
+          },
+          buttonsStyling: false,
+        })
+        .then(() => {
+          this.router.navigate(['/ficha_clinica']);
+        });
       },
       error =>{ console.log("el error al editar es: "+error); 
         console.log("llega el valor? "+this.fichaclinicaedit.motivoConsulta);
-        this.mensaje=error.error;
+        let message = 'la ficha clinica no pudo ser editada. \n';
+        message += error.error ? error.error : error.message;
+        Swal.fire({
+          title: 'Error!',
+          text: message,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-danger',
+          },
+          buttonsStyling: false,
+        });
       }
     );
   }

@@ -56,7 +56,7 @@ export class SubcategoriaEditarComponent implements OnInit {
       },
       error =>{ console.log("el error al editar es: "+error);
         console.log("llega el valor? "+this.subcategoriaedit.descripcion);
-        let message = 'la subcategoria no pudo ser creada. \n';
+        let message = 'la subcategoria no pudo ser editada. \n';
         message += error.error ? error.error : error.message;
         Swal.fire({
           title: 'Error!',

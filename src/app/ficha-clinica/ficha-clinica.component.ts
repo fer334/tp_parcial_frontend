@@ -1,15 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
 import { FichaClinica } from '../model/ficha-clinica';
 import { ServicefichaclinicaService } from '../service/servicefichaclinica.service';
+
+declare interface DataTable {
+  headerRow: string[];
+  footerRow: string[];
+  dataRows: string[][];
+}
+
+declare const $: any;
 
 @Component({
   selector: 'app-ficha-clinica',
   templateUrl: './ficha-clinica.component.html',
   styleUrls: ['./ficha-clinica.component.css']
 })
-export class FichaClinicaComponent implements OnInit {
+export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
   fichasclinicas: FichaClinica[] = [];
+  
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement: DataTableDirective;
+
   constructor(private servicioFichaClinica: ServicefichaclinicaService,
     private route: ActivatedRoute,
     private router: Router) { }
@@ -24,14 +41,39 @@ export class FichaClinicaComponent implements OnInit {
     this.getFichasClinicasPorFechaHasta();
     this.getFichasClinicasPorFechaDesdeHasta();
     this.getFichasClinicasPorIdTipoProducto();
+
+    //propiedades de las tablas
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      lengthMenu: [
+        [10, 25, 50, -1],
+        [10, 25, 50, 'Todos'],
+      ],
+      responsive: true,
+      language: {
+        search: '_INPUT_',
+        searchPlaceholder: 'Buscar Fichas',
+      },
+    };
+    this.dataTable = {
+      headerRow: ['Id(No)','Fecha y Hora','Profesional','Cliente','Categoria','Sub-Categoria','Motivo de Consulta(No)','Observación(No)','Diagnostico(No)','Acciones'],
+      footerRow: ['Id(No)','Fecha y Hora','Profesional','Cliente','Categoria','Sub-Categoria','Motivo de Consulta(No)','Observación(No)','Diagnostico(No)','Acciones'],
+      dataRows: [],
+    };
+
   }
+
+  public dataTable: DataTable;
   
   edit(fc: FichaClinica){
     this.router.navigate(['editarficha_clinica/',fc.idFichaClinica]);
   }
   getFichasClinicas(): void {
     this.servicioFichaClinica.getFichasClinicas().subscribe(
-      entity => this.fichasclinicas = entity.lista,
+      entity =>{ 
+        this.fichasclinicas = entity.lista;
+        this.dtTrigger.next();
+      },
       error => console.log('no se pueden conseguir las fichas clinicas')
     );
   }
@@ -77,5 +119,12 @@ export class FichaClinicaComponent implements OnInit {
       entity => console.log('lista por subcategoria: ',entity.lista,' elementos: ',entity.totalDatos),
       error => console.log('no se puede filtrar las fichas por subcategoria')
     )
+  }
+    
+  ngAfterViewInit() {}
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 }

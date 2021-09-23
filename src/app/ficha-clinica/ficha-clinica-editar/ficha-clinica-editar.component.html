@@ -1,12 +1,70 @@
-<p>ficha-clinica-editar works!</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Ingrese los nuevos datos de la ficha</p>
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="card ">
+            <div class="card-header card-header-primary card-header-text">
+              <div class="card-text">
+                <h4 class="card-title">Editar Ficha Clinica</h4>
+              </div>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <b>Motivo de la consulta:</b> <p> {{fichaclinicaedit.motivoConsulta}}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <b>Diagnostico:</b> <p> {{fichaclinicaedit.diagnostico}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">         
+                    <div class="col-sm-6">
+                        <form method="#" action="#" >
+                            <mat-form-field class="example-full-width">
+                                <p>Observación <small style="color: gray;">*(unico campo modificable)</small></p>
+                                <input matInput name="observacion" type="text" [(ngModel)]="fichaclinicaedit.observacion">
+                            </mat-form-field>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <b>Subcategoria(Producto):</b> <p>{{fichaclinicaedit.idTipoProducto.descripcion}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <b>Fisioterapeuta encargado:</b> <p> {{fichaclinicaedit.idEmpleado.nombre}}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <b>Cliente:</b> <p> {{fichaclinicaedit.idCliente.nombre}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <b>Local: </b> <p>{{fichaclinicaedit.idLocal.nombre}}</p>
+                    </div>
+                </div>
+              </div>
+            <!-- div card footer with items aligned to right -->
+            <div class="card-footer ">
+              <div class="row">
+                <div class="col-md-12">
+
+                  <button mat-raised-button class="btn btn-fill btn-primary mx-2" (click)='editar()' >Modificar</button>
+                  <button mat-raised-button class="btn btn-fill btn-secondary mx-2" [routerLink]="['/ficha_clinica']">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- <p>ficha-clinica-editar works!</p> -->
+<!-- <p>Ingrese los nuevos datos de la ficha</p>
 <div>  
     Motivo de la consulta <input [(ngModel)]="fichaclinicaedit.motivoConsulta">
     <br>
@@ -37,4 +95,4 @@
      <button  (click)="editar()">Modificar</button>
     <br/>
      {{mensaje}}
-</div>
+</div> -->

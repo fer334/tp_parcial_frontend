@@ -17,6 +17,10 @@ export class ServicefichaclinicaService {
     return this.http.get<listadatos<FichaClinica>>(this.api);
   }
   
+  getFichaClinicaPorId(id: number): Observable<FichaClinica> {
+    return this.http.get<FichaClinica>(this.api+'/'+id);
+  }
+
   getFichasClinicasPorFisioterapeuta(fisioterapeutaId: number): Observable<listadatos<FichaClinica>> {
     let payload = JSON.stringify({idEmpleado:{idPersona:fisioterapeutaId}});
     return this.http.get<listadatos<FichaClinica>>(this.api,{params:{ejemplo:payload}});
@@ -69,7 +73,11 @@ export class ServicefichaclinicaService {
       'Content-Type': 'application/json',
       'usuario': 'usuario2'
     });
-    return this.http.put<FichaClinica>(this.api, fc, {headers:headers}).pipe(
+    let body = JSON.stringify({
+      "idFichaClinica":fc.idFichaClinica,
+      "observacion":fc.observacion
+    });
+    return this.http.put<FichaClinica>(this.api, body, {headers:headers}).pipe(
       tap(
         data => console.log('editada fc '+data.motivoConsulta),
         error => console.log('el error al editar la fc es '+error.error)

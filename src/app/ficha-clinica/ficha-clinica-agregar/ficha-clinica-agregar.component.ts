@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { FichaClinica, Local } from '../../model/ficha-clinica';
 import { Paciente } from '../../model/paciente';
 import { Subcategoria } from '../../model/subcategoria';
@@ -21,7 +23,8 @@ export class FichaClinicaAgregarComponent implements OnInit {
 
   constructor(private servicioFichaClinica: ServicefichaclinicaService,
     private servicioSubcategoria: ServicesubcategoriaService,
-    private servicioPersona: PacienteService) { }
+    private servicioPersona: PacienteService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.traerSubCategorias();
@@ -32,9 +35,31 @@ export class FichaClinicaAgregarComponent implements OnInit {
   guardar(): void{
     this.servicioFichaClinica.agregarFichaClinica(this.fichaclinica).subscribe(
       () => {
-        this.mensaje = "Agregado exitosamente"
+        this.mensaje = "Agregado exitosamente";
+        Swal.fire({
+          title: 'Creada!',
+          text: 'La nueva Ficha Clínica fue creada exitosamente.',
+          icon: 'success',
+          customClass: {
+          confirmButton: 'btn btn-success',
+          },
+          buttonsStyling: false,
+        }).then(() => {
+            this.router.navigate(['/ficha_clinica'])
+        });
       },
-      error => this.mensaje = "Error al agregar ficha: "+ error.error
+      error =>{ this.mensaje = "Error al agregar ficha: ";
+        this.mensaje += error.error ? error.error : error.message;
+        Swal.fire({
+          title: 'Error!',
+          text: this.mensaje,
+          icon: 'error',
+          customClass: {
+          confirmButton: 'btn btn-danger',
+          },
+          buttonsStyling: false,
+      });
+      }
     );
   }
  

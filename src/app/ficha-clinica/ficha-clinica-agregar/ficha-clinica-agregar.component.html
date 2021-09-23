@@ -1,12 +1,96 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Registre una nueva ficha clinica</p>
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card ">
+            <div class="card-header card-header-primary card-header-text">
+              <div class="card-text">
+                <h4 class="card-title">Registre una nueva ficha clinica</h4>
+              </div>
+            </div>
+            <div class="card-body ">
+              <form method="#" action="#" >
+                <div class="row">
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="motivo" placeholder="Motivo de consulta" type="text" [(ngModel)]="fichaclinica.motivoConsulta">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="diagnostico" placeholder="Diagnostico" type="text" [(ngModel)]="fichaclinica.diagnostico">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="observacion" placeholder="Observación" type="text" [(ngModel)]="fichaclinica.observacion">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <mat-form-field>
+                        <mat-select placeholder="Subcategoria (Producto)" name="subcategoria" [(ngModel)]="fichaclinica.idTipoProducto.idTipoProducto">
+                          <mat-option *ngFor="let sc of subcategorias" [value]="sc.idTipoProducto">
+                            {{sc.descripcion}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field>
+                            <mat-select placeholder="Fisioterapeuta encargado" name="empleado" [(ngModel)]="fichaclinica.idEmpleado.idPersona">
+                                <ng-container *ngFor="let e of empleados">
+                                    <mat-option *ngIf="e.usuarioLogin" [value]="e.idPersona">
+                                        {{e.nombre}}
+                                    </mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                  <div class="col-sm-6">
+                    <mat-form-field>
+                        <mat-select placeholder="Cliente" name="cliente" [(ngModel)]="fichaclinica.idCliente.idPersona">
+                          <ng-container *ngFor="let cl of clientes">
+                                <mat-option *ngIf="!cl.usuarioLogin" [value]="cl.idPersona">
+                                    {{cl.nombre}}
+                                </mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field>
+                            <mat-select placeholder="Local" name="local" [(ngModel)]="fichaclinica.idLocal.idLocal">
+                              <mat-option *ngFor="let l of locales" [value]="l.idLocal">
+                                {{l.nombre}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+              </form>
+            </div>
+            <!-- div card footer with items aligned to right -->
+            <div class="card-footer ">
+              <div class="row">
+                <div class="col-md-12">
+
+                  <button mat-raised-button class="btn btn-fill btn-primary mx-2" (click)='guardar()' >Guardar</button>
+                  <button mat-raised-button class="btn btn-fill btn-secondary mx-2" [routerLink]="['/ficha_clinica']">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- <p>Registre una nueva ficha clinica</p>
 <div>
     Motivo de la consulta <input [(ngModel)]="fichaclinica.motivoConsulta">
     <br>
@@ -15,12 +99,6 @@
     Observacion <input [(ngModel)]="fichaclinica.observacion">
     <br>
     Fisioterapeuta encargado:
-<!--
-    <select [(ngModel)]="fichaclinica.idEmpleado.idPersona">
-        <option *ngFor="let e of empleados" [value]="e.idPersona">{{e.nombre}}</option>
-    </select>
-    <br>
--->
     <select [(ngModel)]="fichaclinica.idEmpleado.idPersona" >
         <ng-container *ngFor="let e of empleados">
             <option *ngIf="e.usuarioLogin"  value="{{e.idPersona}}">{{e.nombre}}</option>
@@ -29,11 +107,6 @@
     <br>
 
     Cliente:
-<!--
-    <select [(ngModel)]="fichaclinica.idCliente.idPersona">
-        <option *ngFor="let cl of clientes" [value]="cl.idPersona">{{cl.nombre}}</option>
-    </select>
--->
     <select [(ngModel)]="fichaclinica.idCliente.idPersona" >
         <ng-container *ngFor="let cl of clientes">
             <option *ngIf="!cl.usuarioLogin"  value="{{cl.idPersona}}">{{cl.nombre}}</option>
@@ -53,4 +126,4 @@
     <br>
      <button  (click)="guardar()">Guardar</button>
      {{mensaje}}
-</div>
+</div> -->
