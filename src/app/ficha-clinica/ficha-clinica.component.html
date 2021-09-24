@@ -14,9 +14,72 @@
               <!--        Here you can write extra buttons/actions for the toolbar              -->
               
               <button class="btn btn-info" [routerLink]="['/nuevaficha_clinica']">Nueva Ficha Clínica</button>
+              <hr>
+              <div>
+                <h4>Filtros:</h4>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">Empleado:</label>
+                  <div class="col-sm-3">
+                    <mat-form-field class="example-full-width">
+                      <input [(ngModel)]="fisioterapeutaId" matInput type="number">
+                    </mat-form-field>
+                  </div>
+                  <label class="col-sm-2 col-form-label">Cliente:  </label>
+                  <div class="col-sm-3">
+                    <mat-form-field class="example-full-width">
+                      <input matInput  [(ngModel)]="pacienteId" type="number">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3 centered">
+                    <mat-form-field>
+                        <mat-select placeholder="Categoria" name="idCategoria" [(ngModel)]="idCategoria">
+                          <mat-option *ngFor="let c of categorias" [value]="c.idCategoria">
+                            {{c.descripcion}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button (click)="traerSubCategoriasFiltradas()"  mat-raised-button class="btn btn-primary">filtrar</button>
+                  </div>
+                  <div class="col-sm-3 left">
+                    <mat-form-field>
+                        <mat-select placeholder="Subcategoria (Producto)" name="idSubcategoria" [(ngModel)]="idSubcategoria">
+                          <mat-option *ngFor="let sc of subcategorias" [value]="sc.idTipoProducto">
+                            {{sc.descripcion}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Desde:</label>
+                    <div class="col-sm-3 ">
+                        <mat-form-field >
+                          <input  [(ngModel)]="fechaDesde" matInput [matDatepicker]="picker" placeholder="elige una fecha" >
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <label class="col-sm-2 col-form-label">Hasta:</label>
+                    <div class="col-sm-3 ">
+                        <mat-form-field >
+                          <input  [(ngModel)]="fechaHasta" matInput [matDatepicker]="picker2" placeholder="elige una fecha" >
+                          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                          <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                  </div>
+                  
+                <button (click)="filtrarFichasClinicas()"  mat-raised-button class="btn btn-primary">Filtrar</button>
+                <button (click)="getAllFichas()"  mat-raised-button class="btn btn-info">Ver todas las fichas clinicas</button>
+                <button (click)="resetField()"  mat-raised-button class="btn btn-warning">Limpiar Campos</button>
+              </div>
             </div>
+            <hr>
             <div class="material-datatables">
-              <table
+              <!-- *ngIf="fichasfiltradas.length > 0 && filtreFinished; else otherContainer" -->
+              <table 
                 datatable
                 [dtTrigger]="dtTrigger" 
                 [dtOptions]="dtOptions"
@@ -57,7 +120,7 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr *ngFor="let fc of fichasclinicas">
+                  <tr *ngFor="let fc of fichasfiltradas">
                     <td>{{fc.idFichaClinica}}</td>
                     <td>{{fc.fechaHora}}</td>
                     <td>{{fc.idEmpleado.nombre}}</td>
@@ -90,6 +153,11 @@
                   </tr>
                 </tbody>
               </table>
+              
+              <p #otherContainer>
+                No se encontraron Registros
+              </p>
+
             </div>
           </div>
           <!-- end content-->

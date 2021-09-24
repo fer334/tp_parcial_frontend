@@ -51,6 +51,11 @@ export class ServicefichaclinicaService {
     return this.http.get<listadatos<FichaClinica>>(this.api,{params:{ejemplo:payload}});
   }
 
+  getFichasClinicasPorCategoria(idCategor: number): Observable<listadatos<FichaClinica>> {
+    let payload = JSON.stringify({idTipoProducto:{idCategoria:{idCategoria:idCategor}}});
+    return this.http.get<listadatos<FichaClinica>>(this.api,{params:{ejemplo:payload}});
+  }
+
   // (al cargar la pantalla de registro de ficha el cliente puede
   // preseleccionarse si existe una reserva de turno, el campo de observación es opcional, la fecha
   // se carga en el backend automáticamente) PREGUNTAR A JESÚS LO DE RESERVA
