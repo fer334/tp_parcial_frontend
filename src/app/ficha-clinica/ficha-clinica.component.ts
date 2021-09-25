@@ -38,7 +38,6 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
   //listas extra
   categorias: Categoria[]= [];
   subcategorias: Subcategoria[]= [];
-  subcategoriasfiltradas: Subcategoria[] = [];
 
   //elementos de la tabla
   dtOptions: DataTables.Settings = {};
@@ -123,12 +122,13 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getFichasClinicasPorFisioterapeuta(): void{ //por ahora dejamos el id 2 para probar
     if (this.fisioterapeutaId) {
-      this.servicioFichaClinica.getFichasClinicasPorFisioterapeuta(this.fisioterapeutaId).subscribe(
-        entity =>{ console.log('lista por terapeuta: ',entity.lista,' elementos: ',entity.totalDatos)
-          this.fichasfiltradas.concat(entity.lista);
-      },
-        error => console.log('no se puede filtrar las fichas por id 2 de terapeuta')
-      )
+      // this.servicioFichaClinica.getFichasClinicasPorFisioterapeuta(this.fisioterapeutaId).subscribe(
+      //   entity =>{ console.log('lista por terapeuta: ',entity.lista,' elementos: ',entity.totalDatos)
+      //     this.fichasfiltradas.concat(entity.lista);
+      // },
+      //   error => console.log('no se puede filtrar las fichas por id 2 de terapeuta')
+      // )
+     this.fichasfiltradas =this.fichasfiltradas.length>0 ? this.fichasfiltradas.filter(item=>item.idEmpleado.idPersona == this.fisioterapeutaId) : this.fichasclinicas.filter(item=>item.idEmpleado.idPersona == this.fisioterapeutaId); 
     }
   }
 
@@ -140,7 +140,7 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
       // },
       //   error => console.log('no se puede filtrar las fichas por id de paciente')
       // )
-     this.fichasfiltradas = this.fichasclinicas.filter(item=>item.idCliente.idPersona == this.pacienteId) 
+     this.fichasfiltradas =this.fichasfiltradas.length>0 ? this.fichasfiltradas.filter(item=>item.idCliente.idPersona == this.pacienteId) : this.fichasclinicas.filter(item=>item.idCliente.idPersona == this.pacienteId); 
     }
   }
 
@@ -162,36 +162,38 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.fechaDesde && this.fechaHasta) {
       let desde =formatDate(this.fechaDesde,'yyyyMMdd','en-US');
       let hasta=formatDate(this.fechaHasta,'yyyyMMdd','en-US');  
-      this.servicioFichaClinica.getFichasClinicasPorFechaDesdeHasta(desde,hasta).subscribe(
-        entity =>{ console.log('lista por fechaDesdeHasta: ',entity.lista,' elementos: ',entity.totalDatos)
-          this.fichasfiltradas.concat(entity.lista);
-      },
-        error => console.log('no se puede filtrar las fichas por fechaDesdeHasta')
-      )
-      
+      // this.servicioFichaClinica.getFichasClinicasPorFechaDesdeHasta(desde,hasta).subscribe(
+      //   entity =>{ console.log('lista por fechaDesdeHasta: ',entity.lista,' elementos: ',entity.totalDatos)
+      //     this.fichasfiltradas.concat(entity.lista);
+      // },
+      //   error => console.log('no se puede filtrar las fichas por fechaDesdeHasta')
+      // )
+      this.fichasfiltradas =this.fichasfiltradas.length>0 ? this.fichasfiltradas.filter(item=> item.fechaDesdeCadena) : this.fichasclinicas.filter(item=> item.fechaDesdeCadena); 
     }
   }
   
   // (para este campo lógicamente antes hay que filtrar por categoria). A que se refiere esto??
   getFichasClinicasPorIdTipoProducto(): void{ //filtrar por subcategoria. Para el ejemplo id 38 
     if (this.idSubcategoria) {
-      this.servicioFichaClinica.getFichasClinicasPorSubcategoria(this.idSubcategoria).subscribe(
-        entity =>{ console.log('lista por subcategoria: ',entity.lista,' elementos: ',entity.totalDatos)
-          this.fichasfiltradas.concat(entity.lista);
-      },
-        error => console.log('no se puede filtrar las fichas por subcategoria')
-      )
+      // this.servicioFichaClinica.getFichasClinicasPorSubcategoria(this.idSubcategoria).subscribe(
+      //   entity =>{ console.log('lista por subcategoria: ',entity.lista,' elementos: ',entity.totalDatos)
+      //     this.fichasfiltradas.concat(entity.lista);
+      // },
+      //   error => console.log('no se puede filtrar las fichas por subcategoria')
+      // ) 
+      this.fichasfiltradas =this.fichasfiltradas.length>0 ? this.fichasfiltradas.filter(item=>item.idTipoProducto.idTipoProducto == this.idSubcategoria) : this.fichasclinicas.filter(item=>item.idTipoProducto.idTipoProducto == this.idSubcategoria); 
     }
   }
 
   getFichasClinicasPorIdCategoria() {
     if (this.idCategoria) {
-      this.servicioFichaClinica.getFichasClinicasPorCategoria(this.idCategoria).subscribe(
-        entity =>{ console.log('lista por categoria: ',entity.lista,' elementos: ',entity.totalDatos)
-          this.fichasfiltradas.concat(entity.lista);
-      },
-        error => console.log('no se puede filtrar las fichas por subcategoria')
-      )
+      // this.servicioFichaClinica.getFichasClinicasPorCategoria(this.idCategoria).subscribe(
+      //   entity =>{ console.log('lista por categoria: ',entity.lista,' elementos: ',entity.totalDatos)
+      //     this.fichasfiltradas.concat(entity.lista);
+      // },
+      //   error => console.log('no se puede filtrar las fichas por subcategoria')
+      // ) 
+      this.fichasfiltradas =this.fichasfiltradas.length>0 ? this.fichasfiltradas.filter(item=>item.idTipoProducto.idCategoria.idCategoria == this.idCategoria) : this.fichasclinicas.filter(item=>item.idTipoProducto.idCategoria.idCategoria == this.idCategoria); 
     }
   }
  
@@ -224,7 +226,7 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
  traerSubCategoriasFiltradas(): void { //función para traer la lista de categorías
    this.servicioSubcategoria.getSubcategoriasPorIdCategoria(this.idCategoria).subscribe(
       entity=>{
-        this.subcategoriasfiltradas=entity.lista
+        this.subcategorias=entity.lista
         console.log('categorias',this.categorias)
         
       },
@@ -235,9 +237,11 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getAllFichas(): void{
-    console.log('fichas clinicas en all: '+this.fichasclinicas);
-    console.log('fichas filtradas en all: '+this.fichasfiltradas);
+    console.log('fichas clinicas en all: '+this.fichasclinicas.length);
+    console.log('fichas filtradas en all: '+this.fichasfiltradas.length);
     this.fichasfiltradas = [...this.fichasclinicas];
+    console.log('fichas clinicas en all after: '+this.fichasclinicas.length);
+    console.log('fichas filtradas en all after: '+this.fichasfiltradas.length);
   }
   
   resetField(){
