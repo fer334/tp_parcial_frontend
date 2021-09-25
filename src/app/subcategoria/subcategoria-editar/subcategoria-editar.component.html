@@ -1,0 +1,59 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card ">
+            <div class="card-header card-header-primary card-header-text">
+              <div class="card-text">
+                <h4 class="card-title">Editar Sub-Categoria</h4>
+              </div>
+            </div>
+            <div class="card-body ">
+              <form method="#" action="#" >
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field class="example-full-width">
+                          <input matInput name="Descripcion" placeholder="descripcion" type="text" [(ngModel)]="subcategoriaedit.descripcion">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-6">
+                        <mat-form-field>
+                            <mat-select placeholder="Categoria de la subcategoria" name="idCategoria" [(ngModel)]="subcategoriaedit.idCategoria.idCategoria">
+                              <mat-option *ngFor="let c of categorias" [value]="c.idCategoria">
+                                {{c.descripcion}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                      </div>
+                </div>
+              </form>
+            </div>
+            <!-- div card footer with items aligned to right -->
+            <div class="card-footer ">
+              <div class="row">
+                <div class="col-md-12">
+
+                  <button mat-raised-button class="btn btn-fill btn-primary mx-2" (click)='editar()' >Modificar</button>
+                  <button mat-raised-button class="btn btn-fill btn-secondary mx-2" [routerLink]="['/categoria']">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- <p>subcategoria-editar works!</p>
+<p>Ingrese los nuevos datos de la subcategoria</p>
+<div>
+    Nombre de la subcategoria <input [(ngModel)]="subcategoriaedit.descripcion">
+    <br>
+    Categoria de la subcategoria
+    <select [(ngModel)]="subcategoriaedit.idCategoria.idCategoria">
+        <option *ngFor="let c of categorias" [value]="c.idCategoria">{{c.descripcion}}</option>
+    </select>
+    <br>
+     <button  (click)="editar()">Modificar</button>
+    <br/>
+     {{mensaje}}
+</div> -->

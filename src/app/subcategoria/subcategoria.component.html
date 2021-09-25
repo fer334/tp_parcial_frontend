@@ -1,0 +1,105 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Sub-Categorias</h4>
+          </div>
+          <div class="card-body">
+            <div class="toolbar">
+              <!--        Here you can write extra buttons/actions for the toolbar              -->
+              <button class="btn btn-info" [routerLink]="['/nuevasubcategoria']">Nueva Sub-Categoria</button>
+             </div>
+            <div class="material-datatables">
+              <table
+                datatable
+                [dtTrigger]="dtTrigger" 
+                [dtOptions]="dtOptions"
+                id="datatables"
+                class="table table-striped table-no-bordered table-hover"
+                cellspacing="0"
+                width="100%"
+                style="width: 100%"
+              >
+                <thead>
+                  <tr>
+                    <th>{{ dataTable.headerRow[0] }}</th>
+                    <th>{{ dataTable.headerRow[1] }}</th>
+                    <th>{{ dataTable.headerRow[2] }}</th>
+                    <th class="disabled-sorting text-right">
+                      {{ dataTable.headerRow[3] }}
+                    </th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>{{ dataTable.footerRow[0] }}</th>
+                    <th>{{ dataTable.footerRow[1] }}</th>
+                    <th>{{ dataTable.headerRow[2] }}</th>
+                    <th class="text-right">{{ dataTable.footerRow[3] }}</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  <tr *ngFor="let sc of subcategorias">
+                    <td>{{sc.idTipoProducto}}</td>
+                    <td>{{sc.descripcion}}</td>
+                    <td>[{{sc.idCategoria.idCategoria}}] {{sc.idCategoria.descripcion}}</td>
+                    <td class="text-right">
+                      <!-- Angular on click button -->
+                      
+                      <!-- <a
+                        (click)="fav()"
+                        class="btn btn-link btn-info btn-just-icon like"
+                        ><i class="material-icons">favorite</i></a
+                      > -->
+                      <a
+                        (click)="edit(sc)"
+                        class="btn btn-link btn-warning btn-just-icon edit"
+                        ><i class="material-icons">edit</i></a
+                      >
+                      <a
+                        (click)="delete(sc)"
+                        class="btn btn-link btn-danger btn-just-icon remove"
+                        ><i class="material-icons">close</i></a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- end content-->
+        </div>
+        <!--  end card  -->
+      </div>
+      <!-- end col-md-12 -->
+    </div>
+    <!-- end row -->
+  </div>
+</div>
+<!-- <p>subcategoria works!</p>
+<div *ngIf="subcategorias.length>0">
+    <table border="1">
+        <tr>
+            <td>Id</td>
+            <td>Descripcion</td>
+            <td>Categoria</td>
+        </tr>
+        <tr *ngFor="let sc of subcategorias">
+            <td>{{sc.idTipoProducto}}</td>
+            <td>{{sc.descripcion}}</td>
+            <td>({{sc.idCategoria.idCategoria}}),{{sc.idCategoria.descripcion}}</td>
+            <td><a (click)="edit(sc)">editar</a></td>
+        </tr>
+    </table>
+</div>
+<div>
+  <a routerLink="/nuevasubcategoria">Agregar Subcategoria</a>  
+</div>
+<div>
+  <a routerLink="/borrarsubcategoria">Eliminar Subcategoria</a>  
+</div> -->

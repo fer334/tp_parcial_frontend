@@ -49,10 +49,24 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { DataTablesModule } from "angular-datatables";
 
 import { AppRoutes } from './app.routing';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { ServicecategoriaService } from './service/servicecategoria.service';
+import { CategoriaAgregarComponent } from './categoria/categoria-agregar/categoria-agregar.component';
+import { CategoriaEliminarComponent } from './categoria/categoria-eliminar/categoria-eliminar.component';
+import { CategoriaEditarComponent } from './categoria/categoria-editar/categoria-editar.component';
+import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
+import { SubcategoriaAgregarComponent } from './subcategoria/subcategoria-agregar/subcategoria-agregar.component';
+import { SubcategoriaEditarComponent } from './subcategoria/subcategoria-editar/subcategoria-editar.component';
+import { SubcategoriaEliminarComponent } from './subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
+import { ServicesubcategoriaService } from './service/servicesubcategoria.service';
+import { FichaClinicaComponent } from './ficha-clinica/ficha-clinica.component';
 import { PacienteService } from './service/servicepaciente.service';
 import { PacienteComponent } from './paciente/paciente.component';
 import { CreatePaciente } from './paciente/createpaciente.component';
 import { EditPaciente } from './paciente/editpaciente.component';
+import { ServicefichaclinicaService } from './service/servicefichaclinica.service';
+import { FichaClinicaAgregarComponent } from './ficha-clinica/ficha-clinica-agregar/ficha-clinica-agregar.component';
+import { FichaClinicaEditarComponent } from './ficha-clinica/ficha-clinica-editar/ficha-clinica-editar.component';
 
 @NgModule({
   exports: [
@@ -86,7 +100,7 @@ import { EditPaciente } from './paciente/editpaciente.component';
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule
-  ]
+  ], //acá se suele crear un declarations con los nuevos componentes, pero eso no funcioná acá. Borrar acá y poner abajo con el resto.
 })
 export class MaterialModule {}
 
@@ -111,13 +125,27 @@ export class MaterialModule {}
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent,
+        CategoriaComponent,
+        CategoriaAgregarComponent,
+        CategoriaEliminarComponent,
+        CategoriaEditarComponent,
+        SubcategoriaComponent,
+        SubcategoriaAgregarComponent,
+        SubcategoriaEditarComponent,
+        SubcategoriaEliminarComponent,
+        FichaClinicaComponent,
         PacienteComponent,
         CreatePaciente,
         EditPaciente,
+        FichaClinicaAgregarComponent,
+        FichaClinicaEditarComponent,
     ],
     providers : [
       MatNativeDateModule,
+      ServicecategoriaService,
+      ServicesubcategoriaService,
       PacienteService,
+      ServicefichaclinicaService
     ],
     bootstrap:    [ AppComponent ]
 })
