@@ -1,11 +1,21 @@
 import { ThrowStmt } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Reserva } from 'src/app/model/reserva';
 import { ReservaService } from 'src/app/service/reserva/reserva.service';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { LoginService } from 'src/app/service/login/login.service';
 import swal from 'sweetalert2';
+import { Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
+
+
+declare interface DataTable {
+  headerRow: string[];
+  footerRow: string[];
+  dataRows: string[][];
+
+}
 
 @Component({
   selector: 'app-reserva-agregar',
@@ -31,12 +41,54 @@ export class ReservaAgregarComponent implements OnInit {
     fisioterapeutas:any
     clientes:any
     selectedSchedule:string[]=[]
-  ngOnInit(): void {
-    //this.fetchAgendaLibreOcupada()
-    this.loginService.isLogged()
-    this.fetchFisioterapeutas()
-    this.fetchPersona()
-    console.log(this.idEmpleado)
+
+
+    public dataTable: DataTable;
+    dtOptions: DataTables.Settings = {};
+    dtTrigger: Subject<any> = new Subject<any>();
+    @ViewChild(DataTableDirective, {static: false})
+    dtElement: DataTableDirective;
+
+
+    ngOnInit(): void {
+        //this.fetchAgendaLibreOcupada()
+        this.dtOptions = {
+          pagingType: 'full_numbers',
+          lengthMenu: [
+            [5, 25, 50, -1],
+            [5, 25, 50, 'All'],
+          ],
+          responsive: true,
+          language: {
+            search: '_INPUT_',
+            searchPlaceholder: 'Search records',
+          },
+        };
+        this.dataTable = {
+          headerRow: [ 'Hora Inicio','Hora Fin', 'Cliente', 'Seleccionar' ],
+          footerRow: [ 'Hora Inicio','Hora Fin', 'Cliente', 'Seleccionar' ],
+          dataRows: []
+        }
+        this.loginService.isLogged()
+        this.fetchFisioterapeutas()
+        this.fetchPersona()
+        this.reservas=[]
+        this.dtTrigger.next();
+        console.log('empleado',this.idEmpleado)
+    }
+
+    ngOnDestroy(): void {
+      // Do not forget to unsubscribe the event
+      this.dtTrigger.unsubscribe();
+    }
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      // Call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   buscar():void{
@@ -54,6 +106,7 @@ export class ReservaAgregarComponent implements OnInit {
 
             this.reservas=response
             console.log("Response",this.reservas)
+            this.rerender()
           },
           error=>console.log("Error",error)
       )
@@ -64,6 +117,8 @@ export class ReservaAgregarComponent implements OnInit {
 
         this.reservas=response
         console.log("Response",this.reservas)
+        this.rerender()
+
       },
       error=>console.log("Error",error)
   )

@@ -32,35 +32,54 @@
           </div>
         </div>      
       </div>
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card">
-                <div class="card-header card-header-icon card-header-rose">
-                  <div class="card-icon">
-                    <i class="material-icons">assignment</i>
-                  </div>
-                  <h4 class="card-title ">Lista de Reservas</h4>
+      <div class="row" *ngIf="reservas.length>0">
+        <div class="col-md-12">
+            <div class="card">
+              <div class="card-header card-header-primary card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">assignment</i>
                 </div>
-                  <div class="card-body">
-                      <div class="table-responsive">
-                        <table class="table">
-                                <thead class="text-primary">
-                                    <tr>
-                                      <th>HoraInicio</th>
-                                      <th>HoraFin</th>
-                                      <th>Cliente</th>
-                                      <th>Seleccionar</th>
-                                  </tr>
-                                </thead>
-                              <tbody>
-                                <tr *ngFor="let r of reservas">
+                <h4 class="card-title">Lista de Reservas Disponibles</h4>
+              </div>
+                <div class="card-body">
+                    <div class="toolbar">
+                    </div>
+                    <div class="material-datatables">
+                        <table
+                          datatable
+                          [dtTrigger]="dtTrigger" 
+                          [dtOptions]="dtOptions"
+                          id="datatables" 
+                          class="table table-striped table-no-bordered table-hover" 
+                          cellspacing="0" 
+                          width="100%" 
+                          style="width:100%"
+                        >
+                             <thead class="text-primary">
+                                <tr>
+                                    <th>{{ dataTable.headerRow[0] }}</th>
+                                    <th>{{ dataTable.headerRow[1] }}</th>
+                                    <th>{{ dataTable.headerRow[2] }}</th>
+                                    <th>{{ dataTable.headerRow[3] }}</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                              <tr>
+                                <th>{{ dataTable.footerRow[0] }}</th>
+                                <th>{{ dataTable.footerRow[1] }}</th>
+                                <th>{{ dataTable.footerRow[2] }}</th>
+                                <th>{{ dataTable.footerRow[3] }}</th>
+                              </tr>
+                            </tfoot>
+                            <tbody>
+                              <tr *ngFor="let r of reservas">
                                   <td>{{ r.horaInicio.split(" ")[1] ? r.horaInicio.split(" ")[1] : r.horaInicio }}</td>
                                   <td>{{ r.horaFin.split(" ")[1] ? r.horaFin.split(" ")[1] : r.horaFin }}</td>
                                   <td>{{r.idCliente ? r.idCliente.nombre :""}}</td>
                                   <td *ngIf="!r.idCliente"> <input  type="radio" name="horario" [value]="r.horaInicioCadena" (change)="choose(r.horaInicioCadena)" ></td>
                                   <td></td>
                               </tr>
-                              </tbody>
+                          </tbody>
                         </table>
                       </div>
                   </div>

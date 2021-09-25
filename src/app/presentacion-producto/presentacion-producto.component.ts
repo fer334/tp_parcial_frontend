@@ -4,6 +4,8 @@ import { PresentacionProducto } from '../model/presentacionProducto';
 import { PresentacionProductoService } from '../service/presentacion-producto.service';
 import { ActivatedRoute } from '@angular/router';
 import { LoginService } from '../service/login/login.service';
+import { Subject } from 'rxjs';
+
 import swal from 'sweetalert2';
 
 declare interface DataTable {
@@ -34,14 +36,16 @@ export class PresentacionProductoComponent implements OnInit,AfterViewInit {
   idTipoProductoFilter:String=""
   nombreFilter:String=""
   public dataTable: DataTable;
+  dtTrigger: Subject<any> = new Subject<any>();
 
   ngOnInit(): void {
+      this.dataTable = {
+          headerRow: [ 'Id', 'Codigo', 'Nombre', 'IdProducto', 'IdTipoProducto', 'PrecioVenta','FlagServicio','Accion' ],
+          footerRow:[ 'Id', 'Codigo', 'Nombre', 'IdProducto', 'IdTipoProducto', 'PrecioVenta','FlagServicio','Accion' ]
+      }
       this.loginService.isLogged()
       this.getListPresentacionProducto()
-      this.dataTable = {
-        headerRow: [ 'Id', 'Codigo', 'Nombre', 'IdProducto', 'IdTipoProducto', 'PrecioVenta','FlagServicio','Accion' ],
-        footerRow:[ 'Id', 'Codigo', 'Nombre', 'IdProducto', 'IdTipoProducto', 'PrecioVenta','FlagServicio','Accion' ]
-      }
+      
   }
   ngAfterViewInit() {
     $('#datatables').DataTable({
@@ -66,6 +70,7 @@ export class PresentacionProductoComponent implements OnInit,AfterViewInit {
       entity =>{
         console.log("result",entity.lista)
         this.presentacionProductos=this.presentacionProductosFiltrado= entity.lista
+        this.dtTrigger.next();
       },
       error=> console.log("No se pudieron obtener la lista Presentacion Productos")
     );

@@ -31,6 +31,7 @@ export class PacienteComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private servicioPaciente: PacienteService, private router: Router) {}
 
   ngOnInit(): void {
+    
     this.dtOptions = {
       pagingType: 'full_numbers',
       lengthMenu: [
