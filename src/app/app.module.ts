@@ -83,6 +83,7 @@ import { HorarioExComponent } from './horario_ex/horario.component';
 import { CreateHorarioExComponent } from './horario_ex/createhorario.component';
 import { CreateServicioComponent } from './servicio/createservicio.component';
 import { ServicioComponent } from './servicio/servicio.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   exports: [
@@ -170,6 +171,7 @@ export class MaterialModule {}
         CreateHorarioExComponent,
         ServicioComponent,
         CreateServicioComponent,
+        MainComponent
     ],
     providers : [
       MatNativeDateModule,

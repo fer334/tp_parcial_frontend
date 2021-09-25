@@ -59,8 +59,8 @@ export const ROUTES: RouteInfo[] = [
         }
         ]
     },{
-        path: '/dashboard',
-        title: 'Dashboard',
+        path: '/menu',
+        title: 'Menu',
         type: 'link',
         icontype: 'dashboard'
     },{
