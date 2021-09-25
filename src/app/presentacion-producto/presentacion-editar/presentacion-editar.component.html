@@ -1,0 +1,76 @@
+
+<div>
+    <p>{{mensaje}}</p>
+</div>
+<div class="main-content" *ngIf="loaded">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card ">
+                <div class="card-header card-header-rose card-header-text">
+                    <div class="card-text">
+                    <h4 class="card-title">Editar Presentacion Producto</h4>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <form method="get" action="/" class="form-horizontal">
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Id:</label>
+                            <div class="col-sm-10">
+                                <mat-form-field class="example-full-width">
+                                    <input disabled name="1" [(ngModel)]="presentacionProducto.idPresentacionProducto" matInput type="text">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Codigo:</label>
+                            <div class="col-sm-10">
+                                <mat-form-field class="example-full-width">
+                                    <input name="2" [(ngModel)]="presentacionProducto.codigo"  matInput type="text">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Flag Servicio:</label>
+                            <div class="col-sm-10">
+                                <mat-form-field class="example-full-width">
+                                    <input name="3" [(ngModel)]="presentacionProducto.flagServicio"  matInput type="text">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Nombre:</label>
+                            <div class="col-sm-10">
+                                <mat-form-field class="example-full-width">
+                                    <input name="4" [(ngModel)]="presentacionProducto.nombre"  matInput type="text">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Precio Venta:</label>
+                            <div class="col-sm-10">
+                                <mat-form-field class="example-full-width">
+                                    <input name="5" [(ngModel)]="presentacionProducto.existenciaProducto.precioVenta"  matInput type="number">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Id Producto</label>
+                            <div class="col-sm-10">
+                                <mat-form-field>
+                                    <mat-select [(ngModel)]="presentacionProducto.idProducto.idProducto" placeholder="Seleccionar" name="city">
+                                      <mat-option *ngFor="let p of products" [value]="p.idProducto">
+                                        {{p.descripcionGeneral}}
+                                      </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                    <button class=" center btn btn-success" (click)="guardar()"> Actualizar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

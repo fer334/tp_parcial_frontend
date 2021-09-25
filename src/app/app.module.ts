@@ -67,6 +67,16 @@ import { SubcategoriaAgregarComponent } from './subcategoria/subcategoria-agrega
 import { SubcategoriaEditarComponent } from './subcategoria/subcategoria-editar/subcategoria-editar.component';
 import { SubcategoriaEliminarComponent } from './subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
 import { ServicecategoriaService } from './service/servicecategoria.service';
+import { PresentacionProductoComponent } from './presentacion-producto/presentacion-producto.component';
+import { PresentacionProductoService } from './service/presentacion-producto.service';
+import { PresentacionAgregarComponent } from './presentacion-producto/presentacion-agregar/presentacion-agregar.component';
+import { PresentacionEditarComponent } from './presentacion-producto/presentacion-editar/presentacion-editar.component';
+import { ReservaComponent } from './reserva/reserva.component';
+import { ReservaService } from './service/reserva/reserva.service';
+import { ReservaEditarComponent } from './reserva/reserva-editar/reserva-editar.component';
+import { ReservaAgregarComponent } from './reserva/reserva-agregar/reserva-agregar.component';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './service/login/login.service';
 
 @NgModule({
   exports: [
@@ -139,6 +149,15 @@ export class MaterialModule {}
         EditPaciente,
         FichaClinicaAgregarComponent,
         FichaClinicaEditarComponent,
+        //Componentes Presentacion Producto
+        PresentacionProductoComponent,
+        PresentacionAgregarComponent,
+        PresentacionEditarComponent,
+        //Componente de Reservas
+        ReservaComponent,
+        ReservaEditarComponent,
+        ReservaAgregarComponent,      
+        LoginComponent
     ],
     providers : [
       MatNativeDateModule,
@@ -146,6 +165,9 @@ export class MaterialModule {}
       ServicesubcategoriaService,
       PacienteService,
       ServicefichaclinicaService
+      PresentacionProductoService,
+      ReservaService,
+      LoginService
     ],
     bootstrap:    [ AppComponent ]
 })

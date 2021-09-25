@@ -2,8 +2,19 @@ import { Routes } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { PresentacionProductoComponent } from './presentacion-producto/presentacion-producto.component';
+import { PresentacionAgregarComponent } from './presentacion-producto/presentacion-agregar/presentacion-agregar.component';
+import { PresentacionEditarComponent } from './presentacion-producto/presentacion-editar/presentacion-editar.component';
+import { ReservaComponent } from './reserva/reserva.component';
+import { ReservaEditarComponent } from './reserva/reserva-editar/reserva-editar.component';
+import { ReservaAgregarComponent } from './reserva/reserva-agregar/reserva-agregar.component';
+import { LoginComponent } from './login/login.component';
 
 export const AppRoutes: Routes = [
+    {
+        path:'login',
+        component:LoginComponent
+    },
     {
       path: '',
       redirectTo: 'dashboard',
@@ -42,8 +53,32 @@ export const AppRoutes: Routes = [
     }, {
         path: '',
         loadChildren: () => import('./timeline/timeline.module').then(m => m.TimelineModule)
-    }
-  ]}, {
+    },
+    {
+        path:'presentacionProducto',
+        component:PresentacionProductoComponent,
+    },
+    {
+        path:'agregarpresentacionProducto',
+        component:PresentacionAgregarComponent
+    },
+    {
+        path:'editarpresentacionProducto/:id',
+        component:PresentacionEditarComponent
+    },
+    {
+        path:'reserva',
+        component:ReservaComponent
+    },
+    {
+        path:'editarReserva/:id',
+        component:ReservaEditarComponent
+    },
+    {
+        path:'agregarReserva',
+        component:ReservaAgregarComponent
+    },
+    ]}, {
       path: '',
       component: AuthLayoutComponent,
       children: [{
@@ -51,4 +86,6 @@ export const AppRoutes: Routes = [
         loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
       }]
     }
+
+
 ];

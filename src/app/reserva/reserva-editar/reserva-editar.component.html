@@ -1,0 +1,39 @@
+<div>
+    <p>{{mensaje}}</p>
+</div>
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card ">
+            <div class="card-body ">
+                <div class="row">
+                  <label class="col-sm-1 col-form-label">Observacion:</label>
+                  <div class="col-sm-2">
+                    <mat-form-field class="example-full-width">
+                      <input  [(ngModel)]="observacion" matInput type="text">
+                    </mat-form-field>
+                  </div>
+                    <div class="col-lg-5 col-md-8 col-sm-4">
+                        <mat-form-field>
+                            <mat-select [(ngModel)]="flagAsistio" placeholder="Asistio" name="city">
+                                    <mat-option disabled selected hidden value="">
+                                    </mat-option>
+                                    <mat-option value="S">
+                                        Si
+                                    </mat-option>
+                                    <mat-option value="N">
+                                        No
+                                    </mat-option>
+                                </mat-select>
+                         </mat-form-field>
+                    </div>
+                </div>
+                <button (click)="guardar()"  mat-raised-button class="btn btn-success">Guardar</button>
+                <button  (click)="cancellConfirmation()"  mat-raised-button class="btn btn-danger ">Cancelar</button>
+              </div>
+          </div>
+        </div>      
+      </div>
+    </div>
+  </div>

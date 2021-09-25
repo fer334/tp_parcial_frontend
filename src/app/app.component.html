@@ -1,2 +1,11 @@
-
-<router-outlet></router-outlet>
+<div style="text-align:center">
+    <a routerLink="/presentacionProducto">ir A presentacionProducto</a>
+    <br/>
+    <a routerLink="/reserva" > Ir a Reserva</a>
+    <br>
+    <button (click)="logOut()">Cerrar Cession</button>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+  

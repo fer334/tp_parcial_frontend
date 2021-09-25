@@ -1,0 +1,106 @@
+
+<div>
+  <div>
+    <p>{{mensaje}}</p>
+  </div>
+</div>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
+          <div class="card-body ">
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Tipo Producto:</label>
+                <div class="col-sm-3">
+                  <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="idTipoProductoFilter" matInput type="text">
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-2 col-form-label">Nombre:  </label>
+                <div class="col-sm-3">
+                  <mat-form-field class="example-full-width">
+                    <input matInput  [(ngModel)]="nombreFilter" type="text">
+                  </mat-form-field>
+                </div>
+              </div>
+              <button (click)="filtrar()"  mat-raised-button class="btn btn-primary">Filtrar</button>
+              <button (click)="getAll()"  mat-raised-button class="btn btn-info">Ver Todos</button>
+              <button (click)="resetFields()"  mat-raised-button class="btn btn-warning">Limpiar Campos</button>
+
+            </div>
+        </div>
+      </div>      
+    </div>
+    <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">assignment</i>
+                  </div>
+                  <h4 class="card-title">Lista de Presentacion Producto</h4>
+                </div>
+                  <div class="card-body">
+                      <div class="toolbar">
+                        <button  mat-raised-button class="btn btn-default" routerLink="/agregarpresentacionProducto">
+                          Crear uno nuevo
+                        </button>
+                          <!--        Here you can write extra buttons/actions for the toolbar              -->
+                      </div>
+                      <div class="material-datatables">
+                        <table *ngIf="presentacionProductosFiltrado.length>0;else other" id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                              <thead>
+                                  <tr>
+                                    <th>{{ dataTable.headerRow[0] }}</th>
+                                    <th>{{ dataTable.headerRow[1] }}</th>
+                                    <th>{{ dataTable.headerRow[2] }}</th>
+                                    <th>{{ dataTable.headerRow[3] }}</th>
+                                    <th>{{ dataTable.headerRow[4] }}</th>
+                                    <th>{{ dataTable.headerRow[5] }}</th>
+                                    <th>{{ dataTable.headerRow[6] }}</th>
+                                    <th class="disabled-sorting text-center">{{ dataTable.headerRow[7] }}</th>
+                                  </tr>
+                              </thead>
+                              <tfoot>
+                                  <tr>
+                                    <th>{{ dataTable.footerRow[0] }}</th>
+                                    <th>{{ dataTable.footerRow[1] }}</th>
+                                    <th>{{ dataTable.footerRow[2] }}</th>
+                                    <th>{{ dataTable.footerRow[3] }}</th>
+                                    <th>{{ dataTable.footerRow[4] }}</th>
+                                    <th>{{ dataTable.footerRow[5] }}</th>
+                                    <th>{{ dataTable.footerRow[6] }}</th>
+                                    <th class="text-right">{{ dataTable.footerRow[7] }}</th>
+                                  </tr>
+                              </tfoot>
+                              <tbody> 
+                                  <tr *ngFor="let p of presentacionProductosFiltrado">
+                                    <td> {{p.idPresentacionProducto}}</td>
+                                    <td>{{p.codigo}}</td>
+                                    <td>{{p.nombre}}</td>
+                                    <td>{{p.idProducto.idProducto}}</td>
+                                    <td>{{p.idProducto.idTipoProducto.idTipoProducto}}</td>
+                                    <td>{{p.existenciaProducto.precioVenta}}</td>
+                                    <td>{{p.flagServicio}}</td>
+                                    <td class="text-right">
+                                      <a  [routerLink]="['/editarpresentacionProducto',p.idPresentacionProducto]" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">dvr</i></a>
+                                      <a (click)="showSwall(p.idPresentacionProducto)"  class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
+                                    </td>
+                                  </tr>    
+                              </tbody>
+                          </table>
+                          <ng-template #other>
+                              <p>No se encontraron Registros</p>
+                          </ng-template>
+                      </div>
+                  </div>
+                  <!-- end content-->
+              </div>
+              <!--  end card  -->
+          </div>
+          <!-- end col-md-12 -->
+      </div>
+      <!-- end row -->
+  </div>
+</div>

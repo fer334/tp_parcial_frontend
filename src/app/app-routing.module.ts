@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PresentacionProductoComponent } from './presentacion-producto/presentacion-producto.component';
+import { PresentacionAgregarComponent } from './presentacion-producto/presentacion-agregar/presentacion-agregar.component';
 import { CategoriaAgregarComponent } from './categoria/categoria-agregar/categoria-agregar.component';
 import { CategoriaEditarComponent } from './categoria/categoria-editar/categoria-editar.component';
 import { CategoriaEliminarComponent } from './categoria/categoria-eliminar/categoria-eliminar.component';

@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private toggleButton: any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
-
+    
     constructor(private element: ElementRef) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
