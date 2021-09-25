@@ -22,15 +22,8 @@
                   </div>
                   <div class="col-sm-6">
                     <mat-form-field class="example-full-width">
-                      <mat-select placeholder="Categoria" name="idDetalle"  [(ngModel)]="detail.idDetalle" >
-                        <mat-option *ngFor="let c of categorias" [value]="c.idDetalle">
-                          {{ c.idCategoria +' - ' + c.descripcion }}
-                        </mat-option>
-                      </mat-select>
+                      <input matInput name="observacion" placeholder="Observacion" type="text" [(ngModel)]="data.observacion">
                     </mat-form-field>
-                    <!-- <mat-form-field class="example-full-width">
-                      <input matInput name="horaAperturaCadena" placeholder="Hora de apertura" type="number" [(ngModel)]="data.horaAperturaCadena">
-                    </mat-form-field> -->
                   </div>
                 </div>
                 <!-- <div class="row">

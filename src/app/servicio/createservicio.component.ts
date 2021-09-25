@@ -10,9 +10,8 @@ import { Servicio } from '../model/servicio';
 import { ServicecategoriaService } from '../service/servicecategoria.service';
 import { ServicefichaclinicaService } from '../service/servicefichaclinica.service';
 import { PacienteService } from '../service/servicepaciente.service';
+import { ServicioService } from '../service/servicio.service';
 
-// import { Paciente } from '../model/paciente';
-// import { PacienteService } from '../service/servicepaciente.service';
 
 @Component({
 	selector: 'app-servicio',
@@ -27,6 +26,7 @@ export class CreateServicioComponent {
 	constructor(
         private fichasService: ServicefichaclinicaService,
 		private categoriaService: ServicecategoriaService,
+		private servicioService: ServicioService,
 		private router: Router
 	) {
         this.fichasService.getFichasClinicas().subscribe(
@@ -45,35 +45,21 @@ export class CreateServicioComponent {
 		console.log(this.data);
 		// return;
 		if (this.checkFields()) {
-			// this.horarioService.createHorario(this.data).subscribe(
-			// 	() => {
-			// 		swal.fire({
-			// 			title: 'Actualizado!',
-			// 			text: 'El nuevo horario fue actualizado exitosamente.',
-			// 			icon: 'success',
-			// 			customClass: {
-			// 				confirmButton: 'btn btn-success',
-			// 			},
-			// 			buttonsStyling: false,
-			// 		}).then(() => {
-			// 			this.router.navigate(['/horario']);
-			// 		});
-			// 	},
-			// 	(error) => {
-			// 		console.log(error);
-			// 		let message = 'El paciente no pudo ser editado. \n';
-			// 		message += error.error ? error.error : error.message;
-			// 		swal.fire({
-			// 			title: 'Error!',
-			// 			text: message,
-			// 			icon: 'error',
-			// 			customClass: {
-			// 				confirmButton: 'btn btn-danger',
-			// 			},
-			// 			buttonsStyling: false,
-			// 		});
-			// 	}
-			// );
+			this.servicioService.createServicio(this.data).subscribe(()=>{
+				swal.fire({
+					title: 'Actualizado!',
+					text: 'El nuevo servicio fue actualizado exitosamente.',
+					icon: 'success',
+					customClass: {
+						confirmButton: 'btn btn-success',
+					},
+					buttonsStyling: false,
+				}).then(() => {
+					this.router.navigate(['/servicio']);
+				});
+			},(error)=>{
+				console.log(error);
+			});
 		}
 	}
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { listadatos } from '../model/datos';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -24,8 +24,11 @@ export class ServicioService {
   }
 
   createServicio(s: Servicio): Observable<Servicio>{
-
-    return this.http.post<Servicio>(this.api,s).pipe(
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'usuario': 'usuario2'
+    });
+    return this.http.post<Servicio>(this.api,s,{headers:headers}).pipe(
           tap(
             // Log the result or error
             (data) => console.log('agregado ' + data),
@@ -33,8 +36,13 @@ export class ServicioService {
           )
         );
   }
+
   createDetalle(s: Detalle): Observable<Detalle>{
-    return this.http.post<Detalle>(this.api,s).pipe(
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'usuario': 'usuario'
+    });
+    return this.http.post<Detalle>(this.api,s,{headers:headers}).pipe(
           tap(
             // Log the result or error
             (data) => console.log('agregado ' + data),
