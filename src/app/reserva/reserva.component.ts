@@ -3,6 +3,7 @@ import { ReservaService } from '../service/reserva/reserva.service';
 import { Reserva } from '../model/reserva';
 import { formatDate } from '@angular/common';
 import { LoginService } from '../service/login/login.service';
+import { Router } from '@angular/router';
 declare interface DataTable {
   headerRow: string[];
   footerRow: string[];
@@ -23,7 +24,8 @@ export class ReservaComponent implements OnInit {
   public dataTable: DataTable;
 
   constructor(private reservaService: ReservaService,
-              private loginService : LoginService
+              private loginService : LoginService,
+              private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -90,6 +92,10 @@ export class ReservaComponent implements OnInit {
     if(this.cliente){
       this.reservasFiltradas= this.reservasFiltradas.length>0 ? this.reservasFiltradas.filter(item=>item.idCliente.nombre.toLowerCase().startsWith((this.cliente+"").toLowerCase())) : this.reservas.filter(item=>item.idCliente.nombre.toLowerCase().startsWith((this.cliente+"").toLowerCase()))
     }
+  }
+
+  newFicha(r: Reserva){
+    this.router.navigate(['nuevaficha_clinica/',r.idReserva]);
   }
   
 }

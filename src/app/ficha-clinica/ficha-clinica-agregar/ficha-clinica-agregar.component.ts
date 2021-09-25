@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Reserva } from 'src/app/model/reserva';
+import { ReservaService } from 'src/app/service/reserva/reserva.service';
 import Swal from 'sweetalert2';
 import { FichaClinica, Local } from '../../model/ficha-clinica';
 import { Paciente } from '../../model/paciente';
@@ -20,13 +22,32 @@ export class FichaClinicaAgregarComponent implements OnInit {
   clientes: Paciente[] = [];
   empleados: Paciente[] = [];
   locales: Local[] = [];
+  reserva: Reserva = new Reserva();
+  clienteReserva: Paciente = new Paciente();
+  empleadoReserva: Paciente = new Paciente();
 
   constructor(private servicioFichaClinica: ServicefichaclinicaService,
+    private servicioReserva: ReservaService,
     private servicioSubcategoria: ServicesubcategoriaService,
     private servicioPersona: PacienteService,
+    private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
+    //ver si viene de reserva
+    this.route.params.subscribe((params) =>{
+      const id = +params['id']; // el + convierte el string id a number
+      if (id != 0) {
+        //this.reserva.idReserva = id;
+        this.servicioReserva.getReserva(id).subscribe(
+          (reserva) => {
+            this.reserva = reserva;
+            this.cargarPersonasReserva();
+          }
+        ); 
+      }
+    });
+    
     this.traerSubCategorias();
     this.traerPersonas();
     this.traerLocales();
@@ -99,5 +120,25 @@ export class FichaClinicaAgregarComponent implements OnInit {
       }
     );
   }
+
+  cargarPersonasReserva(): void {
+    //si existe reserva cargar el cliente y el empleado
+    if (this.reserva) {
+      console.log('viene de una reserva ',this.reserva);
+      this.servicioPersona.getPaciente(this.reserva.idCliente.idPersona).subscribe(
+        (cli) => {
+          this.clienteReserva = cli;
+        },
+        error =>{ console.log('error al traer cliente ',error.error)}
+      );
+      this.servicioPersona.getPaciente(this.reserva.idEmpleado.idPersona).subscribe(
+        (emp) => {
+          this.empleadoReserva = emp;
+          console.log(this.empleadoReserva.nombre,' y ',this.clienteReserva.nombre);
+        }
+      );
+    };
+  }
+  
 
 }

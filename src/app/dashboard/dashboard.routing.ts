@@ -66,7 +66,7 @@ export const DashboardRoutes: Routes = [
           component: FichaClinicaComponent,
         },
         {
-          path: 'nuevaficha_clinica',
+          path: 'nuevaficha_clinica/:id',
           component: FichaClinicaAgregarComponent,
         },
         {

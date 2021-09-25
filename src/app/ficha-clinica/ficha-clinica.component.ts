@@ -79,8 +79,8 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
       },
     };
     this.dataTable = {
-      headerRow: ['Id(No)','Fecha y Hora','Profesional','Cliente','Categoria','Sub-Categoria','Motivo de Consulta(No)','Observación(No)','Diagnostico(No)','Acciones'],
-      footerRow: ['Id(No)','Fecha y Hora','Profesional','Cliente','Categoria','Sub-Categoria','Motivo de Consulta(No)','Observación(No)','Diagnostico(No)','Acciones'],
+      headerRow: ['Id','Fecha y Hora','Profesional','Cliente','Categoria','Sub-Categoria','Motivo de Consulta','Observación','Acciones'],
+      footerRow: ['Id','Fecha y Hora','Profesional','Cliente','Categoria','Sub-Categoria','Motivo de Consulta','Observación','Acciones'],
       dataRows: [],
     };
 
@@ -95,7 +95,7 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
     this.servicioFichaClinica.getFichasClinicas().subscribe(
       entity =>{ 
         this.fichasclinicas = entity.lista;
-        this.fichasfiltradas = entity.lista;
+        this.fichasfiltradas = [...this.fichasclinicas];
         this.dtTrigger.next();
       },
       error => console.log('no se pueden conseguir las fichas clinicas')
@@ -104,7 +104,7 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   filtrarFichasClinicas(): void {
     this.fichasfiltradas = [];
-    this.filtreFinished=false
+    this.filtreFinished=false;
     this.getFichasClinicasPorFisioterapeuta();
     this.getFichasClinicasPorPaciente();
     this.getFichasClinicasPorFechaDesdeHasta();
