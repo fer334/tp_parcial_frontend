@@ -77,6 +77,10 @@ import { ReservaEditarComponent } from './reserva/reserva-editar/reserva-editar.
 import { ReservaAgregarComponent } from './reserva/reserva-agregar/reserva-agregar.component';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './service/login/login.service';
+import { HorarioComponent } from './horario/horario.component';
+import { CreateHorarioComponent } from './horario/createhorario.component';
+import { HorarioExComponent } from './horario_ex/horario.component';
+import { CreateHorarioExComponent } from './horario_ex/createhorario.component';
 
 @NgModule({
   exports: [
@@ -158,6 +162,10 @@ export class MaterialModule {}
         ReservaEditarComponent,
         ReservaAgregarComponent,      
         LoginComponent
+        HorarioComponent,
+        CreateHorarioComponent,
+        HorarioExComponent,
+        CreateHorarioExComponent,
     ],
     providers : [
       MatNativeDateModule,

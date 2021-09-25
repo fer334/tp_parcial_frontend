@@ -8,6 +8,10 @@ import { SubcategoriaAgregarComponent } from '../subcategoria/subcategoria-agreg
 import { SubcategoriaEditarComponent } from '../subcategoria/subcategoria-editar/subcategoria-editar.component';
 import { SubcategoriaEliminarComponent } from '../subcategoria/subcategoria-eliminar/subcategoria-eliminar.component';
 import { SubcategoriaComponent } from '../subcategoria/subcategoria.component';
+import { CreateHorarioComponent } from '../horario/createhorario.component';
+import { HorarioComponent } from '../horario/horario.component';
+import { CreateHorarioExComponent } from '../horario_ex/createhorario.component';
+import { HorarioExComponent } from '../horario_ex/horario.component';
 import { CreatePaciente } from '../paciente/createpaciente.component';
 import { EditPaciente } from '../paciente/editpaciente.component';
 import { PacienteComponent } from '../paciente/paciente.component';
@@ -84,7 +88,39 @@ export const DashboardRoutes: Routes = [
         {
           path: 'paciente/edit/:id',
           component: EditPaciente,
-        }
-      ],
+        },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
+      {
+        path: 'paciente',
+        component: PacienteComponent,
+      },
+      {
+        path: 'paciente/create',
+        component: CreatePaciente,
+      },
+      {
+        path: 'paciente/edit/:id',
+        component: EditPaciente
+      },
+      {
+        path: 'horario',
+        component: HorarioComponent,
+      },
+      {
+        path: 'horario/create',
+        component: CreateHorarioComponent,
+      },
+      {
+        path: 'horarioex',
+        component: HorarioExComponent,
+      },
+      {
+        path: 'horarioex/create',
+        component: CreateHorarioExComponent,
+      }
+    ],
   },
 ];

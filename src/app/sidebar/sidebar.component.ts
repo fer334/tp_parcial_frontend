@@ -48,6 +48,9 @@ export const ROUTES: RouteInfo[] = [
             { path: 'categoria', title: 'Categorias', type: 'link', ab:'C'},
             { path: 'subcategoria', title: 'Sub-Categorias', type: 'link', ab:'SC'},
             { path: 'ficha_clinica', title: 'Ficha Clínica', type: 'link', ab:'FC'},
+            { path: 'horario', title: 'Paciente', type: 'link', ab:'P'},
+            { path: 'horario', title: 'Horario de Atencion', type: 'link', ab:'H'},
+            { path: 'horarioex', title: 'Horario Excepcional', type: 'link', ab:'H'},
         ]
     },{
         path: '/dashboard',
