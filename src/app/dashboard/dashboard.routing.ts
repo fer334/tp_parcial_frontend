@@ -123,14 +123,14 @@ export const DashboardRoutes: Routes = [
         path: 'horarioex/create',
         component: CreateHorarioExComponent,
       },
-      {
-        path: 'servicio/create',
-        component: CreateServicioComponent,
-      },
-      {
-        path: 'servicio',
-        component: ServicioComponent,
-      }
-    ],
+        {
+          path: 'servicio/create',
+          component: CreateServicioComponent,
+        },
+        {
+          path: 'servicio',
+          component: ServicioComponent,
+        }
+      ],
   },
 ];
