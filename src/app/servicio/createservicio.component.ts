@@ -1,6 +1,6 @@
 import { formatDate } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import swal from 'sweetalert2';
 import { Categoria } from '../model/categoria';
 import { Detalle } from '../model/detalle';
@@ -17,16 +17,19 @@ import { ServicioService } from '../service/servicio.service';
 	selector: 'app-servicio',
 	templateUrl: 'createservicio.component.html',
 })
-export class CreateServicioComponent {
+export class CreateServicioComponent implements OnInit{
 	data: Servicio = new Servicio();
 	detail: Detalle = new Detalle();
     fichas: FichaClinica[] = [];
 	categorias: Categoria[] = [];
+	fichaclinica: FichaClinica = new FichaClinica();
 
 	constructor(
         private fichasService: ServicefichaclinicaService,
 		private categoriaService: ServicecategoriaService,
 		private servicioService: ServicioService,
+		private servicioFichaClinica: ServicefichaclinicaService,
+		private route: ActivatedRoute,
 		private router: Router
 	) {
         this.fichasService.getFichasClinicas().subscribe(
@@ -40,6 +43,22 @@ export class CreateServicioComponent {
 			}
 		);
     }
+
+	ngOnInit(): void {
+		//ver si viene de ficha clinica
+		this.route.params.subscribe((params) =>{
+			const id = +params['id']; // el + convierte el string id a number
+			if (id != 0) {
+			  //this.reserva.idReserva = id;
+			  this.servicioFichaClinica.getFichaClinicaPorId(id).subscribe(
+				(ficha) => {
+				  this.fichaclinica = ficha;
+				  this.data.idFichaClinica = this.fichaclinica.idFichaClinica;
+				}
+			  ); 
+			}
+		  });
+	}
 
 	createButton() {
 		console.log(this.data);

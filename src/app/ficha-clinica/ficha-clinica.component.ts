@@ -9,6 +9,7 @@ import { Subcategoria } from '../model/subcategoria';
 import { ServicecategoriaService } from '../service/servicecategoria.service';
 import { ServicefichaclinicaService } from '../service/servicefichaclinica.service';
 import { ServicesubcategoriaService } from '../service/servicesubcategoria.service';
+import { ServicioService } from '../service/servicio.service';
 
 declare interface DataTable {
   headerRow: string[];
@@ -49,6 +50,7 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private servicioFichaClinica: ServicefichaclinicaService,
     private servicioCategoria: ServicecategoriaService,
     private servicioSubcategoria: ServicesubcategoriaService,
+    private servicioServicio: ServicioService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -87,7 +89,12 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public dataTable: DataTable;
-  
+
+  createServicio(fc: FichaClinica){
+    this.router.navigate(['servicio/create/',fc.idFichaClinica]);
+
+  }
+
   edit(fc: FichaClinica){
     this.router.navigate(['editarficha_clinica/',fc.idFichaClinica]);
   }

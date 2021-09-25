@@ -84,6 +84,7 @@ import { CreateHorarioExComponent } from './horario_ex/createhorario.component';
 import { CreateServicioComponent } from './servicio/createservicio.component';
 import { ServicioComponent } from './servicio/servicio.component';
 import { MainComponent } from './main/main.component';
+import { ServicioService } from './service/servicio.service';
 
 @NgModule({
   exports: [
@@ -181,7 +182,8 @@ export class MaterialModule {}
       ServicefichaclinicaService,
       PresentacionProductoService,
       ReservaService,
-      LoginService
+      LoginService,
+      ServicioService,
     ],
     bootstrap:    [ AppComponent ]
 })

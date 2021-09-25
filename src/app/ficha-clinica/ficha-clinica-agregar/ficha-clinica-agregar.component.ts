@@ -128,12 +128,14 @@ export class FichaClinicaAgregarComponent implements OnInit {
       this.servicioPersona.getPaciente(this.reserva.idCliente.idPersona).subscribe(
         (cli) => {
           this.clienteReserva = cli;
+          this.fichaclinica.idCliente.idPersona = this.clienteReserva.idPersona;
         },
         error =>{ console.log('error al traer cliente ',error.error)}
       );
       this.servicioPersona.getPaciente(this.reserva.idEmpleado.idPersona).subscribe(
         (emp) => {
           this.empleadoReserva = emp;
+          this.fichaclinica.idEmpleado.idPersona = this.empleadoReserva.idPersona;
           console.log(this.empleadoReserva.nombre,' y ',this.clienteReserva.nombre);
         }
       );
