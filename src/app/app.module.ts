@@ -161,7 +161,7 @@ export class MaterialModule {}
         ReservaComponent,
         ReservaEditarComponent,
         ReservaAgregarComponent,      
-        LoginComponent
+        LoginComponent,
         HorarioComponent,
         CreateHorarioComponent,
         HorarioExComponent,
