@@ -51,7 +51,10 @@ export class ServicioService {
         );
   }
 
-
+  getServiciosPorFichaClinica(idFicha: number): Observable<listadatos<Servicio>>{
+    let payload = JSON.stringify({idFichaClinica:{idFichaClinica: idFicha}});
+    return this.http.get<listadatos<Servicio>>(this.api,{params:{ejemplo:payload}});
+  }
 
   // delPaciente(id: number): Observable<Paciente> {
   //   console.log('delPaciente', this.api + '/' + id);

@@ -60,6 +60,37 @@
                 </div>
               </div>
             </div>
+            <div class="table centered">
+              <h4><b>Servicios de esta Ficha clinica</b></h4>
+              <table class="center" 
+              width="100%"
+              style="width: 100%">
+                <thead>
+                  <th>Fecha</th>
+                  <th>Presupuesto</th>
+                  <th>Profesional</th>
+                  <th>Cliente</th>
+                  <th>Categoria</th>
+                  <th>Subcategoria</th>
+                  <th>Acciones</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let s of servicios">
+                    <td>{{ s.fechaHora }}</td>
+                    <td>{{ s.presupuesto }}</td>
+                    <td>{{ s.idFichaClinica.idEmpleado.nombre }}</td>
+                    <td>{{ s.idFichaClinica.idCliente.nombre }}</td>
+                    <td>{{ s.idFichaClinica.idTipoProducto.idCategoria.descripcion }}</td>
+                    <td>{{ s.idFichaClinica.idTipoProducto.descripcion }}</td>
+                    <td>
+                      <button (click)= "editServicio(fc)" mat-raised-button class="btn btn-primary btn-sm">
+                        <i class="material-icons">search</i>ver/editar servicio
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
