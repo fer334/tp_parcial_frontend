@@ -13,7 +13,7 @@
             <div class="toolbar">
               <!--        Here you can write extra buttons/actions for the toolbar              -->
               
-              <button class="btn btn-info" [routerLink]="['/nuevaficha_clinica']">Nueva Ficha Clínica</button>
+              <button class="btn btn-info" [routerLink]="['/nuevaficha_clinica/0']">Nueva Ficha Clínica</button>
               <hr>
               <div>
                 <h4>Filtros:</h4>
@@ -40,7 +40,7 @@
                           </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <button (click)="traerSubCategoriasFiltradas()"  mat-raised-button class="btn btn-primary">filtrar</button>
+                    <button (click)="traerSubCategoriasFiltradas()"  mat-raised-button class="btn btn-primary">filtrar subcategorias</button>
                   </div>
                   <div class="col-sm-3 left">
                     <mat-form-field>
@@ -71,7 +71,7 @@
                     </div>
                   </div>
                   
-                <button (click)="filtrarFichasClinicas()"  mat-raised-button class="btn btn-primary">Filtrar</button>
+                <button (click)="filtrarFichasClinicas()"  mat-raised-button class="btn btn-primary">Aplicar todos los filtros</button>
                 <button (click)="getAllFichas()"  mat-raised-button class="btn btn-info">Ver todas las fichas clinicas</button>
                 <button (click)="resetField()"  mat-raised-button class="btn btn-warning">Limpiar Campos</button>
               </div>
@@ -99,9 +99,9 @@
                     <th>{{ dataTable.headerRow[5] }}</th>
                     <th>{{ dataTable.headerRow[6] }}</th>
                     <th>{{ dataTable.headerRow[7] }}</th>
-                    <th>{{ dataTable.headerRow[8] }}</th>
+                    <!-- <th>{{ dataTable.headerRow[8] }}</th> -->
                     <th class="disabled-sorting text-right">
-                      {{ dataTable.headerRow[9] }}
+                      {{ dataTable.headerRow[8] }}
                     </th>
                   </tr>
                 </thead>
@@ -115,8 +115,8 @@
                     <th>{{ dataTable.footerRow[5] }}</th>
                     <th>{{ dataTable.footerRow[6] }}</th>
                     <th>{{ dataTable.footerRow[7] }}</th>
-                    <th>{{ dataTable.footerRow[8] }}</th>
-                    <th class="text-right">{{ dataTable.footerRow[9] }}</th>
+                    <!-- <th>{{ dataTable.footerRow[8] }}</th> -->
+                    <th class="text-right">{{ dataTable.footerRow[8] }}</th>
                   </tr>
                 </tfoot>
                 <tbody>
@@ -129,8 +129,9 @@
                     <td>{{fc.idTipoProducto.idCategoria.descripcion }}</td>
                     <td>{{fc.motivoConsulta}}</td>
                     <td>{{fc.observacion}}</td>
-                    <td>{{fc.diagnostico}}</td>
+                    <!-- <td>{{fc.diagnostico}}</td> -->
                     <td class="text-right">
+                      <div class="card-body">
                       <!-- Angular on click button -->
                       
                       <!-- <a
@@ -138,17 +139,24 @@
                         class="btn btn-link btn-info btn-just-icon like"
                         ><i class="material-icons">favorite</i></a
                       > -->
-                      <a
-                        (click)="edit(fc)"
-                        class="btn btn-link btn-warning btn-just-icon edit"
-                        ><i class="material-icons">edit</i></a
-                      >
-                      crear servicio
-                      <!-- <a
+                        <button (click)="edit(fc)" mat-raised-button class="btn btn-primary btn-sm search">
+                          <i class="material-icons">search</i> Ver más
+                        </button>
+                       
+                        <!-- <a
+                          (click)="edit(fc)"
+                          class="btn btn-link btn-warning btn-just-icon add"
+                          ><i class="material-icons">add</i></a
+                        > -->
+                        <button (click)= "createServicio(fc)" mat-raised-button class="btn btn-primary btn-sm">
+                          <i class="material-icons">add</i>Crear servicio
+                        </button>
+                        <!-- <a
                         (click)="delete(c)"
                         class="btn btn-link btn-danger btn-just-icon remove"
                         ><i class="material-icons">close</i></a
                       > -->
+                      </div>
                     </td>
                   </tr>
                 </tbody>

@@ -109,9 +109,13 @@
                                     <td>{{r.flagAsistio}}</td>
                                     <td>{{r.observacion}}</td>
                                     <td>{{r.flagEstado}}</td>
-                                      <td class="text-center">
-                                       <button class="btn btn-primary" [routerLink]="['/editarReserva',r.idReserva]">Ir a Modificar</button>
-                                      </td>
+                                    <td class="text-center">
+                                      <button class="btn btn-primary" [routerLink]="['/editarReserva',r.idReserva]">Ir a Modificar</button>
+                                    
+                                    <button (click)="newFicha(r)" mat-raised-button class="btn btn-primary add">
+                                      <i class="material-icons">add</i> Nueva ficha
+                                    </button>
+                                    </td>
                                   </tr>
                               </tbody>
                           </table>

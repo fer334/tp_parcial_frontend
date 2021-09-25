@@ -9,6 +9,7 @@ import { Subcategoria } from '../model/subcategoria';
 import { ServicecategoriaService } from '../service/servicecategoria.service';
 import { ServicefichaclinicaService } from '../service/servicefichaclinica.service';
 import { ServicesubcategoriaService } from '../service/servicesubcategoria.service';
+import { ServicioService } from '../service/servicio.service';
 
 declare interface DataTable {
   headerRow: string[];
@@ -49,6 +50,7 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private servicioFichaClinica: ServicefichaclinicaService,
     private servicioCategoria: ServicecategoriaService,
     private servicioSubcategoria: ServicesubcategoriaService,
+    private servicioServicio: ServicioService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -79,15 +81,20 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
       },
     };
     this.dataTable = {
-      headerRow: ['Id(No)','Fecha y Hora','Profesional','Cliente','Categoria','Sub-Categoria','Motivo de Consulta(No)','Observación(No)','Diagnostico(No)','Acciones'],
-      footerRow: ['Id(No)','Fecha y Hora','Profesional','Cliente','Categoria','Sub-Categoria','Motivo de Consulta(No)','Observación(No)','Diagnostico(No)','Acciones'],
+      headerRow: ['Id','Fecha y Hora','Profesional','Cliente','Categoria','Sub-Categoria','Motivo de Consulta','Observación','Acciones'],
+      footerRow: ['Id','Fecha y Hora','Profesional','Cliente','Categoria','Sub-Categoria','Motivo de Consulta','Observación','Acciones'],
       dataRows: [],
     };
 
   }
 
   public dataTable: DataTable;
-  
+
+  createServicio(fc: FichaClinica){
+    this.router.navigate(['servicio/create/',fc.idFichaClinica]);
+
+  }
+
   edit(fc: FichaClinica){
     this.router.navigate(['editarficha_clinica/',fc.idFichaClinica]);
   }
@@ -95,7 +102,7 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
     this.servicioFichaClinica.getFichasClinicas().subscribe(
       entity =>{ 
         this.fichasclinicas = entity.lista;
-        this.fichasfiltradas = entity.lista;
+        this.fichasfiltradas = [...this.fichasclinicas];
         this.dtTrigger.next();
       },
       error => console.log('no se pueden conseguir las fichas clinicas')
@@ -104,7 +111,7 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   filtrarFichasClinicas(): void {
     this.fichasfiltradas = [];
-    this.filtreFinished=false
+    this.filtreFinished=false;
     this.getFichasClinicasPorFisioterapeuta();
     this.getFichasClinicasPorPaciente();
     this.getFichasClinicasPorFechaDesdeHasta();

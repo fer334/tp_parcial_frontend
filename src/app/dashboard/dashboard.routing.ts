@@ -68,7 +68,7 @@ export const DashboardRoutes: Routes = [
           component: FichaClinicaComponent,
         },
         {
-          path: 'nuevaficha_clinica',
+          path: 'nuevaficha_clinica/:id',
           component: FichaClinicaAgregarComponent,
         },
         {
@@ -124,7 +124,7 @@ export const DashboardRoutes: Routes = [
         component: CreateHorarioExComponent,
       },
         {
-          path: 'servicio/create',
+          path: 'servicio/create/:id',
           component: CreateServicioComponent,
         },
         {

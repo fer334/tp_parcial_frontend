@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FichaClinica, Local } from 'src/app/model/ficha-clinica';
 import { Paciente } from 'src/app/model/paciente';
+import { Servicio } from 'src/app/model/servicio';
 import { Subcategoria } from 'src/app/model/subcategoria';
 import { ServicefichaclinicaService } from 'src/app/service/servicefichaclinica.service';
 import { PacienteService } from 'src/app/service/servicepaciente.service';
 import { ServicesubcategoriaService } from 'src/app/service/servicesubcategoria.service';
+import { ServicioService } from 'src/app/service/servicio.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,10 +23,12 @@ export class FichaClinicaEditarComponent implements OnInit {
   clientes: Paciente[] = [];
   empleados: Paciente[] = [];
   locales: Local[] = [];
+  servicios: Servicio[] = [];
 
   constructor(private servicioFichaClinica: ServicefichaclinicaService,
     private servicioSubcategoria: ServicesubcategoriaService,
     private servicioPersona: PacienteService,
+    private servicioServicio: ServicioService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -41,6 +45,7 @@ export class FichaClinicaEditarComponent implements OnInit {
     this.traerSubCategorias();
     this.traerPersonas();
     this.traerLocales();
+    this.traerServicios();
   }
 
   editar(): void{
@@ -113,6 +118,22 @@ export class FichaClinicaEditarComponent implements OnInit {
         console.log("error al traer los locales para la ficha ",error.error)
       }
     );
+  }
+  
+  traerServicios(): void { //función para traer la lista de clientes y doctores a la hora de crear una ficha clinica
+    this.servicioServicio.getServiciosPorFichaClinica(this.fichaclinica.idFichaClinica).subscribe(
+       entity=>{
+         this.servicios=entity.lista
+        console.log('servicios ',this.servicios) 
+      },
+     error=>{
+       console.log("Error al traer personas para la ficha clinica ",error.error)
+     }
+    );
+  }
+  
+  editServicio(p: Servicio) {
+    this.router.navigate(['/servicio/']);
   }
 
 }

@@ -53,7 +53,7 @@ const routes: Routes = [
 
   //desde acá componentes de ficha clinica
   {
-    path: 'nuevaficha_clinica',
+    path: 'nuevaficha_clinica/:id',
     component: FichaClinicaAgregarComponent,
   },
   {

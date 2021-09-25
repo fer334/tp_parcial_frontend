@@ -42,7 +42,7 @@
                     <div class="col-sm-6">
                         <mat-form-field>
                             <mat-select placeholder="Fisioterapeuta encargado" name="empleado" [(ngModel)]="fichaclinica.idEmpleado.idPersona">
-                                <ng-container *ngFor="let e of empleados">
+                              <ng-container *ngFor="let e of empleados">
                                     <mat-option *ngIf="e.usuarioLogin" [value]="e.idPersona">
                                         {{e.nombre}}
                                     </mat-option>
