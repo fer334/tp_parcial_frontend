@@ -51,10 +51,16 @@ export const ROUTES: RouteInfo[] = [
             { path: 'horario', title: 'Paciente', type: 'link', ab:'P'},
             { path: 'horario', title: 'Horario de Atencion', type: 'link', ab:'H'},
             { path: 'horarioex', title: 'Horario Excepcional', type: 'link', ab:'H'},
+        {
+            path: 'servicio',
+            title: 'Servicio',
+            type: 'link',
+            ab:'S'
+        }
         ]
     },{
-        path: '/dashboard',
-        title: 'Dashboard',
+        path: '/menu',
+        title: 'Menu',
         type: 'link',
         icontype: 'dashboard'
     },{

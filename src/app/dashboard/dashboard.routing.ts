@@ -15,6 +15,8 @@ import { HorarioExComponent } from '../horario_ex/horario.component';
 import { CreatePaciente } from '../paciente/createpaciente.component';
 import { EditPaciente } from '../paciente/editpaciente.component';
 import { PacienteComponent } from '../paciente/paciente.component';
+import { CreateServicioComponent } from '../servicio/createservicio.component';
+import { ServicioComponent } from '../servicio/servicio.component';
 
 import { DashboardComponent } from './dashboard.component';
 import { FichaClinica } from '../model/ficha-clinica';
@@ -120,7 +122,15 @@ export const DashboardRoutes: Routes = [
       {
         path: 'horarioex/create',
         component: CreateHorarioExComponent,
-      }
-    ],
+      },
+        {
+          path: 'servicio/create',
+          component: CreateServicioComponent,
+        },
+        {
+          path: 'servicio',
+          component: ServicioComponent,
+        }
+      ],
   },
 ];

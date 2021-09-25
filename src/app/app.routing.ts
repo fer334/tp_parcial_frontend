@@ -9,6 +9,7 @@ import { ReservaComponent } from './reserva/reserva.component';
 import { ReservaEditarComponent } from './reserva/reserva-editar/reserva-editar.component';
 import { ReservaAgregarComponent } from './reserva/reserva-agregar/reserva-agregar.component';
 import { LoginComponent } from './login/login.component';
+import { MainComponent } from './main/main.component';
 
 export const AppRoutes: Routes = [
     {
@@ -16,68 +17,74 @@ export const AppRoutes: Routes = [
         component:LoginComponent
     },
     {
-      path: '',
-      redirectTo: 'dashboard',
-      pathMatch: 'full',
-    }, {
+        path: '',
+        redirectTo:'menu',
+        pathMatch: 'full',
+    },{
       path: '',
       component: AdminLayoutComponent,
       children: [
-          {
-        path: '',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-    }, {
+        {
+            path: '',
+            loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+        },
+        {
+            path: 'menu',
+            component:MainComponent
+        }, {
         path: 'components',
         loadChildren: () => import('./components/components.module').then(m => m.ComponentsModule)
-    }, {
+        },
+        {
         path: 'forms',
         loadChildren: () => import('./forms/forms.module').then(m => m.Forms)
-    }, {
+        }, {
         path: 'tables',
         loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule)
-    }, {
+        }, {
         path: 'maps',
         loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule)
-    }, {
+        }, {
         path: 'widgets',
         loadChildren: () => import('./widgets/widgets.module').then(m => m.WidgetsModule)
-    }, {
+        }, {
         path: 'charts',
         loadChildren: () => import('./charts/charts.module').then(m => m.ChartsModule)
-    }, {
+        }, {
         path: 'calendar',
         loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule)
-    }, {
+        }   ,
+        {   
         path: '',
         loadChildren: () => import('./userpage/user.module').then(m => m.UserModule)
-    }, {
+        }, {
         path: '',
         loadChildren: () => import('./timeline/timeline.module').then(m => m.TimelineModule)
-    },
-    {
+        },
+        {
         path:'presentacionProducto',
         component:PresentacionProductoComponent,
-    },
-    {
+        },
+        {
         path:'agregarpresentacionProducto',
         component:PresentacionAgregarComponent
-    },
-    {
+        },
+        {
         path:'editarpresentacionProducto/:id',
         component:PresentacionEditarComponent
-    },
-    {
+        },
+        {
         path:'reserva',
         component:ReservaComponent
-    },
-    {
+        },
+        {
         path:'editarReserva/:id',
         component:ReservaEditarComponent
-    },
-    {
+        },
+        {
         path:'agregarReserva',
         component:ReservaAgregarComponent
-    },
+        },
     ]}, {
       path: '',
       component: AuthLayoutComponent,
