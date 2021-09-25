@@ -164,7 +164,7 @@ export class MaterialModule {}
       ServicecategoriaService,
       ServicesubcategoriaService,
       PacienteService,
-      ServicefichaclinicaService
+      ServicefichaclinicaService,
       PresentacionProductoService,
       ReservaService,
       LoginService

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ReservaService } from '../service/reserva/reserva.service';
 import { Reserva } from '../model/reserva';
 import { formatDate } from '@angular/common';
-import { throws } from 'assert';
 import { LoginService } from '../service/login/login.service';
 declare interface DataTable {
   headerRow: string[];

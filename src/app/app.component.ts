@@ -1,7 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
-import { throws } from 'assert';
 import { Subscription } from 'rxjs/Subscription';
 import { LoginService } from './service/login/login.service';
 
