@@ -22,6 +22,7 @@ import { DashboardComponent } from './dashboard.component';
 import { FichaClinica } from '../model/ficha-clinica';
 import { FichaClinicaAgregarComponent } from '../ficha-clinica/ficha-clinica-agregar/ficha-clinica-agregar.component';
 import { FichaClinicaEditarComponent } from '../ficha-clinica/ficha-clinica-editar/ficha-clinica-editar.component';
+import { DetalleComponent } from '../servicio/detalle/detalle.component';
 
 export const DashboardRoutes: Routes = [
     {
@@ -130,7 +131,11 @@ export const DashboardRoutes: Routes = [
         {
           path: 'servicio',
           component: ServicioComponent,
-        }
+        },
+        {
+          path: 'detalle',
+          component: DetalleComponent,
+        },
       ],
   },
 ];

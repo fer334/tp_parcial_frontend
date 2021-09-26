@@ -85,6 +85,7 @@ import { CreateServicioComponent } from './servicio/createservicio.component';
 import { ServicioComponent } from './servicio/servicio.component';
 import { MainComponent } from './main/main.component';
 import { ServicioService } from './service/servicio.service';
+import { DetalleComponent } from './servicio/detalle/detalle.component';
 
 @NgModule({
   exports: [
@@ -172,7 +173,8 @@ export class MaterialModule {}
         CreateHorarioExComponent,
         ServicioComponent,
         CreateServicioComponent,
-        MainComponent
+        MainComponent,
+        DetalleComponent
     ],
     providers : [
       MatNativeDateModule,

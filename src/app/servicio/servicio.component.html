@@ -13,8 +13,9 @@
           <div class="card-body">
             <div class="toolbar">
               <!--        Here you can write extra buttons/actions for the toolbar              -->
-              <button class="btn btn-info" [routerLink]="['/servicio/create/0']">Nuevo Servicio</button>
+              <button class="btn btn-success" [routerLink]="['/servicio/create/0']">Nuevo Servicio</button>
               <button class="btn btn-info" onclick="print()">Generar reporte resumido</button>
+              <button mat-raised-button class="btn btn-fill btn-primary mx-2" [routerLink]="['/detalle']">Ver detalles</button>
                 
              </div>
             <div class="material-datatables">
@@ -59,8 +60,8 @@
                     <td>{{ row.fechaHoraCadena }}</td>
                     <td>{{ row.idFichaClinica.idFichaClinica }}</td>
                     <td>{{ row.idFichaClinica.fechaHora }}</td>
-                    <td>{{ row.idFichaClinica.idEmpleado.nombre }}</td>
-                    <td>{{ row.idFichaClinica.idCliente.nombre }}</td>
+                    <td>{{ row.idFichaClinica.idEmpleado.nombre }} {{ row.idFichaClinica.idEmpleado.apellido }}</td>
+                    <td>{{ row.idFichaClinica.idCliente.nombre }} {{ row.idFichaClinica.idCliente.apellido }}</td>
                     <td>{{ row.idFichaClinica.idTipoProducto.idCategoria.descripcion }}</td>
                     <td>{{ row.idFichaClinica.idTipoProducto.descripcion }}</td>
                     <td class="text-right">

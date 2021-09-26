@@ -11,7 +11,9 @@ import { Detalle } from '../model/detalle';
   providedIn: 'root',
 })
 export class ServicioService {
+
   private api: string = 'http://181.123.243.5:8080/stock-pwfe/servicio';
+  private apiServicioDetalle: string = 'http://181.123.243.5:8080/stock-pwfe/servicio?detalle=S';
 
   constructor(private http: HttpClient) {}
 
@@ -49,6 +51,12 @@ export class ServicioService {
             (error) => console.log('error: ' + error)
           )
         );
+  }
+
+  getDetalles(idCliente: number, idEmpleado: number, fechadesde: string, fechahasta: string, idPresentacionProducto: number): Observable<listadatos<Detalle>> {
+                              //{ "idServicio": { "idFichaClinica":{ "idCliente":{ "idPersona":90 } }, "idEmpleado":{ "idPersona":2 }, "fechaDesdeCadena":null, "fechaHastaCadena":null }, "idPresentacionProducto": { "idPresentacionProducto":334} }
+    let payload = JSON.stringify({idServicio:{idFichaClinica:{idCliente:{idPersona:idCliente}},idEmpleado:{idPersona:idEmpleado},fechaDesdeCadena:fechadesde,fechaHastaCadena:fechahasta},idPresentacionProducto:{idPresentacionProducto:idPresentacionProducto}  });
+    return this.http.get<listadatos<Detalle>>(this.apiServicioDetalle,{params:{ejemplo:payload}});
   }
 
   getServiciosPorFichaClinica(idFicha: number): Observable<listadatos<Servicio>>{

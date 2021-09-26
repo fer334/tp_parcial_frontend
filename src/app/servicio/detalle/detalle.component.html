@@ -1,0 +1,128 @@
+<div class="main-content">
+    <!-- <p>{{ lindo() }}</p> -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-primary card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">assignment</i>
+              </div>
+              <h4 class="card-title">Detalles</h4>
+            </div>
+            <div class="card-body">
+              <div class="toolbar">
+                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                <h4>Filtros:</h4>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">Id Cliente:</label>
+                  <div class="col-sm-3">
+                    <mat-form-field class="example-full-width">
+                      <input [(ngModel)]="idCliente" matInput type="number">
+                    </mat-form-field>
+                  </div>
+                  <label class="col-sm-2 col-form-label">Id Empleado:  </label>
+                  <div class="col-sm-3">
+                    <mat-form-field class="example-full-width">
+                      <input matInput  [(ngModel)]="idEmpleado" type="number">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Desde:</label>
+                    <div class="col-sm-3 ">
+                        <mat-form-field >
+                          <input  [(ngModel)]="fechadesde" matInput [matDatepicker]="picker" placeholder="elige una fecha" >
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <label class="col-sm-2 col-form-label">Hasta:</label>
+                    <div class="col-sm-3 ">
+                        <mat-form-field >
+                          <input  [(ngModel)]="fechahasta" matInput [matDatepicker]="picker2" placeholder="elige una fecha" >
+                          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                          <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-sm-2 col-form-label" placeholder="334">Id Presentación del producto:  </label>
+                    <div class="col-sm-3">
+                      <mat-form-field class="example-full-width">
+                        <input matInput  [(ngModel)]="idPresentacionProducto" type="number">
+                      </mat-form-field>
+                    </div>
+                    <!-- <div class="col-sm-3 centered">
+                      <mat-form-field>
+                          <mat-select placeholder="334" name="idCategoria" [(ngModel)]="idPresentacionProducto">
+                            <mat-option *ngFor="let c of categorias" [value]="c.idCategoria">
+                              {{c.descripcion}}
+                            </mat-option>
+                          </mat-select> -->
+                      <!-- </mat-form-field> -->
+                    <!-- </div> -->
+                  </div>
+                  
+                  <button (click)="filtrarDetalles()"  mat-raised-button class="btn btn-primary">Filtrar</button>
+                  <button class="btn btn-info" onclick="print()">Generar Reporte Detallado</button>
+                  <button mat-raised-button class="btn btn-fill btn-danger mx-2" [routerLink]="['/servicio']">Volver a servicios</button>
+                  
+               </div>
+              <div class="material-datatables">
+                <table
+                  datatable
+                  [dtTrigger]="dtTrigger" 
+                  [dtOptions]="dtOptions"
+                  id="datatables"
+                  class="table table-striped table-no-bordered table-hover"
+                  cellspacing="0"
+                  width="100%"
+                  style="width: 100%"
+                >
+                  <thead>
+                    <tr>
+                      <th>{{ dataTable.headerRow[0] }}</th>
+                      <th>{{ dataTable.headerRow[1] }}</th>
+                      <th>{{ dataTable.headerRow[2] }}</th>
+                      <th>{{ dataTable.headerRow[3] }}</th>
+                      <th>{{ dataTable.headerRow[4] }}</th>
+                      <th>{{ dataTable.headerRow[5] }}</th>
+                      <th>{{ dataTable.headerRow[6] }}</th>
+                      <th>
+                        {{ dataTable.headerRow[7] }}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>{{ dataTable.footerRow[0] }}</th>
+                      <th>{{ dataTable.footerRow[1] }}</th>
+                      <th>{{ dataTable.footerRow[2] }}</th>
+                      <th>{{ dataTable.footerRow[3] }}</th>
+                      <th>{{ dataTable.footerRow[4] }}</th>
+                      <th>{{ dataTable.footerRow[5] }}</th>
+                      <th>{{ dataTable.footerRow[6] }}</th>
+                      <th>{{ dataTable.footerRow[7] }}</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr *ngFor="let row of detalles">
+                      <td>{{ row.idServicio.idFichaClinica.fechaHora }}</td>
+                      <td>{{ row.idServicio.idFichaClinica.idEmpleado.nombre }} {{ row.idServicio.idFichaClinica.idEmpleado.apellido }}</td>
+                      <td>{{ row.idServicio.idFichaClinica.idCliente.nombre }} {{ row.idServicio.idFichaClinica.idCliente.apellido }}</td>
+                      <td>{{ row.idPresentacionProducto.existenciaProducto.precioVenta }}</td>
+                      <td>{{ row.cantidad }}</td>
+                      <td>{{ row.cantidad }}x{{ row.idPresentacionProducto.existenciaProducto.precioVenta }}</td>
+                      <td>{{ row.idPresentacionProducto.nombre }}</td>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- end content-->
+          </div>
+          <!--  end card  -->
+        </div>
+      <!-- end row -->
+    </div>
+  </div>
