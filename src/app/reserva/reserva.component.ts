@@ -28,7 +28,6 @@ export class ReservaComponent implements OnInit {
   filtreFinished:boolean=true
 
   public dataTable: DataTable;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   @ViewChild(DataTableDirective, {static: false})
@@ -59,7 +58,8 @@ export class ReservaComponent implements OnInit {
     }
     this.loginService.isLogged()
     this.fetchReservas()
-    
+    //this.dtTrigger.next();
+
 
   } 
 
@@ -77,6 +77,7 @@ export class ReservaComponent implements OnInit {
       entity=>{
         this.reservas=entity.lista  
         this.filtrarReservasByDate(Date.now())
+        //this.filtrarReservasByDate(tomorrow)
         this.dtTrigger.next();
       },
       error=>console.log("error",error)

@@ -1,16 +1,17 @@
 import { ElementSchemaRegistry, ThrowStmt } from '@angular/compiler';
-import { Component, OnInit,AfterViewInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { PresentacionProducto } from '../model/presentacionProducto';
 import { PresentacionProductoService } from '../service/presentacion-producto.service';
 import { ActivatedRoute } from '@angular/router';
 import { LoginService } from '../service/login/login.service';
 import { Subject } from 'rxjs';
-
+import { DataTableDirective } from 'angular-datatables';
 import swal from 'sweetalert2';
 
 declare interface DataTable {
   headerRow: string[];
   footerRow: string[];
+  dataRows: string[][];
 
 }
 
@@ -21,7 +22,7 @@ declare const $: any;
   templateUrl: './presentacion-producto.component.html',
   styleUrls: ['./presentacion-producto.component.css']
 })
-export class PresentacionProductoComponent implements OnInit,AfterViewInit {
+export class PresentacionProductoComponent implements OnInit {
   
   constructor(
     private servicioPresentacionProducto: PresentacionProductoService,
@@ -35,36 +36,46 @@ export class PresentacionProductoComponent implements OnInit,AfterViewInit {
   newPresentacionProducto: PresentacionProducto= new PresentacionProducto()
   idTipoProductoFilter:String=""
   nombreFilter:String=""
+
   public dataTable: DataTable;
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement: DataTableDirective;
 
   ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      lengthMenu: [
+        [5, 25, 50, -1],
+        [5, 25, 50, 'All'],
+      ],
+      responsive: true,
+      language: {
+        search: '_INPUT_',
+        searchPlaceholder: 'Search records',
+      },
+    };
       this.dataTable = {
           headerRow: [ 'Id', 'Codigo', 'Nombre', 'IdProducto', 'IdTipoProducto', 'PrecioVenta','FlagServicio','Accion' ],
-          footerRow:[ 'Id', 'Codigo', 'Nombre', 'IdProducto', 'IdTipoProducto', 'PrecioVenta','FlagServicio','Accion' ]
-      }
+          footerRow:[ 'Id', 'Codigo', 'Nombre', 'IdProducto', 'IdTipoProducto', 'PrecioVenta','FlagServicio','Accion' ],
+          dataRows: []
+        }
       this.loginService.isLogged()
       this.getListPresentacionProducto()
       
   }
-  ngAfterViewInit() {
-    $('#datatables').DataTable({
-      "pagingType": "full_numbers",
-      "lengthMenu": [
-        [10, 25, 50, -1],
-        [10, 25, 50, "All"]
-      ],
-      responsive: true,
-      language: {
-        search: "_INPUT_",
-        searchPlaceholder: "Search records",
-      }
+  
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      // Call the dtTrigger to rerender again
+      this.dtTrigger.next();
     });
-    const table = $('#datatables').DataTable();
-    console.log('Tablee',table);
-    
-    $('.card .material-datatables label').addClass('form-group');
   }
+
   getListPresentacionProducto():void{
     this.servicioPresentacionProducto.getPresentacionProductos().subscribe(
       entity =>{
@@ -72,10 +83,17 @@ export class PresentacionProductoComponent implements OnInit,AfterViewInit {
         this.presentacionProductos=this.presentacionProductosFiltrado= entity.lista
         this.dtTrigger.next();
       },
-      error=> console.log("No se pudieron obtener la lista Presentacion Productos")
+      error=> {
+        console.log("No se pudieron obtener la lista Presentacion Productos")
+        this.dtTrigger.next();
+      }
     );
   }
   getAll(){
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+    });
     this.getListPresentacionProducto()
   }
   resetFields(){
@@ -96,15 +114,17 @@ export class PresentacionProductoComponent implements OnInit,AfterViewInit {
         if(this.nombreFilter && this.idTipoProductoFilter){
           this.presentacionProductosFiltrado=result.filter((item)=>item.nombre.toLocaleLowerCase().includes(this.nombreFilter.toLocaleLowerCase()))
         }else if(this.nombreFilter){
+            console.log('JustByName');
             this.getByName(this.nombreFilter).
             then((data)=>this.presentacionProductosFiltrado=data)
-            .catch((error)=>console.log(error))
+            .catch((error)=>console.log('error By Name',error))
         }else if(this.idTipoProductoFilter) {
           this.presentacionProductosFiltrado=[...result]
         }
+        this.rerender()
       })
       .catch((error)=>{
-        console.log(error)
+        console.log('Error',error)
         this.presentacionProductosFiltrado=[]
       })
     }
@@ -112,6 +132,7 @@ export class PresentacionProductoComponent implements OnInit,AfterViewInit {
   /* Funcion que retorna la lista de presentacion producto por Id tipo de Producto */
   getByProdutType(id:any): Promise<PresentacionProducto[]> {
      return new Promise((resolve,reject)=>{
+            if(!id)resolve([])
             this.servicioPresentacionProducto.getPrentacionProductoPorIdTipoProducto(id).subscribe(
               entity=>{
                   console.log("Lista",entity.lista)
@@ -131,7 +152,8 @@ export class PresentacionProductoComponent implements OnInit,AfterViewInit {
             console.log("Lista",entity.lista)
             resolve(entity.lista)
           },
-          error=> {console.log("Error",error);reject("Error")}
+          error=> {console.log("Error",error);
+          reject(error)}
       )
       })
       

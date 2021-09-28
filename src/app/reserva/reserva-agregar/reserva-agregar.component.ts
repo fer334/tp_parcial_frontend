@@ -10,12 +10,15 @@ import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 
 
+
 declare interface DataTable {
   headerRow: string[];
   footerRow: string[];
   dataRows: string[][];
 
 }
+
+declare const $: any;
 
 @Component({
   selector: 'app-reserva-agregar',
@@ -41,7 +44,6 @@ export class ReservaAgregarComponent implements OnInit {
     fisioterapeutas:any
     clientes:any
     selectedSchedule:string[]=[]
-
 
     public dataTable: DataTable;
     dtOptions: DataTables.Settings = {};
@@ -72,14 +74,8 @@ export class ReservaAgregarComponent implements OnInit {
         this.loginService.isLogged()
         this.fetchFisioterapeutas()
         this.fetchPersona()
-        this.reservas=[]
-        this.dtTrigger.next();
+       
         console.log('empleado',this.idEmpleado)
-    }
-
-    ngOnDestroy(): void {
-      // Do not forget to unsubscribe the event
-      this.dtTrigger.unsubscribe();
     }
 
   rerender(): void {
@@ -103,8 +99,7 @@ export class ReservaAgregarComponent implements OnInit {
   fetchAgendaLibreOcupada():void{
       this.reservaService.getAgendaLibreOcupado(this.idEmpleado,formatDate(this.dateFilter,'yyyyMMdd','en-US')).subscribe(
           response=>{
-
-            this.reservas=response
+            this.reservas=[...response]
             console.log("Response",this.reservas)
             this.rerender()
           },
@@ -114,7 +109,6 @@ export class ReservaAgregarComponent implements OnInit {
   fetchAgendaLibre():void{
     this.reservaService.getAgendaLibre(this.idEmpleado,formatDate(this.dateFilter,'yyyyMMdd','en-US')).subscribe(
       response=>{
-
         this.reservas=response
         console.log("Response",this.reservas)
         this.rerender()
@@ -128,8 +122,12 @@ export class ReservaAgregarComponent implements OnInit {
       entity=>{
           this.fisioterapeutas=entity
           console.log("fisioos",this.fisioterapeutas)
+          this.reservas=[]
+          this.dtTrigger.next();
       },error=>{
-        console.log("error",error)
+          console.log("error",error)
+          this.reservas=[]
+          this.dtTrigger.next();
       }
     )
   }
