@@ -9,6 +9,8 @@ import { Subject } from 'rxjs';
 import swal from 'sweetalert2';
 import { Servicio } from '../model/servicio';
 import { ServicioService } from '../service/servicio.service';
+import { Paciente } from '../model/paciente';
+import { formatDate } from '@angular/common';
 
 declare interface DataTable {
   headerRow: string[];
@@ -25,12 +27,17 @@ declare const $: any;
 export class ServicioComponent implements OnInit, AfterViewInit, OnDestroy {
   data: Servicio[] = [];
   dias = ['Domingo','Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
-
+  cliente: Paciente;
+  empleado: Paciente
+  
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective;
+  filterData: Servicio[];
+  fromDate: any;
+  toDate: any;
 
   constructor(private servicioService: ServicioService, private router: Router) {}
 
@@ -56,6 +63,7 @@ export class ServicioComponent implements OnInit, AfterViewInit, OnDestroy {
     this.servicioService.getAll().subscribe(
       (entity) => {
         this.data = entity.lista;
+        this.filterData = this.data;
         this.dtTrigger.next();
       },
       (error) => console.log('no se pudieron conseguir los servicios')
@@ -158,5 +166,55 @@ export class ServicioComponent implements OnInit, AfterViewInit, OnDestroy {
     //       tryDelete();
     //     }
     //   });
+  }
+  filtrarByDate(date:any): void{
+    console.log("Reservas",this.data)
+    this.filterData=this.data.filter(item=>item.fechaCadena==formatDate(date,'yyyyMMdd','en-US'))
+    console.log('filtradas,',this.filterData)
+  }
+  filtrar():void{
+      // this.filtreFinished=false
+      this.filtrarByRange();
+      this.filtrarByEmpleado();
+      this.filtrarByCliente();
+      this.removeDuplicate();
+      // this.filtreFinished=true
+      console.log('filtradas,',this.filterData);
+      
+      this.rerender()
+  }
+
+  removeDuplicate():void{
+    let unique={}
+    this.filterData = this.filterData.filter(obj=> !unique[obj.idServicio] && (unique[obj.idServicio]=true) )
+  }
+
+  filtrarByRange():void{
+    if(this.fromDate && this.toDate){
+        let from =formatDate(this.fromDate,'yyyyMMdd','en-US');
+        let to=formatDate(this.toDate,'yyyyMMdd','en-US');
+        console.log(from,to)
+        this.filterData=this.filterData.concat(this.data.filter(item=> item.fechaCadena>=from && item.fechaCadena<=to ))
+    }
+  }
+  filtrarByEmpleado():void{
+    console.log('lenE',this.filterData.length)
+    if(this.empleado){
+      this.filterData = this.filterData.filter(item=>item.idFichaClinica.idEmpleado.nombre.toLowerCase().startsWith((this.empleado+"").toLocaleLowerCase())) 
+    }
+  }
+  resetField(){
+    this.fromDate=this.toDate=this.empleado=this.cliente=null
+  }
+  getAll():void{
+    this.filterData=[...this.data]
+    this.rerender()
+  }
+  filtrarByCliente():void{
+    console.log('filterData',this.filterData)
+    if(this.cliente){
+      // console.log(this.filterData.filter(item=>item.idFichaClinica.idCliente.nombre.toLowerCase().startsWith((this.cliente+"").toLowerCase())) );
+      this.filterData = this.filterData.filter(item=>item.idFichaClinica.idCliente.nombre.toLowerCase().startsWith((this.cliente+"").toLowerCase())) 
+    }
   }
 }

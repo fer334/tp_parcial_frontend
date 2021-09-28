@@ -6,5 +6,6 @@ export class Servicio{
     fechaHoraCadena: string;
     idFichaClinica: any;
     observacion: string;
+    fechaCadena: string;
 
 }

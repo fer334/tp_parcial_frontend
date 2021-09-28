@@ -1,6 +1,49 @@
 <div class="main-content">
-  <!-- <p>{{ lindo() }}</p> -->
   <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
+          <div class="card-body ">
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Empleado:</label>
+                <div class="col-sm-3">
+                  <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="empleado" matInput type="text">
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-2 col-form-label">Cliente:  </label>
+                <div class="col-sm-3">
+                  <mat-form-field class="example-full-width">
+                    <input matInput  [(ngModel)]="cliente" type="text">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                  <label class="col-sm-2 col-form-label">Desde:</label>
+                  <div class="col-sm-3 ">
+                      <mat-form-field >
+                        <input  [(ngModel)]="fromDate" matInput [matDatepicker]="picker" placeholder="Choose a date" >
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                  </div>
+                  <label class="col-sm-2 col-form-label">Hasta:</label>
+                  <div class="col-sm-3 ">
+                      <mat-form-field >
+                        <input  [(ngModel)]="toDate" matInput [matDatepicker]="picker2" placeholder="Choose a date" >
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                      </mat-form-field>
+                  </div>
+                </div>
+              <button (click)="filtrar()"  mat-raised-button class="btn btn-primary">Filtrar</button>
+              <button (click)="getAll()"  mat-raised-button class="btn btn-info">Ver todos los servicios</button>
+              <button (click)="resetField()"  mat-raised-button class="btn btn-warning">Limpiar Campos</button>
+
+            </div>
+        </div>
+      </div>      
+  </div>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -56,7 +99,7 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr *ngFor="let row of data" (click)="foo(row)">
+                  <tr *ngFor="let row of filterData" (click)="foo(row)">
                     <td>{{ row.fechaHoraCadena }}</td>
                     <td>{{ row.idFichaClinica.idFichaClinica }}</td>
                     <td>{{ row.idFichaClinica.fechaHora }}</td>
