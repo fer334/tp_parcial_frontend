@@ -58,6 +58,7 @@
               <!--        Here you can write extra buttons/actions for the toolbar              -->
               <button class="btn btn-success" [routerLink]="['/servicio/create/0']">Nuevo Servicio</button>
               <button class="btn btn-info" onclick="print()">Generar reporte resumido</button>
+              <button class="btn btn-info" onclick="throw Error('bad request')">Generar reporte excel</button>
               <button mat-raised-button class="btn btn-fill btn-primary mx-2" [routerLink]="['/detalle']">Ver detalles</button>
                 
              </div>
